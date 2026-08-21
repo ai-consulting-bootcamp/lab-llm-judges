@@ -1,0 +1,7 @@
+## Step 1 Client Scenario
+
+Scenario. Nordbank, a mid-sized German retail bank, wants to use an LLM to draft the letters sent to applicants whose consumer loan application has been declined. A human loan officer reviews and signs each letter, but the model produces the full first draft from a structured decision record (applicant name, product, decision date, primary and secondary decline reasons, credit bureau reference).
+
+Requirements. Each letter must state the actual decline reason from the decision record and no other reason, tell the applicant they can request a manual review and how, reference the credit bureau consulted where a bureau score contributed to the decision, stay under 300 words, and read as plain, non-condescending German business prose.
+
+Main concerns. Three failure modes, in order of how much they would hurt the client: (1) the model invents or softens the decline reason, which is both a hallucination and a compliance breach; (2) the letter omits the manual review right or the bureau reference, which is a silent regulatory failure that no one notices until an audit; (3) tone drift, either cold and boilerplate or falsely warm and apologetic in a way that implies the decision might be reversed.

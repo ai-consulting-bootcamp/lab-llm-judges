@@ -581,3 +581,56 @@ If you finish early or want to go deeper:
 ---
 
 *Good luck! Remember: evaluation is as much art as science. The goal is to build something useful, not perfect.*
+
+
+**Question 1: What if the client's data were in French?**
+
+We have partly answered this, because our scenario already generates German
+letters. Our judge rubric is written in English and encodes an
+Anglo-American service norm in which warmth signals professionalism, while
+German formal register reads as cold against that baseline. French presents
+the same mismatch with different specifics, plus a second formality axis:
+the tu and vous distinction has no English equivalent and is a
+compliance-adjacent choice in customer correspondence, not a stylistic one.
+
+Benchmark adaptation would get shorter, not longer. The benchmarks we
+audited are English, and machine-translating them puts a translation
+artefact inside the thing being measured. Our deterministic checks port
+cleanly, since a decline reason either appears or does not. Verification
+would need a native-speaker reviewer to calibrate the judge before we
+trusted any tone score. Writing the judge prompt in French does not
+substitute, since the judge's own register preferences were shaped by
+English text.
+
+**Question 2: Is this model AGI-level?**
+
+I would decline the question and replace it. "AGI-level" has no agreed
+definition and no test that settles it, so any answer would be an opinion
+wearing the clothes of a finding. It also invites a general reassurance
+that would be used to justify reducing human review.
+
+The answerable question is narrower: can this model draft compliant letters
+from your decision records, at your volume, without a human catching
+errors? The two can diverge. A model widely called frontier-capability may
+fail our incomplete-record case in a way that makes it unusable, while a
+weaker model that reliably flags missing fields would be the better choice.
+Capability and suitability are different axes. Our findings cover five
+cases, one language, one model version, and expire on any silent vendor
+update.
+
+**Question 3: What could you not evaluate without a human?**
+
+Whether the letter is compliant. Our checks confirm required elements are
+present, which is a proxy, not the thing. Compliance is a legal judgment
+resting on statutory interpretation and prior supervisory feedback, none of
+which lives in the letter.
+
+An LLM judge cannot substitute, for a sharper reason than accuracy: its
+output has no standing. If a regulator challenges a letter, the bank must
+show a qualified person made the call. A model score cannot be deposed and
+carries no liability.
+
+In practice: automated checks gate first, a compliance officer signs a
+sample and every new decline reason family, and a native speaker calibrates
+the judge. Machines for the checkable, humans for the accountable.
+
