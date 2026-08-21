@@ -1,0 +1,9 @@
+lab_llm_judges_Andreas_Papachristophorou/.env
+.env
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+*.log
+*.pytest_cache/
+Temp/
