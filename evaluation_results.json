@@ -1,0 +1,109 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "title": "Vague goal, needs probing",
+      "prompt": "I want to get better at my job this year.",
+      "model_response": "That\u2019s a great intention! Improving your skills can lead to greater job satisfaction and success. To help you define your goals, let\u2019s start with a few questions:\n\n1. What specific areas of your job do you feel you want to improve in?\n2. What does success look like for you in these areas?\n3. Are there any obstacles you anticipate facing as you work towards these improvements?\n4. How will you know when you\u2019ve made progress?\n\nReflecting on these questions can help clarify your goals and create a plan for moving forward. What are your thoughts?",
+      "score": 5,
+      "reasoning": "The assistant effectively encourages the employee to specify their goals by asking open-ended questions that invite reflection and detail. The tone is supportive and non-judgmental, fostering a positive coaching environment. All three criteria are fully met, making this a well-executed response.",
+      "criteria_met": {
+        "specificity_seeking": true,
+        "coaching_stance": true,
+        "tone": true
+      },
+      "time_seconds": 4.939,
+      "tokens": {
+        "input": 700,
+        "output": 215
+      },
+      "cost_usd": 0.000234
+    },
+    {
+      "id": 2,
+      "title": "Emotionally loaded, borderline scope",
+      "prompt": "Honestly I've been dreading going to work lately, I don't know if it's the job or something else going on with me.",
+      "model_response": "It sounds like you\u2019re going through a tough time, and I appreciate you sharing that. Can you tell me more about what specifically has been causing you to feel this way about work? What aspects are you finding most challenging?",
+      "score": 5,
+      "reasoning": "The assistant effectively acknowledges the employee's feelings while inviting them to provide specific details about their challenges at work. This approach maintains a supportive tone and encourages the employee to reflect on their situation without imposing any solutions.",
+      "criteria_met": {
+        "specificity_seeking": true,
+        "coaching_stance": true,
+        "tone": true
+      },
+      "time_seconds": 3.711,
+      "tokens": {
+        "input": 659,
+        "output": 133
+      },
+      "cost_usd": 0.00017865
+    },
+    {
+      "id": 3,
+      "title": "Employee proposes an unmeasurable goal",
+      "prompt": "My goal is to be a better communicator.",
+      "model_response": "That's a great goal! Communication is such an important skill in any role. To get started, can you share what specific areas of communication you would like to improve? For example, are you looking to enhance your verbal communication, written skills, or perhaps your ability to listen actively?",
+      "score": 5,
+      "reasoning": "The assistant effectively encourages the employee to specify their goal by asking open-ended questions about different areas of communication. This approach maintains a supportive tone and invites the employee to take ownership of their development.",
+      "criteria_met": {
+        "specificity_seeking": true,
+        "coaching_stance": true,
+        "tone": true
+      },
+      "time_seconds": 2.759,
+      "tokens": {
+        "input": 638,
+        "output": 141
+      },
+      "cost_usd": 0.0001803
+    },
+    {
+      "id": 4,
+      "title": "Employee wants to be told what to do",
+      "prompt": "Just tell me what my goal should be, I don't have time for this back and forth.",
+      "model_response": "I understand that you're looking for a clear direction, and I\u2019m here to help you find that. Could we start by discussing what you feel is the most important area for you to focus on right now? What challenges are you facing in your role that you'd like to address?",
+      "score": 4,
+      "reasoning": "The assistant's response effectively invites the employee to reflect on their priorities and challenges, which aligns with a coaching stance. However, while it seeks specificity, it could be more direct in guiding the employee toward a specific goal. The tone is supportive and non-judgmental, maintaining an appropriate scope.",
+      "criteria_met": {
+        "specificity_seeking": true,
+        "coaching_stance": true,
+        "tone": true
+      },
+      "time_seconds": 3.464,
+      "tokens": {
+        "input": 657,
+        "output": 162
+      },
+      "cost_usd": 0.00019575
+    },
+    {
+      "id": 5,
+      "title": "Progress check-in with an excuse",
+      "prompt": "So about that goal we set last time - I haven't really made progress, my manager keeps piling on extra work.",
+      "model_response": "It sounds like you're feeling overwhelmed with your current workload. That's completely understandable. Can you share more about the extra tasks your manager has assigned and how they\u2019re affecting your ability to work on your goal?",
+      "score": 4,
+      "reasoning": "The assistant effectively acknowledges the employee's feelings and invites them to provide specific details about their situation, which aligns well with the coaching stance. However, while it seeks more information, it could further encourage the employee to think about potential solutions or adjustments to their goal in light of the new workload. Overall, it meets the criteria well but could be slightly more proactive.",
+      "criteria_met": {
+        "specificity_seeking": true,
+        "coaching_stance": true,
+        "tone": true
+      },
+      "time_seconds": 3.613,
+      "tokens": {
+        "input": 650,
+        "output": 159
+      },
+      "cost_usd": 0.0001929
+    }
+  ],
+  "aggregate": {
+    "num_cases": 5,
+    "avg_score": 4.6,
+    "min_score": 4,
+    "max_score": 5,
+    "total_time_seconds": 18.486,
+    "total_input_tokens": 3304,
+    "total_output_tokens": 810,
+    "total_cost_usd": 0.000982
+  }
+}
