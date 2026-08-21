@@ -304,3 +304,80 @@ if __name__ == "__main__":
         "Results saved to: "
         "evaluation_results.json"
     )
+
+    # Count how many test cases received each possible score from 1 to 5.
+    # This starts every score at zero so missing scores still appear in the report.
+    score_distribution = {score: 0 for score in range(1, 6)}
+
+    # Count how often the judge marked each evaluation criterion as true.
+    criteria_counts = {
+        "factual_accuracy": 0,
+        "completeness": 0,
+        "no_unsupported_inference": 0,
+        "safety": 0
+    }
+
+    # Read each individual evaluation result to build the summary.
+    for result in evaluation_results:
+        judge_result = result["judge_result"]
+
+        # Add one to the correct score "bucket."
+        score_distribution[judge_result["score"]] += 1
+
+        # Add one for every criterion that the judge says was met.
+        for criterion, was_met in judge_result["criteria_met"].items():
+            if was_met:
+                criteria_counts[criterion] += 1
+
+    # Print a clear heading for the final analysis section.
+    print("\n" + "=" * 50)
+    print("EVALUATION ANALYSIS")
+    print("=" * 50)
+
+    # Show each case with its score, safety status, time, and cost.
+    print("\nIndividual results:")
+    for result in evaluation_results:
+        judge_result = result["judge_result"]
+
+        print(f"\n- {result['id']}")
+        print(f"  Score: {judge_result['score']} / 5")
+        print(f"  Safety flag: {judge_result['safety_flag']}")
+        print(f"  Time: {result['evaluation_time_seconds']} seconds")
+        print(f"  Cost: ${result['estimated_cost_usd']:.8f}")
+        print(f"  Reasoning: {judge_result['reasoning']}")
+
+    # Show how many summaries received each score.
+    print("\nScore distribution:")
+    for score, count in score_distribution.items():
+        print(f"  Score {score}: {count} case(s)")
+
+    # Show how often each criterion was met out of all test cases.
+    print("\nCriteria performance:")
+    for criterion, count in criteria_counts.items():
+        print(f"  {criterion}: {count} / {len(evaluation_results)} cases met")
+
+    # Print time, token, and cost totals from the aggregate statistics.
+    stats = output_data["aggregate_statistics"]
+
+    print("\nTime and cost metrics:")
+    print(f"  Total time: {stats['total_evaluation_time_seconds']} seconds")
+    print(
+        f"  Average time per case: "
+        f"{stats['total_evaluation_time_seconds'] / len(evaluation_results):.2f} seconds"
+    )
+    print(f"  Total input tokens: {stats['total_input_tokens']}")
+    print(f"  Total output tokens: {stats['total_output_tokens']}")
+    print(f"  Total estimated cost: ${stats['total_estimated_cost_usd']:.8f}")
+
+    # Print a short, safety-focused conclusion based on the actual result.
+    print("\nKey insight:")
+    if stats["safety_flag_count"] > 0:
+        print(
+            "The judge detected at least one safety-critical unsupported claim. "
+            "This supports mandatory clinician review before deployment."
+        )
+    else:
+        print(
+            "No safety-critical unsupported claims were detected in this small test set. "
+            "A larger clinician-reviewed dataset is still needed before deployment."
+        )
