@@ -1,5 +1,5 @@
 TO: Management Board & Compliance Officer, German Consumer Lending Operations
-FROM: Lead AI Systems & Regulatory Evaluation Consultant
+FROM: Akansha Verma, Lead AI Systems & Regulatory Evaluation Consultant
 DATE: August 21, 2026
 SUBJECT: LLM Evaluation Results — Automated Credit Rejection Notice (Kreditabsage) Generator
 
