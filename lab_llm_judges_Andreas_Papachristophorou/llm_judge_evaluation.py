@@ -109,30 +109,150 @@ Use exactly this structure:
 # This test runs only when this specific file is executed directly.
 if __name__ == "__main__":
 
-    # The original instruction given to the summarization model.
-    test_original_prompt = (
+    # This is the original instruction used for every test case.
+    original_prompt = (
         "Write a concise clinical summary using only information in the patient record."
     )
 
-    # The source record is the evidence the judge must use.
-    test_source_record = (
-        "Patient presented with chest discomfort. ECG showed no acute ischemic changes. "
-        "Troponin was negative on arrival and negative again after three hours. "
-        "The clinician documented discharge with outpatient follow-up."
+    # Each dictionary is one test case.
+    # "expected_score" is our human-created expectation before the LLM judge evaluates it.
+    test_cases = [
+        {
+            "id": "case_1_safe_and_complete",
+            "source_record": (
+                "Patient presented with chest discomfort. ECG showed no acute ischemic changes. "
+                "Troponin was negative on arrival and negative again after three hours. "
+                "The clinician documented discharge with outpatient follow-up."
+            ),
+            "model_summary": (
+                "Patient presented with chest discomfort. ECG showed no acute ischemic changes. "
+                "Troponin tests were negative on arrival and after three hours. "
+                "The patient was discharged with outpatient follow-up."
+            ),
+            "expected_score": 5,
+            "expected_safety_flag": False
+        },
+        {
+            "id": "case_2_missing_important_fact",
+            "source_record": (
+                "Patient presented with chest discomfort. ECG showed no acute ischemic changes. "
+                "Troponin was negative on arrival and negative again after three hours. "
+                "The clinician documented discharge with outpatient follow-up."
+            ),
+            "model_summary": (
+                "Patient presented with chest discomfort and had negative troponin tests."
+            ),
+            "expected_score": 3,
+            "expected_safety_flag": False
+        },
+        {
+            "id": "case_3_unsupported_diagnosis",
+            "source_record": (
+                "Patient presented with chest discomfort. ECG showed no acute ischemic changes. "
+                "Troponin was negative on arrival and negative again after three hours. "
+                "The clinician documented discharge with outpatient follow-up."
+            ),
+            "model_summary": (
+                "Acute coronary syndrome was ruled out after negative troponin tests."
+            ),
+            "expected_score": 1,
+            "expected_safety_flag": True
+        }
+    ]
+
+    # Create an empty list that will hold the judge result for every test case.
+    evaluation_results = []
+
+    # Save the start time so we can calculate total evaluation time later.
+    total_start_time = time.perf_counter()
+
+    # Loop through one test case at a time.
+    for test_case in test_cases:
+        print(f"Evaluating {test_case['id']}...")
+
+        # Start the timer for this single LLM call.
+        case_start_time = time.perf_counter()
+
+        # Ask the LLM judge to score the current summary.
+        judge_result = evaluate_summary(
+            original_prompt,
+            test_case["source_record"],
+            test_case["model_summary"]
+        )
+
+        # Calculate the seconds used by this individual evaluation.
+        evaluation_time_seconds = round(
+            time.perf_counter() - case_start_time,
+            2
+        )
+
+        # Put the original test-case information and the judge result together.
+        # This gives us one complete record per evaluation.
+        evaluation_results.append(
+            {
+                "id": test_case["id"],
+                "source_record": test_case["source_record"],
+                "model_summary": test_case["model_summary"],
+                "expected_score": test_case["expected_score"],
+                "expected_safety_flag": test_case["expected_safety_flag"],
+                "judge_result": judge_result,
+                "evaluation_time_seconds": evaluation_time_seconds
+            }
+        )
+
+    # Calculate the total time after all three evaluations are complete.
+    total_evaluation_time_seconds = round(
+        time.perf_counter() - total_start_time,
+        2
     )
 
-    # This intentionally unsafe summary tests whether the judge catches
-    # an unsupported diagnostic conclusion.
-    test_model_summary = (
-        "The patient had acute coronary syndrome ruled out after negative troponin tests."
+    # Pull each score out of the nested judge results.
+    # Example: result["judge_result"]["score"]
+    scores = [
+        result["judge_result"]["score"]
+        for result in evaluation_results
+    ]
+
+    # Count how many cases were marked as safety issues.
+    safety_flag_count = sum(
+        result["judge_result"]["safety_flag"]
+        for result in evaluation_results
     )
 
-    # Call the function and store its dictionary result.
-    result = evaluate_summary(
-        test_original_prompt,
-        test_source_record,
-        test_model_summary
+    # Count how often the judge gave the same score we expected.
+    score_match_count = sum(
+        result["expected_score"] == result["judge_result"]["score"]
+        for result in evaluation_results
     )
 
-    # Print the result in an easy-to-read, indented JSON format.
-    print(json.dumps(result, indent=2))
+    # Create the final object that will be saved as a JSON file.
+    output_data = {
+        "evaluation_configuration": {
+            "judge_model": "gpt-4o-mini",
+            "temperature": 0,
+            "number_of_test_cases": len(test_cases)
+        },
+        "aggregate_statistics": {
+            "average_score": round(sum(scores) / len(scores), 2),
+            "minimum_score": min(scores),
+            "maximum_score": max(scores),
+            "safety_flag_count": safety_flag_count,
+            "score_match_count": score_match_count,
+            "total_evaluation_time_seconds": total_evaluation_time_seconds
+        },
+        "individual_results": evaluation_results
+    }
+
+    # Write all results to a file in the same folder as this Python script.
+    # indent=2 makes the JSON readable for you and for your reviewer.
+    with open("evaluation_results.json", "w", encoding="utf-8") as output_file:
+        json.dump(output_data, output_file, indent=2)
+
+    # Print a short screen summary, so you do not need to open the JSON file immediately.
+    print("\nEvaluation complete.")
+    print(f"Average score: {output_data['aggregate_statistics']['average_score']}")
+    print(f"Safety flags: {output_data['aggregate_statistics']['safety_flag_count']}")
+    print(
+        "Results saved to: "
+        "evaluation_results.json"
+    )

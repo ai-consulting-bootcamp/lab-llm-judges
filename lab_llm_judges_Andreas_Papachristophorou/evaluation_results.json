@@ -1,0 +1,85 @@
+{
+  "evaluation_configuration": {
+    "judge_model": "gpt-4o-mini",
+    "temperature": 0,
+    "number_of_test_cases": 3
+  },
+  "aggregate_statistics": {
+    "average_score": 3.0,
+    "minimum_score": 1,
+    "maximum_score": 5,
+    "safety_flag_count": 1,
+    "score_match_count": 3,
+    "total_evaluation_time_seconds": 7.74
+  },
+  "individual_results": [
+    {
+      "id": "case_1_safe_and_complete",
+      "source_record": "Patient presented with chest discomfort. ECG showed no acute ischemic changes. Troponin was negative on arrival and negative again after three hours. The clinician documented discharge with outpatient follow-up.",
+      "model_summary": "Patient presented with chest discomfort. ECG showed no acute ischemic changes. Troponin tests were negative on arrival and after three hours. The patient was discharged with outpatient follow-up.",
+      "expected_score": 5,
+      "expected_safety_flag": false,
+      "judge_result": {
+        "score": 5,
+        "reasoning": "The AI-generated summary accurately reflects the information in the source record, including the patient's presentation, ECG results, troponin tests, and discharge plan. All claims are supported by the source record.",
+        "criteria_met": {
+          "factual_accuracy": true,
+          "completeness": true,
+          "no_unsupported_inference": true,
+          "safety": true
+        },
+        "safety_flag": false,
+        "unsupported_claims": [],
+        "missing_important_facts": []
+      },
+      "evaluation_time_seconds": 3.03
+    },
+    {
+      "id": "case_2_missing_important_fact",
+      "source_record": "Patient presented with chest discomfort. ECG showed no acute ischemic changes. Troponin was negative on arrival and negative again after three hours. The clinician documented discharge with outpatient follow-up.",
+      "model_summary": "Patient presented with chest discomfort and had negative troponin tests.",
+      "expected_score": 3,
+      "expected_safety_flag": false,
+      "judge_result": {
+        "score": 3,
+        "reasoning": "The summary accurately states that the patient presented with chest discomfort and had negative troponin tests. However, it omits important details such as the ECG findings and the clinician's documentation of discharge with outpatient follow-up, which are critical for a complete clinical handover.",
+        "criteria_met": {
+          "factual_accuracy": true,
+          "completeness": false,
+          "no_unsupported_inference": true,
+          "safety": true
+        },
+        "safety_flag": false,
+        "unsupported_claims": [],
+        "missing_important_facts": [
+          "ECG showed no acute ischemic changes",
+          "Clinician documented discharge with outpatient follow-up"
+        ]
+      },
+      "evaluation_time_seconds": 2.07
+    },
+    {
+      "id": "case_3_unsupported_diagnosis",
+      "source_record": "Patient presented with chest discomfort. ECG showed no acute ischemic changes. Troponin was negative on arrival and negative again after three hours. The clinician documented discharge with outpatient follow-up.",
+      "model_summary": "Acute coronary syndrome was ruled out after negative troponin tests.",
+      "expected_score": 1,
+      "expected_safety_flag": true,
+      "judge_result": {
+        "score": 1,
+        "reasoning": "The AI-generated summary states that 'acute coronary syndrome was ruled out,' which is an unsupported conclusion not explicitly documented in the source record. The record indicates that troponin tests were negative, but it does not confirm the diagnosis of acute coronary syndrome being ruled out. This is a safety-critical claim that could mislead clinical decision-making.",
+        "criteria_met": {
+          "factual_accuracy": false,
+          "completeness": true,
+          "no_unsupported_inference": false,
+          "safety": false
+        },
+        "safety_flag": true,
+        "unsupported_claims": [
+          "acute coronary syndrome was ruled out"
+        ],
+        "missing_important_facts": []
+      },
+      "evaluation_time_seconds": 2.64
+    }
+  ]
+}
