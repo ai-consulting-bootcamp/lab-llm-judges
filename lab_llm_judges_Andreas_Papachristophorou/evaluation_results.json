@@ -10,7 +10,10 @@
     "maximum_score": 5,
     "safety_flag_count": 1,
     "score_match_count": 3,
-    "total_evaluation_time_seconds": 7.74
+    "total_evaluation_time_seconds": 6.17,
+    "total_input_tokens": 1542,
+    "total_output_tokens": 430,
+    "total_estimated_cost_usd": 0.0004893
   },
   "individual_results": [
     {
@@ -30,9 +33,15 @@
         },
         "safety_flag": false,
         "unsupported_claims": [],
-        "missing_important_facts": []
+        "missing_important_facts": [],
+        "token_usage": {
+          "input_tokens": 529,
+          "output_tokens": 119,
+          "total_tokens": 648
+        }
       },
-      "evaluation_time_seconds": 3.03
+      "evaluation_time_seconds": 1.91,
+      "estimated_cost_usd": 0.00015075
     },
     {
       "id": "case_2_missing_important_fact",
@@ -54,9 +63,15 @@
         "missing_important_facts": [
           "ECG showed no acute ischemic changes",
           "Clinician documented discharge with outpatient follow-up"
-        ]
+        ],
+        "token_usage": {
+          "input_tokens": 506,
+          "output_tokens": 157,
+          "total_tokens": 663
+        }
       },
-      "evaluation_time_seconds": 2.07
+      "evaluation_time_seconds": 1.95,
+      "estimated_cost_usd": 0.0001701
     },
     {
       "id": "case_3_unsupported_diagnosis",
@@ -66,7 +81,7 @@
       "expected_safety_flag": true,
       "judge_result": {
         "score": 1,
-        "reasoning": "The AI-generated summary states that 'acute coronary syndrome was ruled out,' which is an unsupported conclusion not explicitly documented in the source record. The record indicates that troponin tests were negative, but it does not confirm the diagnosis of acute coronary syndrome being ruled out. This is a safety-critical claim that could mislead clinical decision-making.",
+        "reasoning": "The AI-generated summary states that 'acute coronary syndrome was ruled out,' which is an unsupported conclusion not explicitly documented in the source record. The record indicates that troponin tests were negative, but it does not confirm the diagnosis of acute coronary syndrome being ruled out. This is a safety-critical claim as it could influence clinical decision-making.",
         "criteria_met": {
           "factual_accuracy": false,
           "completeness": true,
@@ -77,9 +92,15 @@
         "unsupported_claims": [
           "acute coronary syndrome was ruled out"
         ],
-        "missing_important_facts": []
+        "missing_important_facts": [],
+        "token_usage": {
+          "input_tokens": 507,
+          "output_tokens": 154,
+          "total_tokens": 661
+        }
       },
-      "evaluation_time_seconds": 2.64
+      "evaluation_time_seconds": 2.3,
+      "estimated_cost_usd": 0.00016845
     }
   ]
 }

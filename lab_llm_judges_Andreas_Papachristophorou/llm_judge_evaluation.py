@@ -23,6 +23,10 @@ response = llm.invoke("Reply with exactly: LangChain connection works.")
 
 print(response.content)
 
+# Pricing assumptions in US dollars per one million tokens. Provider prices can change over time.
+INPUT_COST_PER_MILLION_TOKENS = 0.15
+OUTPUT_COST_PER_MILLION_TOKENS = 0.60
+
 
 def evaluate_summary(original_prompt, source_record, model_summary):
     """
@@ -97,13 +101,25 @@ Use exactly this structure:
   "missing_important_facts": []
 }}
 """
-
-    # Send the judge prompt to the LLM.
+    # Send the prompt to the LLM judge.
     response = llm.invoke(judge_prompt)
 
-    # response.content is the text returned by the model.
-    # json.loads converts JSON text into a Python dictionary.
-    return json.loads(response.content)
+    # Convert the JSON text returned by the model into a Python dictionary.
+    judge_result = json.loads(response.content)
+
+    # LangChain stores OpenAI usage data in response.usage_metadata.
+    # .get(..., 0) prevents an error if a usage value is unavailable.
+    usage = response.usage_metadata or {}
+
+    # Store token counts alongside the judge's score and reasoning.
+    judge_result["token_usage"] = {
+        "input_tokens": usage.get("input_tokens", 0),
+        "output_tokens": usage.get("output_tokens", 0),
+        "total_tokens": usage.get("total_tokens", 0)
+    }
+
+    # Return the complete result dictionary to the loop.
+    return judge_result
 
 
 # This test runs only when this specific file is executed directly.
@@ -179,7 +195,19 @@ if __name__ == "__main__":
             test_case["source_record"],
             test_case["model_summary"]
         )
+        # Read the token counts recorded by evaluate_summary().
+        input_tokens = judge_result["token_usage"]["input_tokens"]
+        output_tokens = judge_result["token_usage"]["output_tokens"]
 
+        # Estimate the API cost for this one judge call.
+        # Divide by 1,000,000 because the price is listed per million tokens.
+        estimated_cost_usd = (
+            (input_tokens / 1_000_000) * INPUT_COST_PER_MILLION_TOKENS
+            + (output_tokens / 1_000_000) * OUTPUT_COST_PER_MILLION_TOKENS
+        )
+
+        # Round the small dollar amount so it is readable in the JSON file.
+        estimated_cost_usd = round(estimated_cost_usd, 8)
         # Calculate the seconds used by this individual evaluation.
         evaluation_time_seconds = round(
             time.perf_counter() - case_start_time,
@@ -196,7 +224,8 @@ if __name__ == "__main__":
                 "expected_score": test_case["expected_score"],
                 "expected_safety_flag": test_case["expected_safety_flag"],
                 "judge_result": judge_result,
-                "evaluation_time_seconds": evaluation_time_seconds
+                "evaluation_time_seconds": evaluation_time_seconds,
+                "estimated_cost_usd": estimated_cost_usd
             }
         )
 
@@ -212,6 +241,22 @@ if __name__ == "__main__":
         result["judge_result"]["score"]
         for result in evaluation_results
     ]
+
+    # Add tokens and estimated costs across all three evaluations.
+    total_input_tokens = sum(
+        result["judge_result"]["token_usage"]["input_tokens"]
+        for result in evaluation_results
+    )
+
+    total_output_tokens = sum(
+        result["judge_result"]["token_usage"]["output_tokens"]
+        for result in evaluation_results
+    )
+
+    total_estimated_cost_usd = round(
+        sum(result["estimated_cost_usd"] for result in evaluation_results),
+        8
+    )
 
     # Count how many cases were marked as safety issues.
     safety_flag_count = sum(
@@ -238,7 +283,10 @@ if __name__ == "__main__":
             "maximum_score": max(scores),
             "safety_flag_count": safety_flag_count,
             "score_match_count": score_match_count,
-            "total_evaluation_time_seconds": total_evaluation_time_seconds
+            "total_evaluation_time_seconds": total_evaluation_time_seconds,
+            "total_input_tokens": total_input_tokens,
+            "total_output_tokens": total_output_tokens,
+            "total_estimated_cost_usd": total_estimated_cost_usd,
         },
         "individual_results": evaluation_results
     }
