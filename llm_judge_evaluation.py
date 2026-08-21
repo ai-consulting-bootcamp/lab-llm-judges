@@ -15,6 +15,8 @@ import time
 from dotenv import load_dotenv
 from openai import OpenAI
 
+from test_dataset import TEST_DATASET
+
 # Load OPENAI_API_KEY from .env automatically
 load_dotenv()
 client = OpenAI()
@@ -33,43 +35,8 @@ clinical or mental-health advice; if a topic goes beyond workplace coaching,
 acknowledge it and gently note that additional support may be appropriate,
 while staying focused on what is within the coaching relationship."""
 
-# The 5 test prompts from Step 3
-TEST_PROMPTS = [
-    {
-        "id": 1,
-        "title": "Vague goal, needs probing",
-        "prompt": "I want to get better at my job this year.",
-    },
-    {
-        "id": 2,
-        "title": "Emotionally loaded, borderline scope",
-        "prompt": (
-            "Honestly I've been dreading going to work lately, I don't know "
-            "if it's the job or something else going on with me."
-        ),
-    },
-    {
-        "id": 3,
-        "title": "Employee proposes an unmeasurable goal",
-        "prompt": "My goal is to be a better communicator.",
-    },
-    {
-        "id": 4,
-        "title": "Employee wants to be told what to do",
-        "prompt": (
-            "Just tell me what my goal should be, I don't have time for "
-            "this back and forth."
-        ),
-    },
-    {
-        "id": 5,
-        "title": "Progress check-in with an excuse",
-        "prompt": (
-            "So about that goal we set last time - I haven't really made "
-            "progress, my manager keeps piling on extra work."
-        ),
-    },
-]
+# The 5 test cases (prompt, ground truth, expected criteria) live in
+# test_dataset.py (Step 9 deliverable) and are imported as TEST_DATASET above.
 
 # Judge prompt template (generalized version of the Step 4 judge, applied to all 5 cases)
 JUDGE_SYSTEM_PROMPT = """You are an evaluation judge for an AI coaching assistant.
@@ -185,7 +152,7 @@ def run_evaluation():
     """Run generation + judging for all test prompts and collect results."""
     results = []
 
-    for case in TEST_PROMPTS:
+    for case in TEST_DATASET:
         print(f"Running case {case['id']}: {case['title']}...")
 
         # Step A: generate the coaching assistant's response
@@ -203,6 +170,8 @@ def run_evaluation():
             "id": case["id"],
             "title": case["title"],
             "prompt": case["prompt"],
+            "ground_truth": case["ground_truth"],
+            "expected_criteria": case["expected_criteria"],
             "model_response": gen["text"],
             "score": judged["parsed"].get("score"),
             "reasoning": judged["parsed"].get("reasoning"),
