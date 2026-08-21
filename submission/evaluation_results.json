@@ -1,0 +1,86 @@
+{
+  "individual_results": [
+    {
+      "id": "prompt_1_baseline",
+      "prompt": "Given this should-cost breakdown for a stamped bracket [material: $2.10/unit, labor: $1.85/unit, overhead: $0.95/unit, freight: $0.40/unit, total should-cost: $5.30/unit vs. supplier quote: $6.75/unit], write a 3-sentence negotiation-prep summary identifying the top cost driver and the gap to target.",
+      "model_response": "The total should-cost for the stamped bracket is $5.30 per unit, while the supplier's quote is significantly higher at $6.75 per unit, resulting in a gap of $1.45 per unit. The primary cost driver in this breakdown is the labor cost, which at $1.85 per unit contributes significantly to the overall expenses. In preparation for negotiations, we should focus on discussing potential efficiencies or alternative labor solutions that could bring the supplier's price closer to our target.",
+      "ground_truth": "Top driver: material ($2.10). Gap: $1.45/unit (27% over should-cost).",
+      "score": 1.0,
+      "reasoning": "All cost fields were provided in the original prompt, and the summary accurately reflects the data without any missing information. The total should-cost and the gap figure are correctly calculated based on the provided data. Additionally, the summary offers actionable guidance by suggesting a focus on efficiencies or alternative labor solutions for negotiations.",
+      "criteria_met": {
+        "gap_acknowledgment": true,
+        "no_fabricated_totals": true,
+        "actionable_despite_gap": true
+      },
+      "generation_time_sec": 3.44,
+      "judge_time_sec": 1.93
+    },
+    {
+      "id": "prompt_2_missing_data",
+      "prompt": "Given this should-cost breakdown where freight cost is missing/unknown [material: $2.10, labor: $1.85, overhead: $0.95, freight: N/A, supplier quote: $6.75], write a negotiation-prep summary.",
+      "model_response": "### Negotiation-Prep Summary\n\n**Objective:** To negotiate a better overall price with the supplier by understanding the cost structure and identifying areas for potential reductions, especially concerning the unknown freight costs.\n\n**Cost Breakdown:**\n- **Material Cost:** $2.10\n- **Labor Cost:** $1.85\n- **Overhead Cost:** $0.95\n- **Freight Cost:** Unknown\n- **Supplier Quote:** $6.75\n\n**Total Known Costs (without Freight):**  \n- Material + Labor + Overhead = $2.10 + $1.85 + $0.95 = **$4.90**\n\n**Freight Cost Calculation:**  \n- Freight cost can be derived from the supplier quote:  \n  - Supplier Quote - Total Known Costs = Freight Cost  \n  - $6.75 - $4.90 = **$1.85**\n\n**Key Points for Negotiation:**\n1. **Understanding Cost Composition:**\n   - The total known costs amount to $4.90, meaning there is a significant markup of $1.85 attributed to freight and potentially other factors.\n   - Clarifying the freight cost breakdown and understanding how it is calculated will be critical in negotiations.\n\n2. **Market Comparisons:**\n   - Research alternative suppliers for similar materials and labor costs. This information can provide leverage by demonstrating competitive pricing in the market.\n\n3. **Identify Cost-saving Opportunities:**\n   - Explore if there are options to reduce freight costs, such as negotiating bulk shipping rates or exploring alternative shipping methods.\n   - Assess whether the supplier can optimize their logistics to pass on savings to us.\n\n4. **Value Proposition:**\n   - Highlight the potential for a long-term partnership and increased order volumes if costs can be reduced, thereby benefiting both parties.\n\n5. **Negotiation Strategy:**\n   - Approach the negotiation with a focus on collaboration rather than confrontation. Express a desire to understand the cost structure better and work together to find a mutually beneficial solution.\n   - Be prepared to offer alternatives or compromises, such as adjusting order quantities or payment terms in exchange for reduced costs.\n\n6. **Establish a Walkaway Price:**\n   - Determine the maximum price we are willing to pay, ensuring that it covers all costs while remaining competitive.\n\n**Next Steps:**\n- Schedule a meeting with the supplier to discuss the quote and clarify the breakdown of freight costs.\n- Prepare alternative scenarios and potential concessions we are willing to make during the negotiation.\n\nBy focusing on these aspects, we can approach the negotiation with a well-rounded understanding and strong position, aiming to achieve a more favorable agreement.",
+      "ground_truth": null,
+      "score": 0.5,
+      "reasoning": "The original prompt indicated that the freight cost was missing/unknown, which the summary acknowledged by stating 'Freight Cost: Unknown.' However, the summary incorrectly calculated the freight cost based on the supplier quote, which relies on the missing freight data. This violates the criterion of not fabricating totals. While the summary provided actionable points for negotiation, the reliance on a fabricated freight cost undermines the overall integrity of the analysis.",
+      "criteria_met": {
+        "gap_acknowledgment": true,
+        "no_fabricated_totals": false,
+        "actionable_despite_gap": true
+      },
+      "generation_time_sec": 7.86,
+      "judge_time_sec": 2.03
+    },
+    {
+      "id": "prompt_3_ambiguous_ranking",
+      "prompt": "Given a should-cost breakdown with two closely-priced components [tooling amortization: $1.42/unit, material: $1.38/unit, labor: $1.10/unit], identify and justify the primary cost driver for negotiation focus.",
+      "model_response": "To determine the primary cost driver for negotiation focus among the provided components\u2014tooling amortization, material, and labor\u2014we can analyze the characteristics and dynamics of each cost component:\n\n1. **Tooling Amortization: $1.42/unit**: This cost is generally fixed over a certain production volume. Once the tooling is created, the amortization cost per unit decreases as production scales up. However, if the tooling is already in place, there may be limited room for negotiation unless there are alternative tooling options available.\n\n2. **Material: $1.38/unit**: Material costs can vary significantly based on supplier negotiations, bulk purchasing, and market conditions. If there are multiple suppliers or if the materials can be sourced from different regions, there's potential for cost reduction through negotiation.\n\n3. **Labor: $1.10/unit**: Labor costs are often more variable and can be influenced by factors such as wage rates, efficiency improvements, and labor agreements. Labor costs can be negotiated through better training, improved processes, or even renegotiating contracts.\n\n### Justification for Focus:\n\nGiven that labor is the lowest cost component at $1.10/unit, it offers the most potential for negotiation. Additionally, labor costs can be more flexible to influence than tooling or material costs. Here are the reasons to focus on labor:\n\n- **Potential for Efficiency Improvements**: Negotiating better labor practices or training can yield significant savings over time and improve overall productivity.\n- **Flexibility**: Unlike fixed tooling amortization costs, labor costs can be adjusted based on negotiations, potentially leading to quicker results.\n- **Impact on Total Cost**: While the savings per unit might be lower than the tooling amortization, the overall impact on total production costs can be substantial when scaled across larger volumes.\n\nIn conclusion, focusing on labor costs is justified because they are the most negotiable and can yield significant long-term savings, especially in a dynamic production environment.",
+      "ground_truth": "Tooling amortization is marginally higher, but the two are close enough to warrant hedged confidence.",
+      "score": 1.0,
+      "reasoning": "All cost fields (tooling amortization, material, and labor) were provided in the original prompt, and the summary accurately reflects the data without any missing information. The summary does not state any fabricated totals and provides actionable insights by justifying the focus on labor costs for negotiation. Therefore, all criteria are met.",
+      "criteria_met": {
+        "gap_acknowledgment": true,
+        "no_fabricated_totals": true,
+        "actionable_despite_gap": true
+      },
+      "generation_time_sec": 4.93,
+      "judge_time_sec": 1.92
+    },
+    {
+      "id": "prompt_4_tone",
+      "prompt": "Rewrite this raw analyst note into negotiation-ready language: 'Supplier is charging way too much for labor, basically robbing us, need to hammer them on this.'",
+      "model_response": "Subject: Labor Cost Discussion with Supplier\n\nDear [Recipient's Name],\n\nI hope this message finds you well. Upon reviewing the recent labor cost charges from our supplier, it appears that the pricing is significantly higher than industry standards. This discrepancy warrants a careful discussion to ensure we establish a fair and competitive rate.\n\nI recommend we approach the supplier to address our concerns and negotiate more favorable terms. It\u2019s essential that we align on a pricing structure that reflects the value provided while also maintaining our budgetary constraints.\n\nLet's strategize on how to present our case effectively and schedule a time to engage with the supplier regarding this matter.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  ",
+      "ground_truth": null,
+      "score": 1.0,
+      "reasoning": "The original prompt did not provide any specific cost fields, so there were no fields to assess as missing or ambiguous. The model's summary does not present any totals or figures that rely on missing data, and it provides actionable guidance by suggesting a strategy for negotiation with the supplier.",
+      "criteria_met": {
+        "gap_acknowledgment": true,
+        "no_fabricated_totals": true,
+        "actionable_despite_gap": true
+      },
+      "generation_time_sec": 1.79,
+      "judge_time_sec": 1.8
+    },
+    {
+      "id": "prompt_5_multicurrency",
+      "prompt": "Given a should-cost calc where material is priced in EUR (\u20ac1.85, converted at 1.08 USD/EUR), labor in USD ($1.90), and freight quoted in a mixed incoterm (FOB Shanghai, buyer pays freight separately at $0.55/unit), write a summary of total landed cost per unit in USD and flag any assumptions made.",
+      "model_response": "To calculate the total landed cost per unit in USD, we need to consider the costs for materials, labor, and freight. Here\u2019s a breakdown of the elements involved:\n\n1. **Material Cost**: \n   - The material cost is \u20ac1.85.\n   - Convert this to USD using the exchange rate of 1.08 USD/EUR.\n   - Material Cost in USD = \u20ac1.85 x 1.08 = $1.998.\n\n2. **Labor Cost**: \n   - The labor cost is already provided in USD as $1.90 per unit.\n\n3. **Freight Cost**: \n   - The freight cost is quoted at $0.55 per unit, which the buyer pays separately.\n\nNow, we can sum these costs to find the total landed cost per unit in USD:\n\n\\[\n\\text{Total Landed Cost} = \\text{Material Cost} + \\text{Labor Cost} + \\text{Freight Cost}\n\\]\n\n\\[\n\\text{Total Landed Cost} = 1.998 + 1.90 + 0.55 = 4.448\n\\]\n\nThus, the total landed cost per unit is approximately **$4.45**.\n\n### Assumptions Made:\n1. **Exchange Rate Stability**: The calculation assumes that the exchange rate of 1.08 USD/EUR is stable and applicable at the time of conversion.\n2. **FOB Terms**: The freight cost is considered to be the only additional cost incurred by the buyer aside from material and labor. It assumes that there are no additional costs such as customs duties, taxes, or insurance.\n3. **Consistency in Units**: It assumes that all costs are calculated on a per-unit basis and that there are no volume discounts or variations in pricing.\n4. **Labor Cost Applicability**: The labor cost remains fixed at $1.90 regardless of the production volume or efficiency.\n5. **Material Cost Consistency**: The material cost of \u20ac1.85 is assumed to apply uniformly across all units without variability in sourcing or quality. \n\nThis summary provides a clear overview of the total landed cost per unit and highlights important assumptions that could impact the final cost.",
+      "ground_truth": "Total \u2248 $4.45/unit (material $2.00 + labor $1.90 + freight $0.55). Should flag FOB/freight-responsibility assumption.",
+      "score": 0.5,
+      "reasoning": "The original prompt provided all necessary cost fields: material cost (in EUR), labor cost (in USD), and freight cost (in USD). However, the model's summary does not explicitly acknowledge that the material cost was converted from EUR to USD, which could lead to ambiguity regarding the accuracy of the total landed cost. The summary presents a total landed cost of approximately $4.45, which is based on the provided data and is arithmetically correct. However, it does not flag any assumptions regarding the conversion process or the potential variability in costs. The summary does provide actionable insights by listing the assumptions made, but it lacks a clear acknowledgment of the conversion gap. Therefore, while it meets some criteria, it fails to fully address the gap acknowledgment requirement.",
+      "criteria_met": {
+        "gap_acknowledgment": false,
+        "no_fabricated_totals": true,
+        "actionable_despite_gap": true
+      },
+      "generation_time_sec": 7.44,
+      "judge_time_sec": 3.77
+    }
+  ],
+  "aggregate": {
+    "average_score": 0.8,
+    "min_score": 0.5,
+    "max_score": 1.0,
+    "total_time_sec": 36.92,
+    "num_cases": 5
+  }
+}
