@@ -1,3 +1,89 @@
+# LAB | LLMs grading LLMs—with receipts
+
+Week 7 of the Ironhack AI Consulting Bootcamp — designing, implementing and
+running an LLM evaluation strategy for a client, end to end.
+**Author:** Nnanyelugo Ahukannah
+
+A fork of [`ai-consulting-bootcamp/lab-llm-judges`](https://github.com/ai-consulting-bootcamp/lab-llm-judges).
+The lab brief (`instructions.md`) and grading rubric (`rubric.md`) are kept
+unchanged, and the original lab README is preserved in full at the bottom of this
+file; everything else in this repo is the submission.
+
+## Start here
+
+All lab deliverables live in
+**[`lab_llm_judges_ugo_ahukannah/`](lab_llm_judges_ugo_ahukannah/)** — see
+[its README](lab_llm_judges_ugo_ahukannah/README.md) for the scenario, the file
+map and how to run the code.
+
+The two-minute version:
+
+- The client is a US regional bank automating loan decline letters.
+- Two models were tested, and every letter was graded twice — once by an LLM
+  judge, once by a deterministic compliance checker.
+- **9 of 10 letters were missing a mandatory legal disclosure. The LLM judge
+  scored all ten letters 5/5 — the nine defective ones included.**
+- [`evaluation_memo.md`](lab_llm_judges_ugo_ahukannah/evaluation_memo.md) is the
+  client-facing write-up of that finding.
+
+## Structure
+
+| Path | What it is |
+|---|---|
+| [`instructions.md`](instructions.md) | The lab brief, unchanged from the upstream bootcamp repo |
+| [`rubric.md`](rubric.md) | The grading rubric this submission is reviewed against, unchanged |
+| [`lab_llm_judges_ugo_ahukannah/`](lab_llm_judges_ugo_ahukannah/) | Every lab deliverable — the four Part 1 markdown documents, the Python implementation, the executed notebook, and the JSON results |
+| `lab_llm_judges_ugo_ahukannah/*.md` | Benchmark audit, evaluation design, client memo, reflection, implementation summary |
+| `lab_llm_judges_ugo_ahukannah/*.py` | Pipeline, test cases, rule checker, calibration study, tests |
+| `lab_llm_judges_ugo_ahukannah/*.json` | Run outputs, including every generated letter and both graders' verdicts; `evaluation_results.json` opens with a plain-language summary |
+| [`tips_and_troubleshooting.md`](lab_llm_judges_ugo_ahukannah/tips_and_troubleshooting.md) | The four issues the lab warns about, what each looked like in this run, and two it does not warn about |
+| [`extension_activities.md`](lab_llm_judges_ugo_ahukannah/extension_activities.md) | Which optional extensions were completed, which was not, and why |
+| `lab_llm_judges_ugo_ahukannah/run_*.command` / `.bat` | Double-clickable launchers, macOS and Windows |
+
+The folder name follows the submission format in the lab brief
+(`lab_llm_judges_[your_name]`).
+
+## Rubric coverage
+
+| Rubric rows | Where |
+|---|---|
+| 1, 7, 12 — benchmark audit | [`benchmark_audit.md`](lab_llm_judges_ugo_ahukannah/benchmark_audit.md) |
+| 2, 8, 13 — five evaluation prompts | [`evaluation_design.md`](lab_llm_judges_ugo_ahukannah/evaluation_design.md) |
+| 3, 14 — LLM-as-judge prompt, bias, calibration | [`evaluation_design.md`](lab_llm_judges_ugo_ahukannah/evaluation_design.md) |
+| 4, 9, 17–19 — pipeline, setup, judge, dataset | [`llm_judge_evaluation.py`](lab_llm_judges_ugo_ahukannah/llm_judge_evaluation.py), [`eval_cases.py`](lab_llm_judges_ugo_ahukannah/eval_cases.py) |
+| 5, 20–21 — run, metrics, analysis, visualisation | [`llm_judge_evaluation.ipynb`](lab_llm_judges_ugo_ahukannah/llm_judge_evaluation.ipynb), `evaluation_results.json`, `figures/` |
+| 6, 10, 15 — report with hedging and caveats | [`evaluation_memo.md`](lab_llm_judges_ugo_ahukannah/evaluation_memo.md) |
+| 11 — client scenario | [`benchmark_audit.md`](lab_llm_judges_ugo_ahukannah/benchmark_audit.md) |
+| 16 — reflection | [`reflection.md`](lab_llm_judges_ugo_ahukannah/reflection.md) |
+
+## Extension activities
+
+| Extension | Status | Where |
+|---|---|---|
+| Compare two models | **done** | `gpt-4o-mini` vs `gpt-4o`, all five cases, same graders |
+| Calibration study | **done** | [`judge_calibration.py`](lab_llm_judges_ugo_ahukannah/judge_calibration.py) — one injected defect per variant, mapped to rubric anchors |
+| Cost optimization | **done** | Per-call tokens and cost, 17.2x per-letter gap, judging = 27% of run cost |
+| Human evaluation | **not done** | The honest gap — tone is the one criterion with no ground truth, so it is the one place a human is not optional |
+
+Full write-up, including three things built beyond the lab's list, in
+[`extension_activities.md`](lab_llm_judges_ugo_ahukannah/extension_activities.md).
+
+Issues encountered and how they were handled — JSON parsing, judge variance, API
+cost, judge strictness — are in
+[`tips_and_troubleshooting.md`](lab_llm_judges_ugo_ahukannah/tips_and_troubleshooting.md).
+
+## Keys
+
+No API key is stored in this repository. Keys load at runtime from
+`~/.config/ironhack/.env.local`, outside every git repo.
+
+---
+---
+
+# Original lab README
+
+*Everything below is unmodified from the upstream lab repository.*
+
 # LLMs grading LLMs—with receipts
 
 **Track:** Module 5 — Evaluation & strategy · **When:** Week 7, Day 4 · **Status:** Required
