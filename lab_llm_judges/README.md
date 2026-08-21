@@ -43,6 +43,13 @@ python llm_judge_evaluation.py
 
 Results are saved to `evaluation_results.json` and a summary is printed to the terminal. Estimated cost: < $0.01 per run with GPT-4o-mini.
 
+## Tips & Troubleshooting
+
+- **JSON parsing errors:** The script uses `response_format={"type": "json_object"}` in the OpenAI API call, which forces valid JSON output from the judge. A `try/except` block around `json.loads()` catches any remaining edge cases.
+- **Inconsistent judge scores:** Temperature is set to 0 for the judge to maximize consistency. Running multiple iterations and averaging would further reduce variance.
+- **High API costs:** The pipeline uses `gpt-4o-mini` for both generation and judging, keeping total cost under $0.01 per run. Swap the judge to `gpt-4o` for higher quality at ~10x the cost.
+- **Judge too strict or lenient:** The judge prompt includes a 5-point scoring guide with concrete anchors (e.g., score 1 = "promises unauthorized refund"). Adding few-shot calibration examples would improve score distribution.
+
 ## Success Criteria
 
 - [x] Audited 3 benchmarks with complete evaluation cards (benchmark_audit.md)
