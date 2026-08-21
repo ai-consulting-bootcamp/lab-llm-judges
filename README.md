@@ -1,23 +1,31 @@
-# LLMs grading LLMs—with receipts
+# Lab | Week 7 | Day 5 | LLMs grading LLMs—with receipts
+## John Adams
 
-**Track:** Module 5 — Evaluation & strategy · **When:** Week 7, Day 4 · **Status:** Required
+#### Your chosen scenario
 
-This repository contains everything you need for this lab.
+John (the "client") wants a RAG-backed chatbot that stands in for an initial coffee chat with recruiters and hiring managers, answering questions about his work history, skills, and projects, then booking a call or sending a message. The bot is a direct stand-in for his personal brand, so hallucinated experience, off-script tone, or misstated facts don't just look like a bug, they can misrepresent him to a recruiter.
 
-## Files
+#### Brief overview of your approach
 
-- [`instructions.md`](./instructions.md) — the lab instructions
-- [`rubric.md`](./rubric.md) — how your submission is graded; this is what the AI reviewer checks your PR against
+- Audited 3 existing benchmarks (IFBench, BFCL, SimpleQA Verified) against the scenario, rejecting SimpleQA Verified since it tests memorized knowledge, not RAG retrieval.
+- Designed 5 custom evaluation prompts, tied to real observed issues from testing the actual chatbot (retrieval misses, internal data leakage), plus a control question with no known trap.
+- Built a full LLM-as-judge prompt for the brand tone prompt, with bias analysis and a calibration strategy.
+- Wrote a client memo and 3 reflection questions.
+- Implemented and ran the judge in a Jupyter notebook, using real `gpt-4o-mini` API calls, not simulated output.
 
-## How to complete this lab
+#### Files
 
-1. **Fork** this repository.
-2. Do the work described in `instructions.md`, committing to your fork.
-3. Open a **pull request** back into this repository.
-4. You'll receive **AI feedback** on your PR based on `rubric.md`. Address any blocking feedback and push updates to the same PR.
+- `benchmark_audit.md`, Step 2, 3 benchmark evaluation cards
+- `evaluation_design.md`, Steps 1, 3, 4: scenario, 5 evaluation prompts, judge design with bias and calibration analysis
+- `evaluation_memo.md`, Step 5: 1-page client memo
+- `reflection.md`, Step 6: 3 reflection questions
+- `llm_judge_evaluation.ipynb`, Steps 7-11: setup, judge implementation, test dataset, evaluation run, results analysis
+- `evaluation_results.json`, saved output from the notebook run
+- `implementation_summary.md`, 2-3 paragraph summary of what was built and key findings
 
-## Submission hygiene
+#### How to run your code
 
-- Keep this repository scoped to this lab only — no unrelated projects or personal files.
-- Use clear, descriptive filenames.
-- Remove secrets, API keys, and tokens before committing.
+1. Install dependencies: `pip install openai python-dotenv`
+2. Add your own `OPENAI_API_KEY` to a `.env` file in this folder (not committed, see `.gitignore`)
+3. Run `llm_judge_evaluation.ipynb` top to bottom
+4. Results save to `evaluation_results.json`
