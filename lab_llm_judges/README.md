@@ -2,7 +2,6 @@
 
 **Author:** Kimia Asgari  
 **Scenario:** Retail Customer Service Chatbot (Option C)  
-**Date:** August 2026
 
 ## Chosen Scenario
 
