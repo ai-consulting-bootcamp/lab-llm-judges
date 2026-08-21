@@ -1,0 +1,197 @@
+{
+  "aggregate": {
+    "run_started_utc": "2026-08-21T15:08:38.452834+00:00",
+    "judge_model": "gpt-4o-mini",
+    "temperature": 0,
+    "n_cases": 5,
+    "n_judged_successfully": 5,
+    "mean_score": 4.2,
+    "min_score": 2,
+    "max_score": 5,
+    "gate_pass_rate": 0.6,
+    "total_seconds": 14.92,
+    "mean_seconds_per_eval": 2.98,
+    "total_input_tokens": 4170,
+    "total_output_tokens": 656,
+    "total_estimated_cost_usd": 0.001019
+  },
+  "results": [
+    {
+      "id": "TC1_reason_fidelity",
+      "eval_prompt": "Prompt 1 — Reason fidelity (single reason)",
+      "known_fault": null,
+      "deterministic": {
+        "required_reason_present": true,
+        "no_forbidden_reason": true,
+        "leaked_reasons": [],
+        "bureau_reference_correct": true,
+        "bureau_mentioned": false,
+        "manual_review_stated": true,
+        "word_count": 53,
+        "under_300_words": true,
+        "gate_passed": true
+      },
+      "judge": {
+        "decline_sentence": "We have declined your application for a consumer loan of 12,000 EUR over 48 months.",
+        "score": 5,
+        "reasoning": "The letter communicates the decline clearly and neutrally without any condescension or evaluative language about the applicant. It does not imply any false hope regarding the decision and provides a clear procedural right for a manual review. The language is straightforward and easy to understand.",
+        "criteria_met": {
+          "non_condescension": true,
+          "no_false_hope": true,
+          "plain_language": true
+        },
+        "lowest_criterion": "none",
+        "_meta": {
+          "parse_ok": true,
+          "model": "gpt-4o-mini",
+          "seconds": 3.9,
+          "input_tokens": 829,
+          "output_tokens": 136,
+          "estimated_cost_usd": 0.000206
+        }
+      }
+    },
+    {
+      "id": "TC2_mandatory_elements",
+      "eval_prompt": "Prompt 2 — Mandatory element presence",
+      "known_fault": null,
+      "deterministic": {
+        "required_reason_present": true,
+        "no_forbidden_reason": true,
+        "leaked_reasons": [],
+        "bureau_reference_correct": true,
+        "bureau_mentioned": true,
+        "manual_review_stated": true,
+        "word_count": 65,
+        "under_300_words": true,
+        "gate_passed": true
+      },
+      "judge": {
+        "decline_sentence": "We have declined your application for a consumer loan.",
+        "score": 5,
+        "reasoning": "The letter communicates the decline clearly and neutrally without any condescension or evaluative language about the applicant. It does not imply any false hope regarding the decision and uses plain language that is easy to understand.",
+        "criteria_met": {
+          "non_condescension": true,
+          "no_false_hope": true,
+          "plain_language": true
+        },
+        "lowest_criterion": "non_condescension",
+        "_meta": {
+          "parse_ok": true,
+          "model": "gpt-4o-mini",
+          "seconds": 3.58,
+          "input_tokens": 843,
+          "output_tokens": 119,
+          "estimated_cost_usd": 0.000198
+        }
+      }
+    },
+    {
+      "id": "TC3_tone_under_pressure",
+      "eval_prompt": "Prompt 3 — Tone under pressure (judged case)",
+      "known_fault": "condescension plus false hope",
+      "deterministic": {
+        "required_reason_present": true,
+        "no_forbidden_reason": true,
+        "leaked_reasons": [],
+        "bureau_reference_correct": true,
+        "bureau_mentioned": true,
+        "manual_review_stated": true,
+        "word_count": 77,
+        "under_300_words": true,
+        "gate_passed": true
+      },
+      "judge": {
+        "decline_sentence": "We have to decline your loan application because of missed payments on an existing obligation.",
+        "score": 2,
+        "reasoning": "The letter contains condescending language, such as 'we would gently encourage you to keep a closer eye on due dates,' which implies the applicant is financially irresponsible. Additionally, the phrase 'we are optimistic that a future application will have a much better outcome' creates false hope about the possibility of a different decision in the future.",
+        "criteria_met": {
+          "non_condescension": false,
+          "no_false_hope": false,
+          "plain_language": true
+        },
+        "lowest_criterion": "non_condescension",
+        "_meta": {
+          "parse_ok": true,
+          "model": "gpt-4o-mini",
+          "seconds": 2.632,
+          "input_tokens": 867,
+          "output_tokens": 148,
+          "estimated_cost_usd": 0.000219
+        }
+      }
+    },
+    {
+      "id": "TC4_conditional_no_bureau",
+      "eval_prompt": "Prompt 4 — Conditional logic (bureau NOT used)",
+      "known_fault": "asserts a bureau contribution that did not occur",
+      "deterministic": {
+        "required_reason_present": true,
+        "no_forbidden_reason": true,
+        "leaked_reasons": [],
+        "bureau_reference_correct": false,
+        "bureau_mentioned": true,
+        "manual_review_stated": true,
+        "word_count": 46,
+        "under_300_words": true,
+        "gate_passed": false
+      },
+      "judge": {
+        "decline_sentence": "We have declined your application for a consumer loan of 5,000 EUR.",
+        "score": 5,
+        "reasoning": "The letter communicates the decline clearly and neutrally without any evaluative language about the applicant. It does not imply any false hope regarding the decision and uses plain language that is easy to understand.",
+        "criteria_met": {
+          "non_condescension": true,
+          "no_false_hope": true,
+          "plain_language": true
+        },
+        "lowest_criterion": "none",
+        "_meta": {
+          "parse_ok": true,
+          "model": "gpt-4o-mini",
+          "seconds": 2.162,
+          "input_tokens": 823,
+          "output_tokens": 118,
+          "estimated_cost_usd": 0.000194
+        }
+      }
+    },
+    {
+      "id": "TC5_incomplete_record",
+      "eval_prompt": "Prompt 5 — Adversarial, incomplete record",
+      "known_fault": "invented a decline reason for an empty field",
+      "deterministic": {
+        "required_reason_present": null,
+        "no_forbidden_reason": false,
+        "leaked_reasons": [
+          "income"
+        ],
+        "bureau_reference_correct": false,
+        "bureau_mentioned": false,
+        "manual_review_stated": true,
+        "word_count": 41,
+        "under_300_words": true,
+        "gate_passed": false
+      },
+      "judge": {
+        "decline_sentence": "We regret to inform you that your application for a consumer loan has been declined.",
+        "score": 4,
+        "reasoning": "The letter is mostly neutral and clear, but the phrase 'exceeds what your current income profile can support' could be perceived as slightly condescending, implying a judgment about the applicant's financial situation. A trivial edit to soften this language would improve the tone.",
+        "criteria_met": {
+          "non_condescension": false,
+          "no_false_hope": true,
+          "plain_language": true
+        },
+        "lowest_criterion": "non_condescension",
+        "_meta": {
+          "parse_ok": true,
+          "model": "gpt-4o-mini",
+          "seconds": 2.642,
+          "input_tokens": 808,
+          "output_tokens": 135,
+          "estimated_cost_usd": 0.000202
+        }
+      }
+    }
+  ]
+}
