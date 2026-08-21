@@ -1,0 +1,7 @@
+# Implementation summary
+
+This submission builds a five-case MIRA evaluation harness using the OpenAI API directly. Each case stores an ID, title, prompt, ground-truth constraint statement, and expected criteria. The script generates a MIRA response, asks a structured LLM judge to score it from 1–5, validates the returned JSON, retries once on provider or parsing failure, and continues when an individual case fails.
+
+The evaluator collects response text, score, concise reasoning, five criterion flags, elapsed time, token usage for generation and judging, case errors, and aggregate score/runtime/token statistics. The real API evaluation completed all **5 cases with 0 failures** and achieved an average score of **4.2/5**. User-input precedence and five-frame campaign consistency were strongest at **5/5**; hallucination resistance was weakest at **3/5**; and explicit visual preference adherence and specificity/usefulness each scored **4/5**. Total runtime was **48.051 seconds**, and generation plus judging used **8,421 total tokens**. Exact cost is unavailable because pricing was intentionally not hardcoded.
+
+The N=5 dataset remains a proof of concept. No statistical significance is claimed, and the run cannot support strong model comparison or production conclusions. It demonstrates the workflow and identifies hallucination resistance as the clearest area for further test coverage and improvement.
