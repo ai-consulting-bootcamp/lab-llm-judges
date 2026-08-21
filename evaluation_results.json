@@ -1,0 +1,97 @@
+{
+  "project": "TenderAI",
+  "model": "gpt-4o-mini",
+  "evaluation_type": "LLM-as-Judge",
+  "results": [
+    {
+      "score": 5,
+      "reasoning": "The response accurately assesses the evidence and correctly concludes that the company does not meet the tender requirement. It relies solely on the supplied information without introducing any additional details, providing a clear rationale.",
+      "criteria_met": {
+        "evidence_grounding": true,
+        "correct_compliance_judgment": true,
+        "hallucination_avoidance": true,
+        "explanation_quality": true
+      },
+      "evaluation_time_seconds": 3.937,
+      "input_tokens": 357,
+      "output_tokens": 100,
+      "total_tokens": 457,
+      "id": "T1",
+      "name": "Evidence Sufficiency"
+    },
+    {
+      "score": 5,
+      "reasoning": "The response accurately lists all relevant projects directly from the supplied evidence, adhering strictly to the requirement, without any fabrication or omission. It clearly identifies the project name, technology, and capacity as requested.",
+      "criteria_met": {
+        "evidence_grounding": true,
+        "correct_compliance_judgment": true,
+        "hallucination_avoidance": true,
+        "explanation_quality": true
+      },
+      "evaluation_time_seconds": 1.943,
+      "input_tokens": 342,
+      "output_tokens": 102,
+      "total_tokens": 444,
+      "id": "T2",
+      "name": "Evidence-Based Project Identification"
+    },
+    {
+      "score": 3,
+      "reasoning": "The candidate correctly identifies the supported requirements but fails to explicitly connect the evidence to the engineering and procurement support experience. While it grounded its claims in the evidence, the explanation could be clearer.",
+      "criteria_met": {
+        "evidence_grounding": true,
+        "correct_compliance_judgment": true,
+        "hallucination_avoidance": true,
+        "explanation_quality": false
+      },
+      "evaluation_time_seconds": 1.649,
+      "input_tokens": 338,
+      "output_tokens": 100,
+      "total_tokens": 438,
+      "id": "T3",
+      "name": "Multi-Document Reasoning"
+    },
+    {
+      "score": 3,
+      "reasoning": "The candidate response relies on the supplied evidence but adds a concluding statement that wasn't requested. While it determines the requirement is supported correctly, the extra conclusion detracts from clarity.",
+      "criteria_met": {
+        "evidence_grounding": true,
+        "correct_compliance_judgment": true,
+        "hallucination_avoidance": true,
+        "explanation_quality": false
+      },
+      "evaluation_time_seconds": 1.958,
+      "input_tokens": 297,
+      "output_tokens": 97,
+      "total_tokens": 394,
+      "id": "T4",
+      "name": "Instruction Following"
+    },
+    {
+      "score": 2,
+      "reasoning": "The response correctly identifies one document supporting the claim but fails to address the conflict between documents A and B. It overlooks the need to resolve this inconsistency before making the claim.",
+      "criteria_met": {
+        "evidence_grounding": true,
+        "correct_compliance_judgment": false,
+        "hallucination_avoidance": true,
+        "explanation_quality": false
+      },
+      "evaluation_time_seconds": 1.599,
+      "input_tokens": 324,
+      "output_tokens": 98,
+      "total_tokens": 422,
+      "id": "T5",
+      "name": "Contradictory Evidence"
+    }
+  ],
+  "summary": {
+    "tests_evaluated": 5,
+    "average_score": 3.6,
+    "minimum_score": 2,
+    "maximum_score": 5,
+    "total_evaluation_time_seconds": 11.086,
+    "total_input_tokens": 1658,
+    "total_output_tokens": 497,
+    "total_tokens": 2155
+  }
+}
