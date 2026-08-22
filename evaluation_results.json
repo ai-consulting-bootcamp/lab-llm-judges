@@ -1,0 +1,197 @@
+{
+  "aggregate": {
+    "number_of_cases": 5,
+    "model_tested": "gpt-4o-mini",
+    "judge_model": "gpt-4.1-mini",
+    "average_score": 5.0,
+    "minimum_score": 5,
+    "maximum_score": 5,
+    "total_time_seconds": 22.955,
+    "total_tokens": 5579,
+    "estimated_total_cost_usd": 0.002796,
+    "criteria_summary": {
+      "criterion_level_accuracy": {
+        "passed": 5,
+        "total": 5,
+        "pass_rate": 1.0
+      },
+      "completeness": {
+        "passed": 5,
+        "total": 5,
+        "pass_rate": 1.0
+      },
+      "evidence_grounding": {
+        "passed": 5,
+        "total": 5,
+        "pass_rate": 1.0
+      },
+      "overall_consistency": {
+        "passed": 5,
+        "total": 5,
+        "pass_rate": 1.0
+      },
+      "decision_boundary": {
+        "passed": 5,
+        "total": 5,
+        "pass_rate": 1.0
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "case_1_clear_inclusion",
+      "model_response": "Criterion classification: MET\n\nSupporting information from the patient record: Age: 54 years",
+      "ground_truth": "Classification: MET\nSupporting evidence: Age: 54 years",
+      "score": 5,
+      "reasoning": "The model correctly classified the criterion as MET, citing the patient's age of 54 years, which meets the inclusion criterion of age 18 or older. The response is complete, grounded in explicit patient data, consistent, and does not make a final enrollment decision.",
+      "criteria_met": {
+        "criterion_level_accuracy": true,
+        "completeness": true,
+        "evidence_grounding": true,
+        "overall_consistency": true,
+        "decision_boundary": true
+      },
+      "timing_seconds": {
+        "generation": 1.996,
+        "judge": 3.281,
+        "total": 5.276
+      },
+      "tokens": {
+        "generation_input": 126,
+        "generation_output": 17,
+        "judge_input": 636,
+        "judge_output": 115,
+        "total": 894
+      },
+      "estimated_cost_usd": {
+        "generation": 2.9e-05,
+        "judge": 0.000438,
+        "total": 0.000468
+      }
+    },
+    {
+      "id": "case_2_exclusion_criterion",
+      "model_response": "The criterion is NOT MET.\n\nSupporting information from the patient record: \"Previous treatment: Pembrolizumab for 6 months.\"",
+      "ground_truth": "Classification: NOT MET\nSupporting evidence: Previous treatment: Pembrolizumab for 6 months.\nThe patient violates the eligibility requirement because previous\npembrolizumab treatment is an exclusion condition.",
+      "score": 5,
+      "reasoning": "The model correctly classified the criterion as NOT MET, fully addressed the criterion, cited explicit supporting evidence from the patient record, maintained consistency, and did not make a final enrollment decision.",
+      "criteria_met": {
+        "criterion_level_accuracy": true,
+        "completeness": true,
+        "evidence_grounding": true,
+        "overall_consistency": true,
+        "decision_boundary": true
+      },
+      "timing_seconds": {
+        "generation": 1.225,
+        "judge": 2.036,
+        "total": 3.262
+      },
+      "tokens": {
+        "generation_input": 157,
+        "generation_output": 26,
+        "judge_input": 702,
+        "judge_output": 99,
+        "total": 984
+      },
+      "estimated_cost_usd": {
+        "generation": 3.9e-05,
+        "judge": 0.000439,
+        "total": 0.000478
+      }
+    },
+    {
+      "id": "case_3_missing_information",
+      "model_response": "Criterion classification: UNKNOWN\n\nSupporting information from the patient record: \"eGFR: not reported.\"",
+      "ground_truth": "Classification: UNKNOWN\nSupporting evidence: eGFR is not reported.\nThe criterion cannot be assessed from the available information.",
+      "score": 5,
+      "reasoning": "The model correctly classified the criterion as UNKNOWN due to the absence of eGFR data, did not infer or calculate eGFR, cited the exact supporting information from the patient record, addressed the only criterion present, and did not make a final enrollment decision.",
+      "criteria_met": {
+        "criterion_level_accuracy": true,
+        "completeness": true,
+        "evidence_grounding": true,
+        "overall_consistency": true,
+        "decision_boundary": true
+      },
+      "timing_seconds": {
+        "generation": 1.062,
+        "judge": 2.229,
+        "total": 3.291
+      },
+      "tokens": {
+        "generation_input": 163,
+        "generation_output": 20,
+        "judge_input": 686,
+        "judge_output": 115,
+        "total": 984
+      },
+      "estimated_cost_usd": {
+        "generation": 3.6e-05,
+        "judge": 0.000458,
+        "total": 0.000495
+      }
+    },
+    {
+      "id": "case_4_multiple_criteria",
+      "model_response": "1. **Age**: MET  \n   - Supporting evidence: Patient is 61 years old.\n\n2. **ECOG performance status**: MET  \n   - Supporting evidence: Patient has an ECOG performance status of 1.\n\n3. **Platelet count**: NOT MET  \n   - Supporting evidence: Patient's platelet count is 82 × 10⁹/L, which is below the required minimum of 100 × 10⁹/L.\n\n4. **Active brain metastases**: MET  \n   - Supporting evidence: Brain MRI shows no evidence of brain metastases.\n\n**Overall screening conclusion**: The patient meets the age and ECOG performance status criteria and does not have active brain metastases. However, the platelet count criterion is not met. Further review is needed to determine eligibility for the clinical trial.",
+      "ground_truth": "Criterion 1: MET\nEvidence: Age: 61 years.\n\nCriterion 2: MET\nEvidence: ECOG performance status: 1.\n\nCriterion 3: NOT MET\nEvidence: Platelet count: 82 × 10⁹/L, below the required 100 × 10⁹/L.\n\nCriterion 4: MET\nEvidence: Brain MRI shows no evidence of brain metastases.\n\nOverall conclusion:\nThe patient does not currently satisfy all eligibility criteria because\nthe platelet count is below the required threshold. Final eligibility\nmust be determined by the clinical research team.",
+      "score": 5,
+      "reasoning": "The model correctly classified all four criteria in agreement with the ground truth, citing explicit patient record evidence for each. All criteria were addressed, and the overall conclusion accurately reflects the criterion-level assessments without making a final enrollment decision. The response is fully grounded, complete, consistent, and appropriately cautious.",
+      "criteria_met": {
+        "criterion_level_accuracy": true,
+        "completeness": true,
+        "evidence_grounding": true,
+        "overall_consistency": true,
+        "decision_boundary": true
+      },
+      "timing_seconds": {
+        "generation": 2.401,
+        "judge": 3.228,
+        "total": 5.629
+      },
+      "tokens": {
+        "generation_input": 207,
+        "generation_output": 168,
+        "judge_input": 971,
+        "judge_output": 121,
+        "total": 1467
+      },
+      "estimated_cost_usd": {
+        "generation": 0.000132,
+        "judge": 0.000582,
+        "total": 0.000714
+      }
+    },
+    {
+      "id": "case_5_ambiguous_information",
+      "model_response": "Criterion classification: UNKNOWN\n\nEvidence from the patient record: The patient has a temperature of 37.8°C, elevated C-reactive protein, and a clinical note stating \"Possible infection; cultures pending.\" Antibiotics have been started empirically, but there is no confirmed infectious diagnosis documented.\n\nReasoning: The patient is suspected to have an infection, but it is not confirmed, and the cultures are still pending. Since the trial criterion specifically excludes patients with an active uncontrolled infection, and there is no definitive evidence of such an infection at this time, the status remains unclear. Therefore, the criterion cannot be definitively classified as MET or NOT MET.",
+      "ground_truth": "Classification: UNKNOWN\n\nEvidence:\nThe clinical note states \"Possible infection; cultures pending\" and no\nconfirmed infectious diagnosis is documented.\n\nThere is insufficient information to establish that the patient has an\nactive uncontrolled infection.",
+      "score": 5,
+      "reasoning": "The model correctly classified the criterion as UNKNOWN, fully aligned with the ground truth. It cited all relevant patient data explicitly without inferring or inventing information. The reasoning clearly explained why the criterion could not be classified as MET or NOT MET, maintaining appropriate caution and not making a final enrollment decision. All requested elements were addressed consistently and completely.",
+      "criteria_met": {
+        "criterion_level_accuracy": true,
+        "completeness": true,
+        "evidence_grounding": true,
+        "overall_consistency": true,
+        "decision_boundary": true
+      },
+      "timing_seconds": {
+        "generation": 2.663,
+        "judge": 2.833,
+        "total": 5.495
+      },
+      "tokens": {
+        "generation_input": 169,
+        "generation_output": 130,
+        "judge_input": 820,
+        "judge_output": 131,
+        "total": 1250
+      },
+      "estimated_cost_usd": {
+        "generation": 0.000103,
+        "judge": 0.000538,
+        "total": 0.000641
+      }
+    }
+  ]
+}
