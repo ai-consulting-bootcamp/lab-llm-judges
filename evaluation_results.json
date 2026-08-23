@@ -1,0 +1,73 @@
+{
+  "individual_results": [
+    {
+      "score": 5,
+      "reasoning": "The chatbot effectively acknowledges the customer's frustration by recognizing the pattern of repeated issues, which shows empathy. It also provides a concrete resolution by offering a full refund or replacement, aligning with the store's policy. The tone is calm, respectful, and non-defensive, making it appropriate for the situation.",
+      "criteria_met": {
+        "empathy_acknowledgment": true,
+        "concrete_resolution": true,
+        "tone_appropriateness": true
+      },
+      "input_tokens": 437,
+      "output_tokens": 111,
+      "id": "complaint_good",
+      "time_seconds": 1.88,
+      "cost_usd": 0.000132
+    },
+    {
+      "score": 1,
+      "reasoning": "The response fails to acknowledge the customer's frustration and the repeated issues with their orders. It does not address the emotional state of the customer or the pattern of failures. Additionally, it does not provide a specific resolution regarding the damaged item, merely directing the customer to contact support without any concrete next steps. The tone is also lacking in empathy and does not convey a sense of understanding or respect for the customer's situation.",
+      "criteria_met": {
+        "empathy_acknowledgment": false,
+        "concrete_resolution": false,
+        "tone_appropriateness": false
+      },
+      "input_tokens": 400,
+      "output_tokens": 133,
+      "id": "complaint_generic",
+      "time_seconds": 1.69,
+      "cost_usd": 0.00014
+    },
+    {
+      "score": 2,
+      "reasoning": "The chatbot acknowledges the customer's frustration but does not address the repeated pattern of late and damaged orders. While it expresses understanding and values the customer, it fails to provide a specific resolution regarding the damaged item, such as a refund or replacement. The tone is calm and respectful, but the lack of a concrete resolution significantly impacts the overall effectiveness of the response.",
+      "criteria_met": {
+        "empathy_acknowledgment": true,
+        "concrete_resolution": false,
+        "tone_appropriateness": true
+      },
+      "input_tokens": 420,
+      "output_tokens": 122,
+      "id": "complaint_no_resolution",
+      "time_seconds": 1.56,
+      "cost_usd": 0.000136
+    },
+    {
+      "score": 1,
+      "reasoning": "The response fails to acknowledge the customer's frustration or the repeated issues with their orders. It only provides a vague policy statement regarding damaged items without addressing the customer's emotional state or the context of their dissatisfaction. There is no specific resolution offered, and the tone comes off as robotic and dismissive.",
+      "criteria_met": {
+        "empathy_acknowledgment": false,
+        "concrete_resolution": false,
+        "tone_appropriateness": false
+      },
+      "input_tokens": 402,
+      "output_tokens": 109,
+      "id": "complaint_dismissive",
+      "time_seconds": 1.98,
+      "cost_usd": 0.000126
+    }
+  ],
+  "aggregate_stats": {
+    "average_score": 2.25,
+    "min_score": 1,
+    "max_score": 5,
+    "total_time_seconds": 7.11,
+    "total_cost_usd": 0.000534,
+    "num_cases": 4,
+    "criteria_pass_counts": {
+      "empathy_acknowledgment": 2,
+      "concrete_resolution": 1,
+      "tone_appropriateness": 2
+    }
+  }
+}
