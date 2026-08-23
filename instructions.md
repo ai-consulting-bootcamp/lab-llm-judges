@@ -10,12 +10,12 @@
 You're a consultant tasked with designing and implementing an evaluation strategy for a client's LLM use case. This lab takes you through the complete process: from auditing existing benchmarks to designing your own evaluation, and finally implementing and running it in Python.
 
 **Learning Objectives**
-- [ ] Analyze and critique existing benchmarks for relevance, contamination, and saturation risks
-- [ ] Design custom evaluation prompts with clear ground truth and verification methods
-- [ ] Create LLM-as-judge evaluation prompts following best practices
-- [ ] Implement a complete evaluation pipeline using OpenAI/LangChain
-- [ ] Run evaluations and analyze results including accuracy, cost, and time metrics
-- [ ] Write professional evaluation reports with appropriate hedging and caveats
+- [x] Analyze and critique existing benchmarks for relevance, contamination, and saturation risks
+- [x] Design custom evaluation prompts with clear ground truth and verification methods
+- [x] Create LLM-as-judge evaluation prompts following best practices
+- [x] Implement a complete evaluation pipeline using OpenAI/LangChain
+- [x] Run evaluations and analyze results including accuracy, cost, and time metrics
+- [x] Write professional evaluation reports with appropriate hedging and caveats
 
 **Estimated Time:** 240 minutes (4 hours)
 
@@ -42,10 +42,10 @@ This lab simulates a real-world consulting scenario where you must:
 - Professional reporting requires understanding evaluation caveats
 
 **Success criteria:**
-- [ ] Complete benchmark audit with 3 evaluated benchmarks
-- [ ] Design 5 custom evaluation prompts with verification strategies
-- [ ] Implement working LLM-as-judge evaluation in Python
-- [ ] Generate evaluation report with metrics and recommendations
+- [x] Complete benchmark audit with 3 evaluated benchmarks
+- [x] Design 5 custom evaluation prompts with verification strategies
+- [x] Implement working LLM-as-judge evaluation in Python
+- [x] Generate evaluation report with metrics and recommendations
 
 ---
 
@@ -526,14 +526,14 @@ Submit the following items:
 ## Success Criteria
 
 Your lab is complete when:
-- [ ] You've audited 3 benchmarks with complete evaluation cards
-- [ ] You've designed 5 custom evaluation prompts with verification methods
-- [ ] You've created a complete LLM-as-judge prompt with bias analysis
-- [ ] You've written a professional evaluation memo with appropriate caveats
-- [ ] You've reflected on evaluation design challenges
-- [ ] You've implemented a working evaluation in Python
-- [ ] You've run evaluations and collected metrics (scores, time, cost)
-- [ ] All deliverables are submitted in the required format
+- [x] You've audited 3 benchmarks with complete evaluation cards
+- [x] You've designed 5 custom evaluation prompts with verification methods
+- [x] You've created a complete LLM-as-judge prompt with bias analysis
+- [x] You've written a professional evaluation memo with appropriate caveats
+- [x] You've reflected on evaluation design challenges
+- [x] You've implemented a working evaluation in Python
+- [x] You've run evaluations and collected metrics (scores, time, cost)
+- [x] All deliverables are submitted in the required format
 
 ---
 
