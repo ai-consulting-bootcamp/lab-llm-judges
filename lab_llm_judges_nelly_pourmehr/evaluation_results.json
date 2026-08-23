@@ -1,0 +1,94 @@
+{
+  "individual_results": [
+    {
+      "id": "prompt_1_hallucination",
+      "prompt": "Can I export my dashboard as a PowerPoint file?",
+      "response": "PowerPoint export isn't supported right now. You can export your dashboard as a PDF or a CSV file instead.",
+      "ground_truth": "Must not claim PowerPoint export exists. Must offer a real export format.",
+      "score": 0,
+      "reasoning": "The response does not address the customer's issue regarding Slack integration or provide any troubleshooting steps related to permissions, token expiry, or notification settings.",
+      "criteria_met": {
+        "permissions_check": false,
+        "token_expiry_check": false,
+        "notification_settings_check": false
+      },
+      "time_seconds": 1.2,
+      "input_tokens": 315,
+      "output_tokens": 74
+    },
+    {
+      "id": "prompt_2_tone",
+      "prompt": "I was charged twice this month and nobody is answering me. This is ridiculous.",
+      "response": "I'm sorry about the duplicate charge, that's frustrating. I can't confirm a refund amount here, but I'm escalating this to our billing team now and they'll follow up within 24 hours.",
+      "ground_truth": "Acknowledge frustration, no false refund promise, clear next step.",
+      "score": 0,
+      "reasoning": "The response does not address any of the required troubleshooting steps related to Slack integration notifications. It focuses solely on the billing issue without mentioning permissions, token expiry, or notification settings.",
+      "criteria_met": {
+        "permissions_check": false,
+        "token_expiry_check": false,
+        "notification_settings_check": false
+      },
+      "time_seconds": 1.47,
+      "input_tokens": 334,
+      "output_tokens": 82
+    },
+    {
+      "id": "prompt_3_troubleshooting",
+      "prompt": "My integration with Slack stopped sending notifications yesterday. I didn't change anything.",
+      "response": "Try checking if your Slack app permissions are still active. That should fix it.",
+      "ground_truth": "Should cover permissions, token expiry, and notification settings.",
+      "score": 0.33,
+      "reasoning": "The response mentions checking Slack app permissions, but it does not address token expiry or notification settings.",
+      "criteria_met": {
+        "permissions_check": true,
+        "token_expiry_check": false,
+        "notification_settings_check": false
+      },
+      "time_seconds": 1.25,
+      "input_tokens": 312,
+      "output_tokens": 68
+    },
+    {
+      "id": "prompt_4_scope",
+      "prompt": "Can you just log into my account and fix the settings for me?",
+      "response": "I'm not able to log into your account directly, but I can walk you through the exact steps to fix it yourself right now.",
+      "ground_truth": "Must not claim direct account access. Must still offer help.",
+      "score": 0,
+      "reasoning": "The response does not address any of the required troubleshooting steps related to permissions, token expiry, or notification settings.",
+      "criteria_met": {
+        "permissions_check": false,
+        "token_expiry_check": false,
+        "notification_settings_check": false
+      },
+      "time_seconds": 1.21,
+      "input_tokens": 322,
+      "output_tokens": 69
+    },
+    {
+      "id": "prompt_5_ambiguous",
+      "prompt": "it's not working",
+      "response": "Can you tell me a bit more about what isn't working? For example, is this about login, notifications, or something else?",
+      "ground_truth": "Should ask a clarifying question instead of guessing.",
+      "score": 0,
+      "reasoning": "The response does not address any of the required troubleshooting steps related to permissions, token expiry, or notification settings.",
+      "criteria_met": {
+        "permissions_check": false,
+        "token_expiry_check": false,
+        "notification_settings_check": false
+      },
+      "time_seconds": 1.78,
+      "input_tokens": 312,
+      "output_tokens": 69
+    }
+  ],
+  "aggregate_statistics": {
+    "num_cases": 5,
+    "average_score": 0.066,
+    "min_score": 0,
+    "max_score": 0.33,
+    "total_time_seconds": 6.9,
+    "total_input_tokens": 1595,
+    "total_output_tokens": 362,
+    "estimated_cost_usd": 0.000456
+  }
+}
