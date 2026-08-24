@@ -4,9 +4,13 @@
 
 This repository contains everything you need for this lab.
 
-## Scenario
+## Step 1: Client Scenario
 
-A retailer wants an AI customer service chatbot that handles returns, product questions, and complaints. The chatbot must be helpful, use the right tone, and resolve issues correctly. The main risks are giving wrong return or refund policy information, sounding rude or dismissive, and failing to escalate cases it cannot handle on its own.
+A retailer wants an AI customer service chatbot that handles returns, product questions, and complaints.
+
+- **Client's goal:** Automate first-line customer support for returns, product questions, and complaints, without hurting customer trust or resolution rate.
+- **Key requirements:** The chatbot must be helpful, use the right tone, follow return and refund policy correctly, and escalate to a human when it cannot resolve an issue itself.
+- **Main concerns or failure modes:** Giving wrong return or refund policy information, sounding rude or dismissive to upset customers, inventing order or product details it does not actually have access to, and being manipulated into bypassing policy.
 
 ## Files
 
