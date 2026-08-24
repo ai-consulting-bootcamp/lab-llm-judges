@@ -1,23 +1,206 @@
-# LLMs grading LLMs—with receipts
+# Retail LLM Evaluation
 
-**Track:** Module 5 — Evaluation & strategy · **When:** Week 7, Day 4 · **Status:** Required
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![OpenAI](https://img.shields.io/badge/OpenAI-API-black)
+![LLM Evaluation](https://img.shields.io/badge/LLM-Evaluation-purple)
+![Privacy](https://img.shields.io/badge/Privacy-GDPR%20Aware-green)
 
-This repository contains everything you need for this lab.
+A practical evaluation framework for a retail customer-service LLM, focused on whether the system is not only helpful, but also grounded, policy-compliant, privacy-aware and operationally correct.
 
-## Files
+---
 
-- [`instructions.md`](./instructions.md) — the lab instructions
-- [`rubric.md`](./rubric.md) — how your submission is graded; this is what the AI reviewer checks your PR against
+## What this project tests
 
-## How to complete this lab
+The evaluation covers five common retail customer-service journeys:
 
-1. **Fork** this repository.
-2. Do the work described in `instructions.md`, committing to your fork.
-3. Open a **pull request** back into this repository.
-4. You'll receive **AI feedback** on your PR based on `rubric.md`. Address any blocking feedback and push updates to the same PR.
+- Delivered but not received
+- Wrong product received
+- Cancelled order and refund status
+- Return outside the policy window
+- Order status and customer verification
 
-## Submission hygiene
+The objective is to test more than response quality.
 
-- Keep this repository scoped to this lab only — no unrelated projects or personal files.
-- Use clear, descriptive filenames.
-- Remove secrets, API keys, and tokens before committing.
+We also check whether the assistant:
+
+- uses the available evidence correctly
+- avoids unsupported claims
+- follows business rules
+- handles customer data appropriately
+- gives a valid next step
+- avoids critical operational failures
+
+---
+
+## Evaluation approach
+
+The project combines two evaluation layers:
+
+```text
+Customer case
+    ↓
+Structured system context
+    ↓
+LLM response
+    ↓
+Deterministic checks + LLM-as-a-Judge
+    ↓
+Structured evaluation result
+````
+
+### Deterministic checks
+
+Used for things that can be verified directly:
+
+* system state
+* allowed actions
+* policy rules
+* privacy requirements
+* critical failures
+
+### LLM-as-a-Judge
+
+Used for dimensions that require semantic judgement:
+
+* evidence grounding
+* hallucination avoidance
+* resolution quality
+* clarity
+* customer-facing quality
+
+The judge is calibrated with known good, borderline and bad examples to reduce overly generous scoring.
+
+---
+
+## Benchmark references
+
+The design was informed by three current benchmark families:
+
+| Benchmark        | What it contributes                                                 |
+| ---------------- | ------------------------------------------------------------------- |
+| **τ³-bench**     | End-to-end customer-service evaluation with tools, policy and state |
+| **BFCL V4**      | Function and tool-calling behaviour                                 |
+| **JourneyBench** | Business-process and policy adherence                               |
+
+External benchmarks are used as references, not as proof that the system works for a specific retailer.
+
+The main evidence comes from the custom retail test set.
+
+---
+
+## Results
+
+The current test run covered all five scenarios.
+
+| Metric            |      Result |
+| ----------------- | ----------: |
+| Cases evaluated   |           5 |
+| Average score     | **4.8 / 5** |
+| Minimum score     |           4 |
+| Maximum score     |           5 |
+| Critical failures |       **0** |
+| Total runtime     |    17.319 s |
+| Chatbot tokens    |       1,109 |
+| Judge tokens      |       5,268 |
+| Total tokens      |       6,377 |
+
+The only non-perfect result was the missing-delivery case. The answer was safe and correct, but did not explicitly explain that no proof of delivery or delivery notes were available.
+
+That case was also used to calibrate the judge.
+
+---
+
+## Project structure
+
+```text
+.
+├── README.md
+├── benchmark_audit.md
+├── evaluation_design.md
+├── evaluation_memo.md
+├── reflection.md
+├── implementation_summary.md
+├── llm_judge_evaluation.py
+├── evaluation_results.json
+├── requirements.txt
+├── .env.example
+└── .gitignore
+```
+
+### File guide
+
+| File                        | Purpose                                                             |
+| --------------------------- | ------------------------------------------------------------------- |
+| `benchmark_audit.md`        | Review of the external benchmarks used to shape the evaluation      |
+| `evaluation_design.md`      | Five custom test cases, judge rubric, bias analysis and calibration |
+| `llm_judge_evaluation.py`   | Python evaluation pipeline                                          |
+| `evaluation_results.json`   | Raw results and aggregate metrics                                   |
+| `evaluation_memo.md`        | Client-facing summary and recommendation                            |
+| `implementation_summary.md` | Technical summary of the implementation                             |
+| `reflection.md`             | Notes on multilingual evaluation, AGI claims and human review       |
+
+---
+
+## Run locally
+
+### 1. Create or activate a Python environment
+
+Python 3.11 is recommended.
+
+### 2. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Add the API key
+
+Create a `.env` file:
+
+```text
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+The `.env` file is excluded from version control.
+
+### 4. Run the evaluation
+
+```bash
+python llm_judge_evaluation.py
+```
+
+Results are written to:
+
+```text
+evaluation_results.json
+```
+
+---
+
+## Evaluation principles
+
+This project follows a few simple rules:
+
+* Do not treat fluency as correctness.
+* Do not use an LLM judge for facts that can be checked directly.
+* Treat privacy, policy and financial errors as operational risks.
+* Keep critical failures separate from style quality.
+* Use external benchmarks as references, not as production evidence.
+* Calibrate the judge before trusting its scores.
+* Treat results as valid only for the scenarios and conditions tested.
+
+---
+
+## Current scope
+
+This is a small controlled evaluation, not a production benchmark.
+
+The current version uses:
+
+* 5 retail scenarios
+* simulated system context
+* one target model
+* one judge model
+* deterministic checks for critical rules
+
+A production evaluation would need a larger private test set, repeated runs, real tool integrations and targeted human review for high-risk cases.
