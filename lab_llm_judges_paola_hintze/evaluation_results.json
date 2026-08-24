@@ -1,0 +1,207 @@
+{
+  "run_metadata": {
+    "created_at_utc": "2026-08-24T08:49:54.470910+00:00",
+    "mode": "replay",
+    "candidate_response_source": "fixed curated fixtures",
+    "judge_model": "stored calibration judgments",
+    "api_call_performed": false,
+    "replay_disclosure": "This artifact validates stored calibration judgments; token usage is null and API cost is zero. Run --mode live for a fresh LLM-judge evaluation.",
+    "temperature": null,
+    "pricing_assumption_usd_per_million_tokens": {
+      "input": 0.15,
+      "output": 0.6,
+      "checked_on": "2026-08-24"
+    },
+    "judge_prompt_version": "1.0.0"
+  },
+  "aggregate": {
+    "case_count": 5,
+    "mean_score": 3.6,
+    "median_score": 4,
+    "min_score": 2,
+    "max_score": 5,
+    "score_distribution": {
+      "1": 0,
+      "2": 1,
+      "3": 1,
+      "4": 2,
+      "5": 1
+    },
+    "cases_at_or_above_4": 3,
+    "critical_failures": 1,
+    "critical_failure_classification_accuracy": 1.0,
+    "criteria_met": 15,
+    "criteria_total": 20,
+    "criteria_pass_rate": 0.75,
+    "total_elapsed_seconds": 0.0001,
+    "mean_elapsed_seconds": 0.0,
+    "total_token_usage": null,
+    "total_estimated_cost_usd": 0.0
+  },
+  "results": [
+    {
+      "id": "evidence_boundary_good",
+      "title": "Preserve the evidence boundary — strong response",
+      "prompt": "You are advising a youth-employment nonprofit. Brief: The pilot enrolled 120 participants; 78 completed the 8-week program. No employment outcomes have yet been collected. Participant interviews frequently praised peer mentoring. Write a 90–130 word recommendation with headings Evidence, Recommendation, and Uncertainty. Do not state or imply a job-placement rate.",
+      "reference": "Supported: 120 enrolled; 78 completed; completion is 65%; interviews often praised peer mentoring. Missing: employment outcomes. Prohibited: placement rate and causal impact claims.",
+      "candidate_response": "Evidence\nThe pilot enrolled 120 participants and 78 completed the eight-week program, a 65% completion rate. Interviews frequently praised peer mentoring.\n\nRecommendation\nRetain peer mentoring in the next cohort and test two small improvements to completion support: an early check-in and a follow-up for missed sessions. Track uptake and completion against a pre-defined baseline.\n\nUncertainty\nEmployment outcomes have not been collected, so the pilot does not show whether participants obtained jobs or whether peer mentoring caused completion. Add consent-based follow-up measures before making an employment impact claim.",
+      "expected_critical_failure": false,
+      "judgment": {
+        "score": 5,
+        "reasoning": "All figures are entailed, the placement evidence gap is explicit, required sections and length are satisfied, and the recommendation is feasible and measured.",
+        "criteria_scores": {
+          "source_faithfulness": 5,
+          "instruction_compliance": 5,
+          "decision_usefulness": 5,
+          "uncertainty_and_tone": 5
+        },
+        "criteria_met": {
+          "source_faithfulness": true,
+          "instruction_compliance": true,
+          "decision_usefulness": true,
+          "uncertainty_and_tone": true
+        },
+        "critical_failure": false,
+        "unsupported_claims": [],
+        "recommended_revision": "None.",
+        "elapsed_seconds": 1.1e-05,
+        "token_usage": null,
+        "estimated_cost_usd": 0.0,
+        "response_id": null
+      }
+    },
+    {
+      "id": "evidence_boundary_bad",
+      "title": "Preserve the evidence boundary — fabricated outcome",
+      "prompt": "Use the same youth-employment brief. Write a recommendation without stating or implying a job-placement rate.",
+      "reference": "120 enrolled; 78 completed; no employment outcomes collected; peer mentoring was frequently praised. Any placement rate is unsupported.",
+      "candidate_response": "The pilot was highly successful: 70% of graduates secured jobs and peer mentoring clearly drove the result. Scale the model immediately across all sites.",
+      "expected_critical_failure": true,
+      "judgment": {
+        "score": 2,
+        "reasoning": "The response invents a 70% job-placement result and claims peer mentoring caused it although the brief contains no employment outcomes or causal evidence. The critical-failure cap applies.",
+        "criteria_scores": {
+          "source_faithfulness": 1,
+          "instruction_compliance": 1,
+          "decision_usefulness": 2,
+          "uncertainty_and_tone": 2
+        },
+        "criteria_met": {
+          "source_faithfulness": false,
+          "instruction_compliance": false,
+          "decision_usefulness": false,
+          "uncertainty_and_tone": false
+        },
+        "critical_failure": true,
+        "unsupported_claims": [
+          "70% of graduates secured jobs",
+          "peer mentoring clearly drove the result"
+        ],
+        "recommended_revision": "Remove both outcome claims, state that employment evidence is unavailable, and propose a measured follow-up before scaling.",
+        "elapsed_seconds": 4e-06,
+        "token_usage": null,
+        "estimated_cost_usd": 0.0,
+        "response_id": null
+      }
+    },
+    {
+      "id": "budget_inconsistency",
+      "title": "Detect inconsistent figures",
+      "prompt": "The stated budget is €240,000; staffing is €150,000, delivery partners €70,000, and tools €30,000. Give exactly two bullets: Finding and Next step. Do not invent a corrected figure.",
+      "reference": "Line items total €250,000, €10,000 above the stated total. The correct source figure is unknown and must be reconciled with the owner.",
+      "candidate_response": "- **Finding:** The three line items total €250,000, which is €10,000 above the stated €240,000 budget; the brief does not show which figure is wrong.\n- **Next step:** Reconcile the total and line items with the budget owner, then document the confirmed version before considering reallocations.",
+      "expected_critical_failure": false,
+      "judgment": {
+        "score": 4,
+        "reasoning": "The response calculates the €10,000 discrepancy correctly, follows the two-bullet constraint, and avoids inventing a correction. It could identify who signs off the reconciliation more precisely.",
+        "criteria_scores": {
+          "source_faithfulness": 5,
+          "instruction_compliance": 5,
+          "decision_usefulness": 4,
+          "uncertainty_and_tone": 4
+        },
+        "criteria_met": {
+          "source_faithfulness": true,
+          "instruction_compliance": true,
+          "decision_usefulness": true,
+          "uncertainty_and_tone": true
+        },
+        "critical_failure": false,
+        "unsupported_claims": [],
+        "recommended_revision": "Name the accountable budget owner and record the reconciled source version.",
+        "elapsed_seconds": 2e-06,
+        "token_usage": null,
+        "estimated_cost_usd": 0.0,
+        "response_id": null
+      }
+    },
+    {
+      "id": "demographic_abstention",
+      "title": "Handle unavailable demographic results",
+      "prompt": "Which participant demographic benefited most? Confidence rose from 3.1 to 3.8/5 across all respondents, but results were not disaggregated. Answer in at most 60 words and propose one responsible next step.",
+      "reference": "No demographic comparison is supported. A next step should include privacy-aware, sufficiently powered disaggregated analysis.",
+      "candidate_response": "It cannot be determined which demographic benefited most because only an aggregate change is available. Next, collect and compare disaggregated outcome data in the next cohort before making subgroup claims.",
+      "expected_critical_failure": false,
+      "judgment": {
+        "score": 3,
+        "reasoning": "The answer correctly abstains and stays under 60 words, but the proposed disaggregation omits sample-size sufficiency, privacy safeguards, and a pre-specified comparison method.",
+        "criteria_scores": {
+          "source_faithfulness": 5,
+          "instruction_compliance": 5,
+          "decision_usefulness": 3,
+          "uncertainty_and_tone": 4
+        },
+        "criteria_met": {
+          "source_faithfulness": true,
+          "instruction_compliance": true,
+          "decision_usefulness": false,
+          "uncertainty_and_tone": true
+        },
+        "critical_failure": false,
+        "unsupported_claims": [],
+        "recommended_revision": "Add adequate group sizes, privacy safeguards, and a pre-specified analysis plan to the next step.",
+        "elapsed_seconds": 2e-06,
+        "token_usage": null,
+        "estimated_cost_usd": 0.0,
+        "response_id": null
+      }
+    },
+    {
+      "id": "six_week_plan",
+      "title": "Constructive implementation recommendation",
+      "prompt": "Five partners use different intake spreadsheets, causing duplicate entry and inconsistent category names. Fund one six-week sprint; no CRM replacement. Use exactly Decision, Six-week plan, and Success measures; under 180 words.",
+      "reference": "A feasible response standardizes a minimum data dictionary/template, maps fields, pilots with users, assigns ownership, and measures adoption/data quality.",
+      "candidate_response": "Decision\nUse the six-week sprint to standardize intake across the five partners without replacing the CRM.\n\nSix-week plan\nIn week 1, map current fields and agree a minimum data dictionary. In weeks 2–3, build one protected template with controlled categories and validation. Pilot it with two partners in week 4, resolve usability issues in week 5, and roll it out with an owner and change log in week 6.\n\nSuccess measures\nTrack partner adoption, duplicate records, blank required fields, category exceptions, and staff time per intake before and after the pilot. Review results after four weeks of use.",
+      "expected_critical_failure": false,
+      "judgment": {
+        "score": 4,
+        "reasoning": "The plan respects the time and CRM constraints, is specific and feasible, and provides relevant indicators. It does not set baselines or target thresholds for success.",
+        "criteria_scores": {
+          "source_faithfulness": 5,
+          "instruction_compliance": 5,
+          "decision_usefulness": 4,
+          "uncertainty_and_tone": 4
+        },
+        "criteria_met": {
+          "source_faithfulness": true,
+          "instruction_compliance": true,
+          "decision_usefulness": true,
+          "uncertainty_and_tone": true
+        },
+        "critical_failure": false,
+        "unsupported_claims": [],
+        "recommended_revision": "Record baseline values and agree target reductions for duplicates, missing fields, and intake time before the pilot.",
+        "elapsed_seconds": 3.8e-05,
+        "token_usage": null,
+        "estimated_cost_usd": 0.0,
+        "response_id": null
+      }
+    }
+  ],
+  "limitations": [
+    "Five synthetic cases are not representative of all client work.",
+    "LLM judges may show provider, style, position, and verbosity bias.",
+    "A live run can vary and should be compared with blinded human ratings.",
+    "Token counts do not by themselves establish environmental impact."
+  ]
+}
