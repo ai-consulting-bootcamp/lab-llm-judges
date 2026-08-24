@@ -1,0 +1,178 @@
+{
+  "scenario": "Retail customer service chatbot",
+  "mode": "openai",
+  "model": "gpt-4o-mini",
+  "run_mode_note": "This results file was produced with the live OpenAI judge path. The offline heuristic fallback exists in the script for no-key development runs.",
+  "created_at": "2026-08-24T08:40:55Z",
+  "results": [
+    {
+      "case_id": "retail-1",
+      "title": "Late Return Request",
+      "prompt": "A customer says: 'I bought a speaker 37 days ago and opened it, but I do not like the sound. Can I return it for a refund?'",
+      "ground_truth": "Explain that the return window has passed and offer a defect review or escalation path.",
+      "candidate_response": "No. The 30-day return window has passed, so this would not qualify for a standard refund. If the speaker is defective, send the order number and I can help with the review.",
+      "expected_criteria": {
+        "helpfulness": true,
+        "tone": true,
+        "policy_adherence": true,
+        "resolution_quality": true
+      },
+      "judge_result": {
+        "score": 3,
+        "reasoning": "The assistant correctly references the 30-day return policy but lacks empathy in its response. The mention of reviewing for defects is a positive step towards providing resolution, but it does not sufficiently guide the customer towards further action or clarify details about defectiveness. The tone is somewhat blunt and could be more supportive to better address the customer's feelings regarding dissatisfaction with the product.",
+        "criteria_met": {
+          "helpfulness": true,
+          "tone": false,
+          "policy_adherence": true,
+          "resolution_quality": true
+        },
+        "input_tokens": 453,
+        "output_tokens": 103,
+        "estimated_cost_usd": 0.00013,
+        "judge_mode": "openai",
+        "response_id": "resp_01c7a501ca7f46e5006a8c038c14f887d2b1225e1c1975cf83",
+        "elapsed_seconds": 3.0854,
+        "prompt_tokens_estimate": 36,
+        "response_tokens_estimate": 42
+      }
+    },
+    {
+      "case_id": "retail-2",
+      "title": "Damaged Arrival Complaint",
+      "prompt": "A customer says: 'My order arrived with a cracked item and one accessory missing. I am pretty angry.'",
+      "ground_truth": "Apologize, gather the needed details, and move directly to replacement or refund handling.",
+      "candidate_response": "I am very sorry this happened. Please send your order number and photos of the damage if you can, and we will help arrange a replacement or refund according to policy. I understand how frustrating this is.",
+      "expected_criteria": {
+        "helpfulness": true,
+        "tone": true,
+        "policy_adherence": true,
+        "resolution_quality": true
+      },
+      "judge_result": {
+        "score": 4,
+        "reasoning": "The response effectively addresses the customer's issue by acknowledging the complaint about the cracked item and missing accessory. The assistant demonstrates empathy and understanding, maintaining a calm tone throughout. It correctly adheres to the retail policy regarding handling damaged items and provides a clear action step (sending the order number and photos) for the customer to take next. Thus, it meets all evaluation criteria.",
+        "criteria_met": {
+          "helpfulness": true,
+          "tone": true,
+          "policy_adherence": true,
+          "resolution_quality": true
+        },
+        "input_tokens": 443,
+        "output_tokens": 105,
+        "estimated_cost_usd": 0.000129,
+        "judge_mode": "openai",
+        "response_id": "resp_05c7b054fc8ade0f006a8c038eb5b887d2bfed840cbcbafe20",
+        "elapsed_seconds": 1.9707,
+        "prompt_tokens_estimate": 24,
+        "response_tokens_estimate": 49
+      }
+    },
+    {
+      "case_id": "retail-3",
+      "title": "Product Compatibility Question",
+      "prompt": "A customer asks: 'Will your USB-C charger work with a 2021 Dell XPS 13 and fast charge it?'",
+      "ground_truth": "Avoid guessing and request the missing charger details before confirming compatibility.",
+      "candidate_response": "It probably works with most USB-C chargers. If you send the exact model, I can confirm.",
+      "expected_criteria": {
+        "helpfulness": true,
+        "tone": true,
+        "policy_adherence": true,
+        "resolution_quality": true
+      },
+      "judge_result": {
+        "score": 3,
+        "reasoning": "The response does provide some assistance in indicating that more information is needed to give a definitive answer; however, it lacks reassurance that an appropriate action can be taken based on the details provided. The phrase 'it probably works' does not clearly adhere to the retail policy regarding avoiding speculative statements about product compatibility. The tone is neutral but could be interpreted as vague. There is no clear resolution path indicated, which lowers the resolution quality.",
+        "criteria_met": {
+          "helpfulness": false,
+          "tone": true,
+          "policy_adherence": false,
+          "resolution_quality": false
+        },
+        "input_tokens": 427,
+        "output_tokens": 117,
+        "estimated_cost_usd": 0.000134,
+        "judge_mode": "openai",
+        "response_id": "resp_09cbbb62b843210b006a8c0390a9e487d283d1bc57ad8bfc40",
+        "elapsed_seconds": 2.4058,
+        "prompt_tokens_estimate": 24,
+        "response_tokens_estimate": 21
+      }
+    },
+    {
+      "case_id": "retail-4",
+      "title": "Missing Tracking Update",
+      "prompt": "A customer says: 'Your tracking page has not updated in four days. Where is my package?'",
+      "ground_truth": "Acknowledge the problem and explain the next action without pretending to know the package location.",
+      "candidate_response": "Please contact the carrier.",
+      "expected_criteria": {
+        "helpfulness": true,
+        "tone": true,
+        "policy_adherence": true,
+        "resolution_quality": true
+      },
+      "judge_result": {
+        "score": 2,
+        "reasoning": "The response does not directly address the customer's issue about the lack of updates on the tracking page nor provide any guidance on next steps related to the retailer's processes.",
+        "criteria_met": {
+          "helpfulness": false,
+          "tone": true,
+          "policy_adherence": true,
+          "resolution_quality": false
+        },
+        "input_tokens": 406,
+        "output_tokens": 64,
+        "estimated_cost_usd": 0.000099,
+        "judge_mode": "openai",
+        "response_id": "resp_0bc6130042e5032a006a8c039325b087d2aec990cf3efe5447",
+        "elapsed_seconds": 2.282,
+        "prompt_tokens_estimate": 21,
+        "response_tokens_estimate": 6
+      }
+    },
+    {
+      "case_id": "retail-5",
+      "title": "Price Match Complaint",
+      "prompt": "A customer says: 'I bought this jacket last week and now it is on sale. I want the difference refunded.'",
+      "ground_truth": "Do not invent the policy; check eligibility and offer a verification path.",
+      "candidate_response": "Sure, I can refund the difference right away if you send the order number.",
+      "expected_criteria": {
+        "helpfulness": true,
+        "tone": true,
+        "policy_adherence": true,
+        "resolution_quality": true
+      },
+      "judge_result": {
+        "score": 3,
+        "reasoning": "The response is somewhat helpful as it prompts for the order number to process the refund; however, it does not adhere to the company's policy regarding price adjustments. The tone is calm and respectful, but because it offers an unsupported promise of a refund without acknowledging the inability to adjust prices for sales after purchase, it fails in policy adherence. The resolution quality is lacking as it does not provide a concrete path toward a legitimate complaint or acknowledgment of the policy.",
+        "criteria_met": {
+          "helpfulness": true,
+          "tone": true,
+          "policy_adherence": false,
+          "resolution_quality": false
+        },
+        "input_tokens": 420,
+        "output_tokens": 121,
+        "estimated_cost_usd": 0.000136,
+        "judge_mode": "openai",
+        "response_id": "resp_05f6a9781fe1735e006a8c03955f6c87d288756236c21ac707",
+        "elapsed_seconds": 1.9275,
+        "prompt_tokens_estimate": 26,
+        "response_tokens_estimate": 19
+      }
+    }
+  ],
+  "summary": {
+    "case_count": 5,
+    "average_score": 3,
+    "min_score": 2,
+    "max_score": 4,
+    "total_elapsed_seconds": 11.6714,
+    "total_estimated_cost_usd": 0.000628,
+    "criteria_coverage": {
+      "helpfulness": 3,
+      "tone": 4,
+      "policy_adherence": 3,
+      "resolution_quality": 2
+    }
+  }
+}
