@@ -1,23 +1,40 @@
-# LLMs grading LLMs—with receipts
+# LLMs grading LLMs—with receipts — Paola Hintze
 
-**Track:** Module 5 — Evaluation & strategy · **When:** Week 7, Day 4 · **Status:** Required
+This submission evaluates an LLM used by a fictional social-impact consultancy to draft evidence-grounded recommendations from a supplied client brief. The assistant must preserve the source facts, distinguish evidence from recommendations, follow the requested format, use an appropriate consulting tone, and abstain when the brief does not support a claim.
 
-This repository contains everything you need for this lab.
+The evaluation combines three benchmark audits, five production-like prompt cards, a calibrated LLM-as-judge rubric, deterministic safety checks, and a reproducible Python pipeline. Candidate answers are fixed fixtures so that model judging—not answer generation—is the variable under test.
 
-## Files
+## Submission map
 
-- [`instructions.md`](./instructions.md) — the lab instructions
-- [`rubric.md`](./rubric.md) — how your submission is graded; this is what the AI reviewer checks your PR against
+All student deliverables are in [`lab_llm_judges_paola_hintze/`](./lab_llm_judges_paola_hintze/):
 
-## How to complete this lab
+- [`benchmark_audit.md`](./lab_llm_judges_paola_hintze/benchmark_audit.md) — three benchmark evaluation cards.
+- [`evaluation_design.md`](./lab_llm_judges_paola_hintze/evaluation_design.md) — five prompt cards, full judge prompt, bias analysis, and calibration plan.
+- [`evaluation_memo.md`](./lab_llm_judges_paola_hintze/evaluation_memo.md) — client-facing evaluation memo.
+- [`reflection.md`](./lab_llm_judges_paola_hintze/reflection.md) — responses to the three reflection questions.
+- [`llm_judge_evaluation.py`](./lab_llm_judges_paola_hintze/llm_judge_evaluation.py) — OpenAI Responses API evaluation pipeline with structured output, replay mode, metrics, and validation.
+- [`evaluation_results.json`](./lab_llm_judges_paola_hintze/evaluation_results.json) — reproducible calibration-replay results for five cases.
+- [`implementation_summary.md`](./lab_llm_judges_paola_hintze/implementation_summary.md) — implementation choices, results, and limitations.
+- [`requirements.txt`](./lab_llm_judges_paola_hintze/requirements.txt) — Python dependency.
 
-1. **Fork** this repository.
-2. Do the work described in `instructions.md`, committing to your fork.
-3. Open a **pull request** back into this repository.
-4. You'll receive **AI feedback** on your PR based on `rubric.md`. Address any blocking feedback and push updates to the same PR.
+The original [`instructions.md`](./instructions.md) and [`rubric.md`](./rubric.md) remain at repository root for traceability.
 
-## Submission hygiene
+## Run the evaluation
 
-- Keep this repository scoped to this lab only — no unrelated projects or personal files.
-- Use clear, descriptive filenames.
-- Remove secrets, API keys, and tokens before committing.
+```bash
+cd lab_llm_judges_paola_hintze
+python -m venv .venv
+source .venv/bin/activate  # Windows Git Bash: source .venv/Scripts/activate
+pip install -r requirements.txt
+cp .env.example .env
+# Add your OPENAI_API_KEY to .env; never commit it.
+python llm_judge_evaluation.py --mode live --output evaluation_results_live.json
+```
+
+To reproduce the committed calibration result without an API key:
+
+```bash
+python llm_judge_evaluation.py --mode replay --output evaluation_results.json
+```
+
+Replay mode is explicitly labelled and does not claim API token usage or paid cost. Live mode uses `gpt-4o-mini`, captures API-reported token usage, measures wall-clock time, estimates cost from documented rates, and writes an auditable JSON record.
