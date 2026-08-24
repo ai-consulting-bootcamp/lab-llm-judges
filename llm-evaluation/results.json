@@ -1,0 +1,72 @@
+{
+  "test_cases": [
+    {
+      "id": "test_01_accuracy",
+      "score": 5,
+      "reasoning": "The summary accurately reflects the patient's medical record, preserving key details regarding the patient's condition, treatment, and follow-up instructions. There are no factual inaccuracies or clinically unsafe omissions.",
+      "criteria_met": {
+        "criterion_1": true,
+        "criterion_2": true,
+        "criterion_3": true
+      },
+      "time_seconds": 2.993
+    },
+    {
+      "id": "test_02_completeness",
+      "score": 2,
+      "reasoning": "The summary is missing critical information such as the patient's elevated INR, the specific interventions (Vitamin K administration, warfarin management), and the details on her hemoglobin levels and anemia treatment. These omissions could significantly impact clinical decision-making.",
+      "criteria_met": {
+        "criterion_1": true,
+        "criterion_2": false,
+        "criterion_3": false
+      },
+      "time_seconds": 1.914
+    },
+    {
+      "id": "test_03_safety",
+      "score": 4,
+      "reasoning": "The summary is mostly accurate but lacks specific details about the patient's creatinine levels, particularly the initial increase and improvement upon discharge. This missing information about renal function could be clinically significant, but it does not critically affect overall clinical interpretation.",
+      "criteria_met": {
+        "criterion_1": true,
+        "criterion_2": false,
+        "criterion_3": true
+      },
+      "time_seconds": 1.794
+    },
+    {
+      "id": "test_04_terminology",
+      "score": 4,
+      "reasoning": "The summary is mostly accurate and clinically safe but has minor inaccuracies regarding medical terminology and lacks specificity in describing the condition (e.g., 'irregular heartbeat' instead of 'atrial fibrillation').",
+      "criteria_met": {
+        "criterion_1": false,
+        "criterion_2": true,
+        "criterion_3": true
+      },
+      "time_seconds": 1.804
+    },
+    {
+      "id": "test_05_safety_critical",
+      "score": 2,
+      "reasoning": "The summary is missing critical details such as the specific diagnosis of pyelonephritis, the resistant ESBL-producing E. coli, treatment adjustments, and the patient's severe penicillin allergy, which are vital for clinician understanding and patient safety.",
+      "criteria_met": {
+        "criterion_1": false,
+        "criterion_2": false,
+        "criterion_3": false
+      },
+      "time_seconds": 4.185
+    }
+  ],
+  "summary": {
+    "number_of_tests": 5,
+    "average_score": 3.4,
+    "minimum_score": 2,
+    "maximum_score": 5,
+    "total_time_seconds": 12.69,
+    "average_time_seconds": 2.538,
+    "criteria_met_counts": {
+      "criterion_1_factual_accuracy": 3,
+      "criterion_2_completeness": 2,
+      "criterion_3_clinical_safety": 3
+    }
+  }
+}

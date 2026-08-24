@@ -1,0 +1,17 @@
+## Question 1: What would change in your evaluation design if your client's data was in French?
+
+If the client's patient data were in French, I would prioritize benchmarks that are specifically designed for **French or multilingual clinical language** rather than assuming that English-language medical benchmarks transfer directly. I would adapt the evaluation prompts and ground-truth records into French and ensure that medical terminology, abbreviations, medication names, and clinical conventions are representative of French healthcare. I would also test whether the model preserves meaning when translating or summarizing French clinical language, rather than evaluating only linguistic fluency.
+
+A major challenge would be finding sufficiently large, high-quality French clinical datasets while maintaining patient privacy. I would use French-speaking clinicians to create reference summaries and evaluate accuracy, completeness, terminology, and safety. I would also include cases containing French-specific abbreviations and ambiguous clinical expressions. Automated metrics could still provide useful signals, but human evaluation would be particularly important because a translation or summary can be grammatically correct while subtly changing clinical meaning.
+
+## Question 2: Your client asks "Is this model AGI-level?" — how do you respond?
+
+I would first explain that **"AGI-level" is not a sufficiently precise evaluation criterion** for this use case. AGI generally refers to a system capable of performing a broad range of intellectual tasks at a level comparable to or exceeding humans, rather than simply being very good at one task. A model could perform extremely well at clinical summarization without demonstrating general intelligence.
+
+To answer the broader question, I would need evaluations across multiple capabilities, including reasoning, knowledge, coding, planning, instruction following, multimodal understanding, tool use, generalization to unfamiliar tasks, and robustness. I would also test performance on tasks that were not represented in the model's training data. Even then, I would avoid claiming that the evaluation "proves AGI," because there is no universally accepted AGI benchmark or threshold. For this client, I would focus instead on whether the model is **reliably capable and safe for the specific clinical task**.
+
+## Question 3: What is the one thing you could not evaluate without a human, and why?
+
+The most important thing I could not reliably evaluate without a human is **whether a summary is clinically safe and sufficiently complete for patient care**. A rule-based system can check whether specific facts, medications, laboratory values, or diagnoses are present, while an LLM judge can compare the output with the source record. Neither can fully determine whether an omission or wording choice could materially affect a clinician's decision in a particular context.
+
+I would therefore incorporate qualified clinicians into the evaluation process. They could independently review a representative sample of summaries, identify clinically significant errors or omissions, and rate overall safety and usefulness. I would use these human judgments to calibrate the automated judge, investigate disagreements, and establish a minimum safety threshold before deployment. For a high-risk medical application, **human evaluation should be treated as a validation layer rather than something replaced entirely by automated metrics**.
