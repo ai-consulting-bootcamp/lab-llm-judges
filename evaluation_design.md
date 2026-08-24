@@ -127,6 +127,11 @@ Evaluation Criteria:
 3. Policy adherence: Does the response avoid inventing policy or making unsupported promises?
 4. Resolution quality: Does the response clearly move the case toward closure, escalation, or the correct support path?
 
+Score Anchors:
+1. Score 1: The response is materially wrong, evasive, or unsafe. It may invent policy, ignore the customer's issue, or fail to provide any useful next step.
+2. Score 3: The response is directionally correct and partially helpful, but one or two criteria are weak. It may be polite but vague, cautious but incomplete, or helpful but not fully resolution-oriented.
+3. Score 5: The response is fully aligned with the retail support goal. It is accurate, empathetic, specific, and gives a clear path to resolution without unsupported promises.
+
 Reasoning Steps:
 Step 1: Check whether the response answers the customer with the correct retail policy or a careful uncertainty statement.
 Step 2: Check whether the tone is supportive and de-escalating.

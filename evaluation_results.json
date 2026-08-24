@@ -2,6 +2,7 @@
   "scenario": "Retail customer service chatbot",
   "mode": "openai",
   "model": "gpt-4o-mini",
+  "run_mode_note": "This results file was produced with the live OpenAI judge path. The offline heuristic fallback exists in the script for no-key development runs.",
   "created_at": "2026-08-24T08:40:55Z",
   "results": [
     {
