@@ -1,0 +1,101 @@
+{
+  "generator_model": "gpt-4o-mini",
+  "judge_model": "gpt-4o-mini",
+  "individual_results": [
+    {
+      "id": "live_1",
+      "prompt": "This is the worst product I've ever bought. It broke after two days and you are basically scamming your customers.",
+      "response": "I'm sorry to hear that you had such a negative experience with your purchase. I understand how frustrating it can be when a product doesn’t meet your expectations. To resolve this issue, I can assist you with a refund or a replacement. Please let me know which option you would prefer, and I’ll take care of it for you.",
+      "expected_quality": "unknown (live generation, judge score is the real test)",
+      "score": 5,
+      "reasoning": "The response effectively acknowledges the customer's frustration with the broken product and their negative experience. It offers a clear resolution by providing the customer with two actionable options: a refund or a replacement. The tone is calm and professional, avoiding defensiveness or excessive apologies.",
+      "criteria_met": {
+        "acknowledgment": true,
+        "concrete_resolution": true,
+        "tone": true
+      },
+      "time_seconds": 1.365,
+      "input_tokens": 416,
+      "output_tokens": 96,
+      "estimated_cost_usd": 0.00012
+    },
+    {
+      "id": "live_2",
+      "prompt": "Great, ANOTHER broken item from you guys. Third time this month. Are you even trying?",
+      "response": "I'm really sorry to hear that you've received another broken item. I understand how frustrating this must be for you, especially after multiple issues. To resolve this, I can assist you with a replacement for the broken item. Would you like to proceed with that?",
+      "expected_quality": "unknown (live generation, judge score is the real test)",
+      "score": 4,
+      "reasoning": "The response acknowledges the customer's frustration with the broken item and the repeated issues, which is a strong point. It also offers a clear resolution by suggesting a replacement, which is actionable. However, the tone, while generally calm, could be perceived as slightly apologetic, which may not fully align with the criteria for a professional tone.",
+      "criteria_met": {
+        "acknowledgment": true,
+        "concrete_resolution": true,
+        "tone": false
+      },
+      "time_seconds": 2.489,
+      "input_tokens": 398,
+      "output_tokens": 112,
+      "estimated_cost_usd": 0.000127
+    },
+    {
+      "id": "fixed_good",
+      "prompt": "I ordered a blender and it arrived cracked. This is unacceptable.",
+      "response": "I'm sorry your blender arrived cracked, that's not the experience we want for you. I can send a free replacement right away, or issue a full refund if you'd prefer. Which would you like me to set up?",
+      "expected_quality": "good",
+      "score": 5,
+      "reasoning": "The response directly acknowledges the customer's specific complaint about the cracked blender and expresses understanding of their frustration. It offers two clear, actionable next steps (a free replacement or a full refund) and invites the customer to choose, which is consistent with customer service policies. The tone is calm and professional, without defensiveness or excessive apologies.",
+      "criteria_met": {
+        "acknowledgment": true,
+        "concrete_resolution": true,
+        "tone": true
+      },
+      "time_seconds": 1.669,
+      "input_tokens": 381,
+      "output_tokens": 111,
+      "estimated_cost_usd": 0.000124
+    },
+    {
+      "id": "fixed_bad_generic",
+      "prompt": "I ordered a blender and it arrived cracked. This is unacceptable.",
+      "response": "I'm sorry for the inconvenience. Thank you for your patience.",
+      "expected_quality": "bad",
+      "score": 1,
+      "reasoning": "The response does not acknowledge the specific complaint about the cracked blender and fails to address the customer's frustration. It also does not provide any concrete resolution or next steps for the customer. The tone is overly generic and lacks professionalism.",
+      "criteria_met": {
+        "acknowledgment": false,
+        "concrete_resolution": false,
+        "tone": false
+      },
+      "time_seconds": 1.716,
+      "input_tokens": 350,
+      "output_tokens": 90,
+      "estimated_cost_usd": 0.000107
+    },
+    {
+      "id": "fixed_borderline_vague",
+      "prompt": "I ordered a blender and it arrived cracked. This is unacceptable.",
+      "response": "I understand your blender arrived cracked, that's frustrating. We'll look into it and get back to you.",
+      "expected_quality": "borderline",
+      "score": 3,
+      "reasoning": "The response acknowledges the specific issue of the cracked blender and recognizes the customer's frustration. However, it does not provide a concrete resolution or next step, as it only states that they will look into it without specifying what the customer can expect. The tone is calm and professional.",
+      "criteria_met": {
+        "acknowledgment": true,
+        "concrete_resolution": false,
+        "tone": true
+      },
+      "time_seconds": 1.52,
+      "input_tokens": 358,
+      "output_tokens": 100,
+      "estimated_cost_usd": 0.000114
+    }
+  ],
+  "aggregate": {
+    "num_cases": 5,
+    "average_score": 3.6,
+    "min_score": 1,
+    "max_score": 5,
+    "total_time_seconds": 8.76,
+    "total_input_tokens": 1903,
+    "total_output_tokens": 509,
+    "total_estimated_cost_usd": 0.000592
+  }
+}
