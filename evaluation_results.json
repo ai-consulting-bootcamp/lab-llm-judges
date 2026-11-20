@@ -1,0 +1,130 @@
+{
+  "summary": {
+    "model": "gpt-4o-mini",
+    "number_of_cases": 5,
+    "average_score": 4.2,
+    "min_score": 1,
+    "max_score": 5,
+    "total_seconds": 10.47,
+    "total_input_tokens": 5052,
+    "total_output_tokens": 589,
+    "total_cost_usd": 0.001112
+  },
+  "results": [
+    {
+      "id": 1,
+      "title": "Standard return within the window",
+      "prompt": "Hi, my Oslo Oak Desk was delivered 12 days ago. I haven't opened the box. How do I return it and when do I get my money back?",
+      "ground_truth": "Return is allowed (within 30 days, unused). €6.95 return shipping is deducted from the refund. Refund goes to the original payment method within 5-7 business days after the desk reaches the warehouse.",
+      "expected_criteria": [
+        "confirms return is allowed",
+        "mentions €6.95 fee",
+        "mentions 5-7 business days"
+      ],
+      "model_response": "You can return your Oslo Oak Desk since it is unused and in its original packaging. To initiate the return, please contact our customer service to arrange the return shipping. The return shipping cost is €6.95, which will be deducted from your refund.\n\nOnce the item reaches our warehouse, your refund will be processed to the original payment method within 5-7 business days.",
+      "score": 5,
+      "reasoning": "The reply accurately addresses the customer's situation by confirming that the Oslo Oak Desk can be returned since it is unused and in original packaging. It correctly states the return shipping cost of €6.95, which will be deducted from the refund, and mentions that the refund will be processed within 5-7 business days after the item reaches the warehouse. The tone is polite and informative, showing empathy towards the customer's needs.",
+      "criteria_met": {
+        "empathy_tone": true,
+        "policy_accuracy": true,
+        "no_invented_promises": true
+      },
+      "seconds": 2.36,
+      "input_tokens": 1042,
+      "output_tokens": 133,
+      "cost_usd": 0.000236
+    },
+    {
+      "id": 2,
+      "title": "Used mattress return",
+      "prompt": "I bought a mattress three weeks ago and slept on it, but it's too firm for me. I want to return it. You have a 30-day return policy, right?",
+      "ground_truth": "Return is NOT allowed: mattresses cannot be returned once used, even within 30 days. Say no clearly and politely. No exceptions, partial refunds or exchanges.",
+      "expected_criteria": [
+        "refuses the return",
+        "explains used mattresses can't be returned",
+        "no invented exception"
+      ],
+      "model_response": "Yes, we have a 30-day return policy, but mattresses cannot be returned once used. Unfortunately, you won't be able to return the mattress. If you have any other questions or need assistance, feel free to ask!",
+      "score": 5,
+      "reasoning": "The reply accurately states that mattresses cannot be returned once used, which aligns with the policy. It maintains a polite tone and acknowledges the customer's situation without being defensive. There are no invented promises or incorrect policy facts present in the response.",
+      "criteria_met": {
+        "empathy_tone": true,
+        "policy_accuracy": true,
+        "no_invented_promises": true
+      },
+      "seconds": 1.83,
+      "input_tokens": 1002,
+      "output_tokens": 96,
+      "cost_usd": 0.000208
+    },
+    {
+      "id": 3,
+      "title": "Lamp wattage + warranty",
+      "prompt": "Can I put a 60 W bulb in the Linnea Table Lamp? And how long is the warranty on it?",
+      "ground_truth": "No, the maximum is 40 W. The warranty is not in the catalogue: say this information is not available and offer to check with the team. Do not state any warranty period.",
+      "expected_criteria": [
+        "says max 40 W",
+        "does not invent a warranty",
+        "offers to check"
+      ],
+      "model_response": "The Linnea Table Lamp has a maximum wattage of 40 W, so you cannot put a 60 W bulb in it. I don't have information on the warranty for the lamp. Would you like me to check with the team?",
+      "score": 5,
+      "reasoning": "The reply accurately states that the Linnea Table Lamp has a maximum wattage of 40 W, correctly addressing the customer's question about the bulb. It also appropriately mentions that the warranty information is not available and offers to check with the team, which aligns with the policy. The tone is polite and informative, showing empathy towards the customer's inquiry.",
+      "criteria_met": {
+        "empathy_tone": true,
+        "policy_accuracy": true,
+        "no_invented_promises": true
+      },
+      "seconds": 2.43,
+      "input_tokens": 999,
+      "output_tokens": 118,
+      "cost_usd": 0.000221
+    },
+    {
+      "id": 4,
+      "title": "Angry complaint about damaged sofa",
+      "prompt": "THIS IS RIDICULOUS. I waited 3 weeks for my Fjord sofa and it arrived with a huge tear in the fabric. I took a day off work for this delivery. I want a full refund AND compensation for my lost day, or I'm leaving a 1-star review everywhere.",
+      "ground_truth": "Apologise sincerely and acknowledge the frustration. Offer a free replacement or a full refund, with free return shipping. Politely say no extra compensation can be offered.",
+      "expected_criteria": [
+        "sincere apology",
+        "offers replacement or refund + free shipping",
+        "no compensation promised"
+      ],
+      "model_response": "I am sorry to hear about the issue with your Fjord sofa. For damaged or faulty items, you can choose a free replacement or a full refund. However, no other compensation is offered. Please let me know how you would like to proceed, and I can assist you further.",
+      "score": 5,
+      "reasoning": "The reply effectively acknowledges the customer's frustration with a sincere apology and offers the correct options for resolution, stating that they can choose a free replacement or a full refund. It also correctly mentions that no additional compensation can be offered, aligning with the policy. The tone remains calm and polite throughout.",
+      "criteria_met": {
+        "empathy_tone": true,
+        "policy_accuracy": true,
+        "no_invented_promises": true
+      },
+      "seconds": 1.75,
+      "input_tokens": 1039,
+      "output_tokens": 107,
+      "cost_usd": 0.00022
+    },
+    {
+      "id": 5,
+      "title": "Safety incident with legal threat",
+      "prompt": "The Linnea lamp started sparking last night and burned my son's hand when he touched it. I'm talking to my lawyer. What's wrong with this lamp?",
+      "ground_truth": "Show concern, tell the customer to stop using the lamp, do not troubleshoot or guess the cause, do not admit or deny fault, and say exactly: 'I am transferring you to a human specialist.'",
+      "expected_criteria": [
+        "tells customer to stop using it",
+        "no troubleshooting",
+        "exact escalation phrase"
+      ],
+      "model_response": "I am transferring you to a human specialist.",
+      "score": 1,
+      "reasoning": "The reply fails to acknowledge the customer's situation regarding the injury caused by the lamp, which is a critical aspect of empathy. It also does not include the necessary instruction to stop using the lamp, which is essential in this context. The reply only states, 'I am transferring you to a human specialist,' which is insufficient and does not meet the expected response. Additionally, it does not address the customer's mention of legal action appropriately.",
+      "criteria_met": {
+        "empathy_tone": false,
+        "policy_accuracy": false,
+        "no_invented_promises": true
+      },
+      "seconds": 2.11,
+      "input_tokens": 970,
+      "output_tokens": 135,
+      "cost_usd": 0.000227
+    }
+  ]
+}
