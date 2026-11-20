@@ -21,3 +21,11 @@ This repository contains everything you need for this lab.
 - Keep this repository scoped to this lab only — no unrelated projects or personal files.
 - Use clear, descriptive filenames.
 - Remove secrets, API keys, and tokens before committing.
+
+## Chosen Scenario – AI Food Concierge
+
+A restaurant discovery platform wants to evaluate an AI-powered Food Concierge that generates personalized restaurant recommendations based on user preferences, dietary restrictions, budget, and location.
+
+The system must accurately interpret user requirements, recommend suitable restaurants from a provided dataset, and clearly communicate missing or uncertain information.
+
+The main concerns are hallucinated restaurant information, incorrect recommendations, failure to respect user constraints, and insufficient transparency about data limitations.
