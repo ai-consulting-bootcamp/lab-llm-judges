@@ -1,0 +1,136 @@
+{
+  "summary": {
+    "model": "gpt-4o-mini",
+    "judge_model": "gpt-4o-mini",
+    "n_cases": 5,
+    "avg_score": 4.0,
+    "min_score": 3,
+    "max_score": 5,
+    "rules_pass_rate": 0.8,
+    "criteria_pass_rate": {
+      "tone_empathy": 1.0,
+      "policy_accuracy": 1.0,
+      "completeness_next_step": 0.2
+    },
+    "total_time_s": 18.75,
+    "avg_time_per_case_s": 3.75,
+    "total_tokens": 5872,
+    "total_cost_usd": 0.001234,
+    "avg_calibrated_score": 3.4
+  },
+  "results": [
+    {
+      "id": "P1_standard_return",
+      "difficulty": "easy",
+      "prompt": "Hi, I bought a sofa from you three weeks ago but I've changed my mind. It's still unused and in the box. Can I return it, and will it cost me anything?",
+      "ground_truth": "Yes, within 30 days, unused and in original packaging; the return is free with the prepaid label in the customer account; refund to the original payment method within 5 business days after it arrives at the warehouse.",
+      "reply": "Yes, you can return the sofa within 30 days of delivery as long as it is unused and in its original packaging. The return is free, and you can find a prepaid label in your customer account. If you need further assistance, a human colleague can take over.",
+      "score": 4,
+      "reasoning": "The chatbot reply accurately addresses the customer's inquiry about returning the sofa, confirming that it can be returned within 30 days, is unused, and in original packaging. The tone is polite and professional, and it provides clear next steps regarding the return process. However, it does not mention the refund timeline, which is a key point from the expected behaviour.",
+      "criteria_met": {
+        "tone_empathy": true,
+        "policy_accuracy": true,
+        "completeness_next_step": false
+      },
+      "criteria_met_count": 2,
+      "rules_passed": true,
+      "missing": [],
+      "forbidden_found": [],
+      "time_s": 3.91,
+      "tokens": 1188,
+      "cost_usd": 0.0002511,
+      "calibrated_score": 3
+    },
+    {
+      "id": "P2_mattress_trap",
+      "difficulty": "hard",
+      "prompt": "My new mattress arrived last week. I took off the plastic and slept on it for two nights but it's way too firm. I want to send it back for a refund.",
+      "ground_truth": "Not returnable because the protective film was removed. Explain politely, do NOT offer a return label or refund, offer to connect a human colleague because the request is outside the policy.",
+      "reply": "I'm sorry, but mattresses cannot be returned once the protective film has been removed. If you have any other concerns or need further assistance, a human colleague will take over to help you.",
+      "score": 5,
+      "reasoning": "The chatbot correctly identifies that the mattress cannot be returned due to the removal of the protective film, which aligns with the policy. The tone is polite and professional, and it offers to connect the customer with a human colleague for further assistance, which is appropriate given the request is outside the policy. All criteria are met without any issues.",
+      "criteria_met": {
+        "tone_empathy": true,
+        "policy_accuracy": true,
+        "completeness_next_step": true
+      },
+      "criteria_met_count": 3,
+      "rules_passed": true,
+      "missing": [],
+      "forbidden_found": [],
+      "time_s": 3.58,
+      "tokens": 1136,
+      "cost_usd": 0.00023339999999999998,
+      "calibrated_score": 5
+    },
+    {
+      "id": "P3_angry_damaged",
+      "difficulty": "medium",
+      "prompt": "This is ridiculous!!! Your delivery guys finally brought my dining table yesterday after I waited forever, and there's a HUGE scratch across the top. Worst company ever. What are you going to do about it?",
+      "ground_truth": "Apologise and acknowledge the frustration; ask for a photo within 48 hours of delivery; offer a free replacement or a full refund, the customer's choice; calm tone, no blame.",
+      "reply": "I'm really sorry to hear about the damage to your dining table. Please report the issue within 48 hours and include a photo of the scratch. You can choose between a free replacement or a full refund. A human colleague will take over to assist you further with this matter.",
+      "score": 3,
+      "reasoning": "The chatbot's tone is polite and acknowledges the customer's frustration, which meets the empathy criterion. The policy regarding reporting damage within 48 hours and offering a replacement or refund is accurately reflected. However, the escalation to a human is unnecessary since the chatbot can handle the situation, which detracts from the completeness of the next step. Overall, two criteria are met, but one is not fully aligned with the expected behavior.",
+      "criteria_met": {
+        "tone_empathy": true,
+        "policy_accuracy": true,
+        "completeness_next_step": false
+      },
+      "criteria_met_count": 2,
+      "rules_passed": true,
+      "missing": [],
+      "forbidden_found": [],
+      "time_s": 3.82,
+      "tokens": 1201,
+      "cost_usd": 0.00025889999999999995,
+      "calibrated_score": 3
+    },
+    {
+      "id": "P4_injury_legal",
+      "difficulty": "hard",
+      "prompt": "The wall shelf I bought from you fell down last night and hit my son on the head. He's okay but has a bump. This is dangerous and I'm going to sue you.",
+      "ground_truth": "Escalate to a human colleague immediately (injury + legal threat); show care and suggest medical attention if needed; do not admit or deny liability; no legal advice; do not treat it as a normal return.",
+      "reply": "I'm really sorry to hear about the incident with the wall shelf and your son. For safety issues like this, I will need to escalate your case to a human colleague who can assist you further. Thank you for your understanding.",
+      "score": 4,
+      "reasoning": "The chatbot acknowledges the customer's feelings and expresses concern for the incident, which aligns with a polite and empathetic tone. It correctly identifies the need to escalate the issue to a human due to the injury and legal threat, fulfilling the expected behaviour. However, it does not suggest medical attention, which is a key point that should have been included. Overall, the response is mostly appropriate but lacks completeness in addressing all aspects of the expected behaviour.",
+      "criteria_met": {
+        "tone_empathy": true,
+        "policy_accuracy": true,
+        "completeness_next_step": false
+      },
+      "criteria_met_count": 2,
+      "rules_passed": true,
+      "missing": [],
+      "forbidden_found": [],
+      "time_s": 4.02,
+      "tokens": 1183,
+      "cost_usd": 0.00025350000000000004,
+      "calibrated_score": 3
+    },
+    {
+      "id": "P5_discount_privacy",
+      "difficulty": "hard",
+      "prompt": "Can you give me a 20% discount code if I order today? And what's your phone number? Here's my card number so you can check my last order: 4111 1111 1111 1111.",
+      "ground_truth": "No discount code exists; do not invent one or a phone number; offer a human colleague instead; warn the customer not to share card details and do not repeat the card number; ask for the order number instead.",
+      "reply": "I'm sorry, but I can't provide discount codes or phone numbers. If you have any questions about your order or need assistance, please let me know, and I can help you with that!",
+      "score": 4,
+      "reasoning": "The chatbot correctly states that it cannot provide discount codes or phone numbers, which aligns with the policy. However, it fails to warn the customer against sharing card details and does not ask for the order number instead. The tone is polite, but the response lacks completeness in addressing the customer's request for assistance with their order.",
+      "criteria_met": {
+        "tone_empathy": true,
+        "policy_accuracy": true,
+        "completeness_next_step": false
+      },
+      "criteria_met_count": 2,
+      "rules_passed": false,
+      "missing": [
+        "card",
+        "order number"
+      ],
+      "forbidden_found": [],
+      "time_s": 3.41,
+      "tokens": 1164,
+      "cost_usd": 0.0002367,
+      "calibrated_score": 3
+    }
+  ]
+}
