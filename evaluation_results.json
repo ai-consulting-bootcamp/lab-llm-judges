@@ -1,0 +1,96 @@
+{
+  "evaluation_type": "Synthetic pre-written responses",
+  "judge_model": "gpt-4o-mini",
+  "timestamp_utc": "2026-11-20T16:45:54.538715+00:00",
+  "results": [
+    {
+      "id": "TC-01",
+      "prompt": "Recommend exactly one Italian restaurant with vegan options and a maximum price of €30 per person. Available restaurants: Trattoria Verde (€24, vegan), Pasta Porto (€28, not vegan), Osteria Luna (€35, vegan). Explain your choice briefly.",
+      "model_response": "I recommend Trattoria Verde. It is an Italian restaurant offering vegan options at €24 per person, which meets your €30 budget.",
+      "ground_truth": "Trattoria Verde is the only valid recommendation.",
+      "expected_criteria": {
+        "criterion_1": true,
+        "criterion_2": true,
+        "criterion_3": true
+      },
+      "judgment": {
+        "score": 5,
+        "reasoning": "The response correctly identifies Trattoria Verde as the only Italian restaurant that offers vegan options within the specified budget of €30 per person. It provides accurate information and a clear justification for the recommendation.",
+        "criteria_met": {
+          "criterion_1": true,
+          "criterion_2": true,
+          "criterion_3": true
+        }
+      },
+      "time_seconds": 2.013,
+      "input_tokens": 415,
+      "output_tokens": 86,
+      "total_tokens": 501,
+      "estimated_cost_usd": 0.00011385
+    },
+    {
+      "id": "TC-02",
+      "prompt": "Does Trattoria Verde offer gluten-free pasta? Available data: Italian cuisine, €24 per person, vegan options available. Gluten-free options are not specified. Do not invent information.",
+      "model_response": "Yes, Trattoria Verde offers gluten-free pasta.",
+      "ground_truth": "Gluten-free pasta availability is unknown. The response must acknowledge missing information.",
+      "expected_criteria": {
+        "criterion_1": false,
+        "criterion_2": false,
+        "criterion_3": false
+      },
+      "judgment": {
+        "score": 1,
+        "reasoning": "The response incorrectly states that gluten-free pasta is offered, despite the available data indicating that gluten-free options are not specified. This is a major factual error.",
+        "criteria_met": {
+          "criterion_1": false,
+          "criterion_2": false,
+          "criterion_3": false
+        }
+      },
+      "time_seconds": 1.704,
+      "input_tokens": 389,
+      "output_tokens": 78,
+      "total_tokens": 467,
+      "estimated_cost_usd": 0.00010515
+    },
+    {
+      "id": "TC-03",
+      "prompt": "Recommend an Italian restaurant offering vegan options for no more than €20 per person. Available restaurants: Trattoria Verde (€24, vegan), Pasta Porto (€28, not vegan), Osteria Luna (€35, vegan). If none qualifies, explain and suggest which constraint could be reconsidered.",
+      "model_response": "None of the available restaurants meets all your requirements. You could increase your budget to €24 to consider Trattoria Verde, which offers vegan options.",
+      "ground_truth": "No restaurant satisfies all constraints. Increasing the budget to €24 is a valid suggestion.",
+      "expected_criteria": {
+        "criterion_1": true,
+        "criterion_2": true,
+        "criterion_3": true
+      },
+      "judgment": {
+        "score": 5,
+        "reasoning": "The response accurately identifies that no restaurant meets the original budget constraint and correctly suggests increasing the budget to €24 to consider Trattoria Verde, which offers vegan options.",
+        "criteria_met": {
+          "criterion_1": true,
+          "criterion_2": true,
+          "criterion_3": true
+        }
+      },
+      "time_seconds": 1.305,
+      "input_tokens": 431,
+      "output_tokens": 80,
+      "total_tokens": 511,
+      "estimated_cost_usd": 0.00011265
+    }
+  ],
+  "summary": {
+    "test_cases": 3,
+    "average_score": 3.67,
+    "min_score": 1,
+    "max_score": 5,
+    "total_time_seconds": 5.023,
+    "total_tokens": 1479,
+    "total_estimated_cost_usd": 0.00033165,
+    "criteria_met_counts": {
+      "criterion_1": 2,
+      "criterion_2": 2,
+      "criterion_3": 2
+    }
+  }
+}
