@@ -46,7 +46,7 @@ Across all 5 cases, gpt-4o-mini averaged 4.6/5 with 4 of 5 PASS (gpt-5.4-mini: 4
 ![Judge score per test case](score_chart.png)
 
 ## Failure or limitation I hit
-1. Extension 4 suggests comparing gpt-3.5-turbo with gpt-4o-mini, but gpt-3.5-turbo was shut down on 23 October 2026 (OpenAI deprecations page). My second choice, gpt-4.1-mini, failed with "does not have access to model" on this API key, so the second chatbot and the bigger judge are gpt-5.4-mini (reasoning effort "none", temperature 0). gpt-4o-mini itself is deprecated, with shutdown on 14 January 2027, so this run cannot be reproduced on that model after that date.
+1. Extension 4 suggests comparing gpt-3.5-turbo with gpt-4o-mini, but gpt-3.5-turbo was shut down on 23 October 2026 (OpenAI deprecations page). My second choice, gpt-4.1-mini, failed  "does not have access to model" on this API key, so the second chatbot and the bigger judge are gpt-5.4-mini (reasoning effort "none", temperature 0). gpt-4o-mini itself is deprecated, with shutdown on 14 January 2027, so this run cannot be reproduced on that model after that date.
 2. Calibration: The judge was never more than one point off the known level in the calibration set.
 3. Language: In the first run, gpt-4o-mini answered 4 of the 5 English messages in German, although the system prompt said to reply in the customer's language; the German brand names (Kleinanzeigen, Sicher bezahlen, Käuferschutz) most likely pulled it into German. Fix: the code now detects the customer's language and names it in the system prompt. After the fix, all 5 replies from gpt-4o-mini were in the customer's language.
 4. JSON parsing: 0 of 30 judge answers could not be parsed.
