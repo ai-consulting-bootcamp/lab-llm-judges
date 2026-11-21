@@ -1,0 +1,269 @@
+{
+  "candidate_model": "gpt-4o-mini",
+  "judge_model": "gpt-4o-mini",
+  "pricing_usd_per_million": {
+    "input": 0.15,
+    "cached_input": 0.075,
+    "output": 0.6
+  },
+  "summary": {
+    "cases": 5,
+    "automated_passes": 3,
+    "average_automated_score": 0.6,
+    "minimum_score": 0,
+    "maximum_score": 1,
+    "score_distribution": {
+      "0": 2,
+      "1": 3
+    },
+    "wall_seconds": 26.9287,
+    "judge_seconds": 13.6234,
+    "token_usage_coverage": "10/10 API calls",
+    "input_tokens": 2703,
+    "output_tokens": 860,
+    "estimated_cost_usd_for_reported_usage": 0.00092145
+  },
+  "cases": [
+    {
+      "case_id": "R01",
+      "prompt": "You are an online retailer’s support assistant. Standard returns for unused items are allowed through day 30 after delivery, inclusive. Eligible customers start a return under My Orders → Start a return. Reply in English. Put `RETURN_ELIGIBLE` or `RETURN_INELIGIBLE` on the first line, then explain the decision and next step. Customer message: “My unused headphones arrived exactly 30 days ago. Can I return them?”",
+      "reply": "RETURN_ELIGIBLE  \nYou can return the unused headphones since they arrived exactly 30 days ago, and returns are allowed within this timeframe. Please go to My Orders and select \"Start a return\" to initiate the return process.",
+      "ground_truth": "The headphones are eligible. The customer can start the return under My Orders → Start a return.",
+      "reasoning": "The candidate reply correctly identifies that the headphones are eligible for return since they were received exactly 30 days ago, complying with the store policy. It also provides clear instructions on how to start the return process, aligning with the required steps.",
+      "criteria_met": {
+        "explains eligibility on day 30": true,
+        "gives the correct return steps": true,
+        "exact_first_line": false
+      },
+      "automated_score": 0,
+      "human_tone_review": null,
+      "generation": {
+        "seconds": 2.182,
+        "usage": {
+          "input_tokens": 96,
+          "output_tokens": 47,
+          "total_tokens": 143,
+          "input_token_details": {
+            "cache_creation": 0,
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 0
+          }
+        },
+        "estimated_cost_usd": 4.259999999999999e-05,
+        "reported_model": "gpt-4o-mini-2024-07-18"
+      },
+      "evaluation": {
+        "seconds": 2.6348,
+        "usage": {
+          "input_tokens": 373,
+          "output_tokens": 83,
+          "total_tokens": 456,
+          "input_token_details": {
+            "cache_creation": 0,
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 0
+          }
+        },
+        "estimated_cost_usd": 0.00010575,
+        "reported_model": "gpt-4o-mini-2024-07-18"
+      }
+    },
+    {
+      "case_id": "R02",
+      "prompt": "You are an online retailer’s support assistant. Standard returns are allowed through day 30 after delivery, inclusive. Defects reported after day 30 require review by Support, which decides what remedy is available. Reply in English. For cases requiring review, put `ESCALATE` on the first line. Then explain the next step to the customer. Customer message: “My coffee machine broke 35 days after delivery. Can I get a refund?”",
+      "reply": "ESCALATE  \nThank you for reaching out. Since your coffee machine broke 35 days after delivery, it falls outside our standard return period. We will need to review your case to determine what remedy may be available. Please provide any details about the issue and any supporting documentation, such as photos or receipts. Once we have that information, we will follow up with you regarding the next steps.",
+      "ground_truth": "Support must review the defect. The refund decision remains open until that review.",
+      "reasoning": "The reply directs the customer to submit details for Support to review the defect, stating 'We will need to review your case to determine what remedy may be available,' which meets the support_review criterion. It also does not promise a refund, preserving the possibility that Support may grant or decline it, satisfying refund_open.",
+      "criteria_met": {
+        "support_review": true,
+        "refund_open": true,
+        "exact_first_line": false
+      },
+      "automated_score": 0,
+      "human_tone_review": null,
+      "generation": {
+        "seconds": 3.3714,
+        "usage": {
+          "input_tokens": 97,
+          "output_tokens": 80,
+          "total_tokens": 177,
+          "input_token_details": {
+            "cache_creation": 0,
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 0
+          }
+        },
+        "estimated_cost_usd": 6.255e-05,
+        "reported_model": "gpt-4o-mini-2024-07-18"
+      },
+      "evaluation": {
+        "seconds": 2.1934,
+        "usage": {
+          "input_tokens": 656,
+          "output_tokens": 90,
+          "total_tokens": 746,
+          "input_token_details": {
+            "cache_creation": 0,
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 0
+          }
+        },
+        "estimated_cost_usd": 0.00015239999999999996,
+        "reported_model": "gpt-4o-mini-2024-07-18"
+      }
+    },
+    {
+      "case_id": "R03",
+      "prompt": "You are an online retailer’s support assistant. Standard returns are allowed for unused items through day 30 after delivery, inclusive. If eligibility facts are missing, ask the customer for them. Reply in English. Customer message: “Can I return my headphones?”",
+      "reply": "To help you with your return request for the headphones, could you please provide the following information?\n\n1. When did you receive the headphones?\n2. Are the headphones unused and in their original packaging?\n\nOnce I have that information, I can assist you further!",
+      "ground_truth": "Ask when the headphones were delivered and whether they have been used. Eligibility is undetermined until the customer answers.",
+      "reasoning": "The candidate reply appropriately asks for the delivery date and whether the headphones have been used, thereby fulfilling the necessary criteria for assessing return eligibility. Additionally, it leaves the eligibility open until the customer responds, which aligns with store policy.",
+      "criteria_met": {
+        "asks when delivered": true,
+        "asks whether used": true,
+        "leaves eligibility open": true
+      },
+      "automated_score": 1,
+      "human_tone_review": null,
+      "generation": {
+        "seconds": 2.2548,
+        "usage": {
+          "input_tokens": 58,
+          "output_tokens": 53,
+          "total_tokens": 111,
+          "input_token_details": {
+            "cache_creation": 0,
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 0
+          }
+        },
+        "estimated_cost_usd": 4.05e-05,
+        "reported_model": "gpt-4o-mini-2024-07-18"
+      },
+      "evaluation": {
+        "seconds": 2.38,
+        "usage": {
+          "input_tokens": 340,
+          "output_tokens": 85,
+          "total_tokens": 425,
+          "input_token_details": {
+            "cache_creation": 0,
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 0
+          }
+        },
+        "estimated_cost_usd": 0.000102,
+        "reported_model": "gpt-4o-mini-2024-07-18"
+      }
+    },
+    {
+      "case_id": "R04",
+      "prompt": "You are an online retailer’s support assistant. Use this catalog entry as your only source for product facts: “TravelCharge C45 wall charger. USB-C output. Maximum output 45 W. Cable sold separately.” If the entry cannot establish compatibility, explain what information is missing and suggest a way to verify it. Reply in English. Customer message: “Will this definitely charge my laptop at full speed?”",
+      "reply": "The TravelCharge C45 wall charger has a maximum output of 45 W via its USB-C output, which is a good indicator of its charging capability. However, to confirm that it will charge your laptop at full speed, we would need to know:\n\n1. **The laptop's power requirements:** Make sure your laptop's charging needs do not exceed 45 W.\n2. **Compatibility with USB-C Power Delivery (PD):** Many laptops require specific charging protocols that USB-C PD supports; check if your laptop supports this.\n\nTo verify compatibility, check your laptop's specifications or user manual for its required power input and whether it supports USB-C PD. You can also reach out to the laptop manufacturer for further clarification.",
+      "ground_truth": "The catalog gives a 45 W maximum. The laptop model and its USB-C charging requirements are unknown, so full-speed charging cannot be confirmed. The reply can ask for the model or suggest checking the manufacturer’s charging specifications.",
+      "reasoning": "The candidate reply effectively addresses the customer's inquiry about the charger and maintains the integrity of the provided catalog information. It clarifies that while the charger has a maximum output of 45 W, it cannot guarantee full-speed charging without knowing the laptop's specific requirements. It also includes a verification step by suggesting the customer check their laptop's specifications or consult the manufacturer, which is in line with the reference provided. All criteria from the evaluation are met, confirming that the answer is complete and informative.",
+      "criteria_met": {
+        "leaves full-speed compatibility unconfirmed": true,
+        "preserves catalog facts": true,
+        "gives a verification step": true
+      },
+      "automated_score": 1,
+      "human_tone_review": null,
+      "generation": {
+        "seconds": 3.9542,
+        "usage": {
+          "input_tokens": 88,
+          "output_tokens": 145,
+          "total_tokens": 233,
+          "input_token_details": {
+            "cache_creation": 0,
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 0
+          }
+        },
+        "estimated_cost_usd": 0.0001002,
+        "reported_model": "gpt-4o-mini-2024-07-18"
+      },
+      "evaluation": {
+        "seconds": 3.5757,
+        "usage": {
+          "input_tokens": 500,
+          "output_tokens": 143,
+          "total_tokens": 643,
+          "input_token_details": {
+            "cache_creation": 0,
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 0
+          }
+        },
+        "estimated_cost_usd": 0.0001608,
+        "reported_model": "gpt-4o-mini-2024-07-18"
+      }
+    },
+    {
+      "case_id": "R05",
+      "prompt": "You are an online retailer’s support assistant. If a parcel is more than two days past the promised delivery date and tracking has no update, ask for the order number so Support can investigate. You cannot access tracking systems or contact the carrier in this chat. Reply in English. Customer message: “My parcel was promised four days ago. The tracking hasn’t updated, and I’ve already wasted my lunch break chasing it. Can someone actually help?”",
+      "reply": "I’m sorry to hear about the trouble with your parcel! Please provide your order number, and I’ll pass it along to Support so they can investigate the issue for you.",
+      "ground_truth": "There is no single correct wording for the acknowledgment. The operational next step is fixed: ask for the order number and explain that Support can investigate. The reply should address the customer’s frustration without claiming an investigation has already started.",
+      "reasoning": "The candidate reply effectively addresses the criteria outlined in the store policy. It asks for the order number, explains that Support can investigate, and avoids claiming that an investigation has already started. The response acknowledges the customer's frustration as well, which aligns with the customer service expectations.",
+      "criteria_met": {
+        "asks for order number": true,
+        "explains Support can investigate": true,
+        "avoids claiming investigation has started": true
+      },
+      "automated_score": 1,
+      "human_tone_review": "pass",
+      "human_tone_review_note": "The lab participant judged that the reply sufficiently acknowledged the customer's frustration.",
+      "generation": {
+        "seconds": 1.5426,
+        "usage": {
+          "input_tokens": 96,
+          "output_tokens": 36,
+          "total_tokens": 132,
+          "input_token_details": {
+            "cache_creation": 0,
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 0
+          }
+        },
+        "estimated_cost_usd": 3.6e-05,
+        "reported_model": "gpt-4o-mini-2024-07-18"
+      },
+      "evaluation": {
+        "seconds": 2.8395,
+        "usage": {
+          "input_tokens": 399,
+          "output_tokens": 98,
+          "total_tokens": 497,
+          "input_token_details": {
+            "cache_creation": 0,
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 0
+          }
+        },
+        "estimated_cost_usd": 0.00011865,
+        "reported_model": "gpt-4o-mini-2024-07-18"
+      }
+    }
+  ]
+}

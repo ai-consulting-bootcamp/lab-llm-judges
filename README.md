@@ -9,6 +9,10 @@ This repository contains everything you need for this lab.
 - [`instructions.md`](./instructions.md) — the lab instructions
 - [`rubric.md`](./rubric.md) — how your submission is graded; this is what the AI reviewer checks your PR against
 
+## Submission
+
+[Retail chatbot evaluation and run instructions](./lab_llm_judges_Ztirf91/README.md)
+
 ## How to complete this lab
 
 1. **Fork** this repository.
