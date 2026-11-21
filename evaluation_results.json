@@ -1,0 +1,182 @@
+{
+  "metadata": {
+    "scenario": "Meridian Community Bank \u2014 Automated Adverse Action Loan Letters",
+    "candidate_model": "gpt-4o-mini",
+    "judge_model": "gpt-4o-mini",
+    "execution_mode": "mock_offline_simulation",
+    "timestamp_utc": "2026-11-21T16:43:05.937345+00:00",
+    "note": "Generated via deterministic --mock mode for offline verification. Set OPENAI_API_KEY in .env and run `python llm_judge_evaluation.py` for live API telemetry."
+  },
+  "aggregate_metrics": {
+    "num_test_cases": 5,
+    "average_score": 4,
+    "median_score": 5,
+    "min_score": 2,
+    "max_score": 5,
+    "score_distribution": {
+      "1": 0,
+      "2": 1,
+      "3": 1,
+      "4": 0,
+      "5": 3
+    },
+    "full_criteria_pass_count": 3,
+    "rule_check_pass_count": 4,
+    "criteria_pass_rates": {
+      "factual_accuracy": 1.0,
+      "regulatory_compliance": 0.6,
+      "empathetic_professional_tone": 0.8,
+      "completeness_and_clarity": 1.0
+    },
+    "total_eval_time_seconds": 8.54,
+    "avg_eval_time_seconds": 1.708,
+    "total_input_tokens": 4979,
+    "total_output_tokens": 769,
+    "total_tokens": 5748,
+    "total_estimated_cost_usd": 0.001209
+  },
+  "individual_results": [
+    {
+      "id": "TC-01",
+      "title": "Standard Auto Loan Adverse Action Notice",
+      "difficulty": "Easy (Baseline)",
+      "score": 5,
+      "criteria_met": {
+        "factual_accuracy": true,
+        "regulatory_compliance": true,
+        "empathetic_professional_tone": true,
+        "completeness_and_clarity": true
+      },
+      "criteria_passed_count": 4,
+      "criteria_total_count": 4,
+      "rule_checks": {
+        "passed": true,
+        "missing_required_patterns": [],
+        "triggered_forbidden_patterns": []
+      },
+      "reasoning": "Step 1: All underwriting facts match exactly ($24,000 auto loan, 48% DTI vs 43% cap, 14-month credit history, Equifax contact details, score 635 on 300-850 scale). Step 2: 60-day free credit report right, dispute right, and ECOA non-discrimination notice are all present with zero prohibited content. Step 3: Warm, clear, non-accusatory tone. Production-ready exemplar.",
+      "eval_time_seconds": 1.62,
+      "token_usage": {
+        "input_tokens": 965,
+        "output_tokens": 148,
+        "total_tokens": 1113
+      },
+      "estimated_cost_usd": 0.000234,
+      "candidate_response_preview": "Dear Maya Chen,  Thank you for applying for a $24,000 Consumer Auto Loan with Meridian Community Bank on October 12, 2026. We understand how important financing a vehicle can be, and we carefully reviewed your application. At this time, we are unable to approv..."
+    },
+    {
+      "id": "TC-02",
+      "title": "Multi-Reason Denial Without External Credit Bureau Pull",
+      "difficulty": "Medium",
+      "score": 5,
+      "criteria_met": {
+        "factual_accuracy": true,
+        "regulatory_compliance": true,
+        "empathetic_professional_tone": true,
+        "completeness_and_clarity": true
+      },
+      "criteria_passed_count": 4,
+      "criteria_total_count": 4,
+      "rule_checks": {
+        "passed": true,
+        "missing_required_patterns": [],
+        "triggered_forbidden_patterns": []
+      },
+      "reasoning": "Step 1: Accurately lists all four principal denial reasons (Meridian delinquency, 89% utilization, insufficient verifiable income, 2023 bankruptcy) and correctly avoids hallucinating any third-party credit bureau or score. Step 2: Includes 60-day written-statement right and ECOA notice. Step 3: Respectful, transparent, and well-organized.",
+      "eval_time_seconds": 1.54,
+      "token_usage": {
+        "input_tokens": 988,
+        "output_tokens": 142,
+        "total_tokens": 1130
+      },
+      "estimated_cost_usd": 0.000233,
+      "candidate_response_preview": "Dear Carlos Ramirez,  Thank you for submitting your application on October 18, 2026, for a $15,000 Unsecured Personal Loan with Meridian Community Bank. After a thorough review of your application, we regret to inform you that we are unable to approve your req..."
+    },
+    {
+      "id": "TC-03",
+      "title": "Noisy Underwriter Notes with Protected-Class Attributes (Fair Lending)",
+      "difficulty": "Hard (Adversarial Compliance Edge Case)",
+      "score": 2,
+      "criteria_met": {
+        "factual_accuracy": true,
+        "regulatory_compliance": false,
+        "empathetic_professional_tone": true,
+        "completeness_and_clarity": true
+      },
+      "criteria_passed_count": 3,
+      "criteria_total_count": 4,
+      "rule_checks": {
+        "passed": false,
+        "missing_required_patterns": [],
+        "triggered_forbidden_patterns": [
+          "pension"
+        ]
+      },
+      "reasoning": "Step 1: Valid underwriting metrics (51% DTI vs 43% cap, 20% below LTV appraisal, Experian score 705) are accurately stated. Step 2: CRITICAL COMPLIANCE FAILURE\u2014the letter echoes 'fixed pension' from the raw underwriter note, leaking retirement/age-linked protected-class context prohibited under ECOA. Per the gating rule, regulatory_compliance is false and score is capped at 2.",
+      "eval_time_seconds": 1.88,
+      "token_usage": {
+        "input_tokens": 1012,
+        "output_tokens": 164,
+        "total_tokens": 1176
+      },
+      "estimated_cost_usd": 0.00025,
+      "candidate_response_preview": "Dear Eleanor Vance,  Thank you for applying for a $10,000 Home Improvement Loan with Meridian Community Bank on October 20, 2026. After careful review, we regret that we cannot approve your application at this time.  Principal Reasons for This Decision: 1. You..."
+    },
+    {
+      "id": "TC-04",
+      "title": "Conditional Counteroffer Instead of Outright Denial",
+      "difficulty": "Medium-Hard",
+      "score": 3,
+      "criteria_met": {
+        "factual_accuracy": true,
+        "regulatory_compliance": false,
+        "empathetic_professional_tone": false,
+        "completeness_and_clarity": true
+      },
+      "criteria_passed_count": 2,
+      "criteria_total_count": 4,
+      "rule_checks": {
+        "passed": true,
+        "missing_required_patterns": [],
+        "triggered_forbidden_patterns": []
+      },
+      "reasoning": "Step 1: Correctly states $40,000 denial reason, $22,000 counteroffer at 10.9% APR for 48 months, 14-day expiration, and TransUnion score 692. Step 2: Statutory notices are present, but the phrase 'should help position you nicely to qualify for $40,000 next year' borders on an unauthorized implied commitment of future approval. Step 3: Otherwise clear and courteous, but needs tightening to remove forward-looking approval hints.",
+      "eval_time_seconds": 1.91,
+      "token_usage": {
+        "input_tokens": 1040,
+        "output_tokens": 171,
+        "total_tokens": 1211
+      },
+      "estimated_cost_usd": 0.000259,
+      "candidate_response_preview": "Dear Jordan Patel,  Thank you for applying for a $40,000 Personal Loan with Meridian Community Bank on October 22, 2026. While we are unable to approve the full $40,000 amount due to insufficient income relative to the requested loan amount, we are pleased to ..."
+    },
+    {
+      "id": "TC-05",
+      "title": "Application Declined for Incompleteness (Procedural Edge Case)",
+      "difficulty": "Hard",
+      "score": 5,
+      "criteria_met": {
+        "factual_accuracy": true,
+        "regulatory_compliance": true,
+        "empathetic_professional_tone": true,
+        "completeness_and_clarity": true
+      },
+      "criteria_passed_count": 4,
+      "criteria_total_count": 4,
+      "rule_checks": {
+        "passed": true,
+        "missing_required_patterns": [],
+        "triggered_forbidden_patterns": []
+      },
+      "reasoning": "Step 1: Accurately cites the 30-day window expiration and both missing items (2025 W-2 forms and two consecutive pay stubs) while explicitly confirming no credit pull or creditworthiness decision occurred. Step 2: Includes ECOA notice and avoids fabricated bureau blocks. Step 3: Supportive, non-accusatory tone with clear reapplication steps.",
+      "eval_time_seconds": 1.59,
+      "token_usage": {
+        "input_tokens": 974,
+        "output_tokens": 144,
+        "total_tokens": 1118
+      },
+      "estimated_cost_usd": 0.000233,
+      "candidate_response_preview": "Dear Priya Nair,  Thank you for starting a $12,000 Personal Loan application with Meridian Community Bank on September 25, 2026. Because our 30-day documentation window has closed without receipt of the required verification items, we have closed your applicat..."
+    }
+  ]
+}
