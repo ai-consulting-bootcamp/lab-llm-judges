@@ -1,0 +1,7 @@
+# Implementation Summary
+
+**What I built.** One notebook, `llm_judge_evaluation.ipynb`, that runs a custom evaluation of a Kleinanzeigen buyer-support chatbot. The chatbot (gpt-4o-mini) answers 5 test messages using only an 8-rule policy sheet. The customer's language is detected in code and named in the system prompt, after a first run answered English questions in German. Each reply gets rule-based checks (language, length, required facts) and an LLM-as-judge grade from gpt-4o-mini: a 1-5 score plus three true/false criteria, as JSON, at temperature 0. Everything, including the raw replies, the judge's reasoning, time, tokens and cost, is saved to `evaluation_results.json`.
+
+**Key findings.** gpt-4o-mini averaged 4.6/5 with 4 of 5 replies at 4 or higher; gpt-5.4-mini averaged 4.6/5 with 5 of 5. Rule checks passed: 17/18 for gpt-4o-mini and 18/18 for gpt-5.4-mini. On 10 replies with known quality, gpt-4o-mini matched the level exactly in 60% of cases and within one point in 100%, with rank correlation 0.94 and recall of bad replies 83%. The bigger judge gpt-5.4-mini reached 90% exact and 100% recall, at $1.29 instead of $0.21 per 1,000 judged replies.
+
+**Limits.** Five prompts and one run each, a judge from the same model family as the chatbots, calibration levels set by me, and gpt-4o-mini scheduled for shutdown on 14 January 2027. Gaps of less than a point between models should not drive a decision.

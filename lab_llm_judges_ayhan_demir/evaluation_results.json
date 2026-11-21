@@ -1,0 +1,930 @@
+{
+  "lab": "LLMs grading LLMs, with receipts",
+  "author": "Ayhan Demir",
+  "client": "Kleinanzeigen (lab scenario)",
+  "run_date": "2026-11-20",
+  "models": {
+    "chat_model": "gpt-4o-mini",
+    "chat_model_b": "gpt-5.4-mini",
+    "judge_model": "gpt-4o-mini",
+    "judge_model_b": "gpt-5.4-mini"
+  },
+  "settings": {
+    "temperature": 0,
+    "judge_output": "json_object",
+    "pass_threshold": 4
+  },
+  "prices_usd_per_1m_tokens": {
+    "gpt-4o-mini": [
+      0.15,
+      0.6
+    ],
+    "gpt-5.4-mini": [
+      0.75,
+      4.5
+    ]
+  },
+  "main": {
+    "cases": [
+      {
+        "id": "P1",
+        "short": "Return",
+        "title": "Return, item not as described",
+        "prompt": "I bought a used phone for 180 € with \"Sicher bezahlen\". The screen has a big crack that was not in the photos or the description. Can I send it back and get my money back?",
+        "ground_truth": "Covered by buyer protection: the item differs strongly from the description (rule 3). Report the problem from the purchase in the app or website (rule 6). If accepted, the item price (180 EUR) is refunded; return shipping costs are not (rule 5). The assistant cannot issue the refund itself (rule 6).",
+        "expected_criteria": {
+          "policy_accuracy": "item price refunded, return shipping not refunded, no invented return window",
+          "resolution": "tells the buyer to report the problem from the purchase in the app",
+          "tone_language": "empathetic about the damaged phone, in English"
+        },
+        "chat": {
+          "reply": "Since you paid with \"Sicher bezahlen,\" you are covered by buyer protection. If the item differs significantly from the description, you can get the item price back. However, please note that return shipping costs are not refunded.\n\nTo proceed, please report the issue in the Kleinanzeigen app or website. Unfortunately, I cannot open orders or issue refunds myself. If you need further assistance, feel free to reach out to Kleinanzeigen support directly.",
+          "reply_language_asked": "English",
+          "chat_model": "gpt-4o-mini",
+          "seconds": 1.88,
+          "tokens_in": 474,
+          "tokens_out": 88,
+          "cost_usd": 0.0001239
+        },
+        "rules": {
+          "language": true,
+          "max_words": true,
+          "includes_1": true
+        },
+        "judge": {
+          "score": 5,
+          "reasoning": "The reply accurately states that the buyer is covered by buyer protection and that the item price can be refunded while return shipping costs are not. It correctly instructs the buyer to report the issue in the app or website, and it acknowledges the assistant's limitations in issuing refunds. The tone is polite and empathetic towards the customer's situation.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.83,
+          "tokens_in": 1078,
+          "tokens_out": 98,
+          "cost_usd": 0.0002205
+        }
+      },
+      {
+        "id": "P2",
+        "short": "Item question",
+        "title": "Question about an item the bot cannot see",
+        "prompt": "Hi, is the \"Kinderfahrrad 20 Zoll\" in the listing still available, and does it come with lights? I want to buy it today.",
+        "ground_truth": "The assistant cannot see listings, so it must not say whether the bike is available or has lights (rule 8). Next step: message the seller through the listing.",
+        "expected_criteria": {
+          "policy_accuracy": "no claim about availability or lights",
+          "resolution": "tells the buyer to message the seller through the listing",
+          "tone_language": "friendly, in English"
+        },
+        "chat": {
+          "reply": "I'm sorry, but I cannot check the availability of listings or specific item details. I recommend messaging the seller directly through the listing to ask about the \"Kinderfahrrad 20 Zoll\" and whether it comes with lights. If you have any questions about the payment process or buyer protection, feel free to ask!",
+          "reply_language_asked": "English",
+          "chat_model": "gpt-4o-mini",
+          "seconds": 1.38,
+          "tokens_in": 466,
+          "tokens_out": 64,
+          "cost_usd": 0.00010829999999999999
+        },
+        "rules": {
+          "language": true,
+          "max_words": true,
+          "includes_1": true,
+          "includes_2": true
+        },
+        "judge": {
+          "score": 5,
+          "reasoning": "The chatbot correctly states that it cannot check the availability of listings or specific item details, aligning with the policy. It also provides the correct next step for the buyer to message the seller directly. The tone is polite and friendly, matching the customer's message. All criteria are met without any inaccuracies or issues.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.34,
+          "tokens_in": 997,
+          "tokens_out": 92,
+          "cost_usd": 0.00020474999999999996
+        }
+      },
+      {
+        "id": "P3",
+        "short": "Scam complaint",
+        "title": "Angry complaint, scam after bank transfer",
+        "prompt": "This is a joke!!! Your useless site let a scammer take my 250 euros. I paid the seller by bank transfer for a PS5 and now he blocked me. Give me my money back NOW or I'm going to the press.",
+        "ground_truth": "A bank transfer is outside Sicher bezahlen, so buyer protection does not cover it and Kleinanzeigen cannot refund it (rules 1, 7). Next steps: report the user or listing to Kleinanzeigen, contact the bank right away, file a police report (rule 7). No refund promise, no blaming the customer.",
+        "expected_criteria": {
+          "policy_accuracy": "says clearly that a bank transfer is not covered by buyer protection",
+          "resolution": "report the user or listing, contact the bank, file a police report; no refund promise",
+          "tone_language": "calm and empathetic despite the insults, no blame, in English"
+        },
+        "chat": {
+          "reply": "I understand your frustration, and I'm sorry to hear about your situation. However, payments made outside of \"Sicher bezahlen,\" such as bank transfers, are not covered by buyer protection. Unfortunately, I cannot issue refunds or assist with this directly. \n\nI recommend reporting the user or listing to Kleinanzeigen, contacting your bank for assistance, and considering filing a police report for suspected fraud. If you have further questions or need assistance with the reporting process, please let me know.",
+          "reply_language_asked": "English",
+          "chat_model": "gpt-4o-mini",
+          "seconds": 2.24,
+          "tokens_in": 480,
+          "tokens_out": 95,
+          "cost_usd": 0.000129
+        },
+        "rules": {
+          "language": true,
+          "max_words": true,
+          "includes_1": true,
+          "includes_2": true
+        },
+        "judge": {
+          "score": 5,
+          "reasoning": "The reply accurately states that bank transfers are not covered by buyer protection and that refunds cannot be issued, aligning with the policy. It provides the correct next steps for the customer to take without promising a refund. The tone is calm and empathetic, acknowledging the customer's frustration without placing blame.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 2.79,
+          "tokens_in": 1096,
+          "tokens_out": 89,
+          "cost_usd": 0.0002178
+        }
+      },
+      {
+        "id": "P4",
+        "short": "Not shipped",
+        "title": "Seller has not shipped",
+        "prompt": "I paid 60 € for a jacket with \"Sicher bezahlen\" 9 days ago. The seller still hasn't shipped it and doesn't answer my messages. What happens to my money?",
+        "ground_truth": "Covered: the item was not shipped (rule 3). Report the problem from the purchase (rule 6). The full item price comes back, plus shipping if a Hermes label was created (rule 4). The policy gives no deadline in days, so the reply must not invent one.",
+        "expected_criteria": {
+          "policy_accuracy": "full item price back, no invented deadline in days",
+          "resolution": "tells the buyer to report the problem from the purchase",
+          "tone_language": "reassuring, in English"
+        },
+        "chat": {
+          "reply": "Since you paid with \"Sicher bezahlen,\" you are protected. If the seller does not ship the item, you will receive a full refund of the item price, including shipping costs if a Hermes label was created. If a DHL label was used and not canceled, the label cost will remain with the carrier.\n\nTo report the issue, please use the Kleinanzeigen app or website to report the problem with your purchase. Unfortunately, I cannot access orders or issue refunds myself. If you need further assistance, please follow the reporting process in the app.",
+          "reply_language_asked": "English",
+          "chat_model": "gpt-4o-mini",
+          "seconds": 1.78,
+          "tokens_in": 469,
+          "tokens_out": 109,
+          "cost_usd": 0.00013575
+        },
+        "rules": {
+          "language": true,
+          "max_words": true,
+          "includes_1": false,
+          "includes_2": true
+        },
+        "judge": {
+          "score": 5,
+          "reasoning": "The reply accurately states that the buyer is protected under the 'Sicher bezahlen' policy and correctly explains the refund process if the seller does not ship the item. It also provides the necessary next step for the buyer to report the issue through the app or website. The tone is polite and reassuring, addressing the customer's concern appropriately.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.41,
+          "tokens_in": 1074,
+          "tokens_out": 97,
+          "cost_usd": 0.0002193
+        }
+      },
+      {
+        "id": "P5",
+        "short": "Fee (German)",
+        "title": "Fee question in German",
+        "prompt": "Hallo, ich möchte ein Fahrrad für 100 € mit „Sicher bezahlen“ kaufen. Wie hoch ist die Gebühr und wer muss sie zahlen?",
+        "ground_truth": "Service fee 0,50 EUR + 4,5 % of the price = 5,00 EUR for a 100 EUR bike, paid by the buyer, plus shipping costs (rule 2). The reply must be in German.",
+        "expected_criteria": {
+          "policy_accuracy": "fee is 5,00 EUR (0,50 EUR + 4,5 %) and the buyer pays it",
+          "resolution": "answers both questions: the amount and who pays",
+          "tone_language": "friendly, in German"
+        },
+        "chat": {
+          "reply": "Hallo! Bei einem Kauf über „Sicher bezahlen“ beträgt die Gebühr 0,50 EUR plus 4,5% des Kaufpreises. In deinem Fall wären das 0,50 EUR plus 4,5 EUR, also insgesamt 5 EUR. Diese Gebühren werden vom Käufer getragen. \n\nWenn du weitere Fragen hast oder Unterstützung benötigst, lass es mich wissen!",
+          "reply_language_asked": "German",
+          "chat_model": "gpt-4o-mini",
+          "seconds": 2.69,
+          "tokens_in": 462,
+          "tokens_out": 77,
+          "cost_usd": 0.0001155
+        },
+        "rules": {
+          "language": true,
+          "max_words": true,
+          "includes_1": true
+        },
+        "judge": {
+          "score": 3,
+          "reasoning": "The chatbot's reply accurately states the service fee as 5 EUR and confirms that the buyer is responsible for this fee, aligning with the policy. The tone is friendly and the response is in German, matching the customer's language. However, the calculation of the fee is slightly misleading as it states '4,5 EUR' instead of '4,5% von 100 EUR', which could confuse the customer about how the fee is derived.",
+          "criteria_met": {
+            "policy_accuracy": false,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.84,
+          "tokens_in": 1037,
+          "tokens_out": 120,
+          "cost_usd": 0.00022754999999999997
+        }
+      }
+    ],
+    "summary": {
+      "cases": 5,
+      "valid_scores": 5,
+      "avg_score": 4.6,
+      "min_score": 3,
+      "max_score": 5,
+      "passed": 4,
+      "criteria_met": 14,
+      "criteria_possible": 15,
+      "rule_checks_passed": 17,
+      "rule_checks_total": 18,
+      "chat_seconds": 9.97,
+      "judge_seconds": 9.21,
+      "chat_tokens": 2784,
+      "judge_tokens": 5778,
+      "chat_cost_usd": 0.000612,
+      "judge_cost_usd": 0.00109
+    }
+  },
+  "model_comparison": {
+    "chat_model": "gpt-5.4-mini",
+    "judge_model": "gpt-4o-mini",
+    "cases": [
+      {
+        "id": "P1",
+        "short": "Return",
+        "title": "Return, item not as described",
+        "chat": {
+          "reply": "Yes — if the item differs significantly from the description, buyer protection can apply with “Sicher bezahlen”.\n\nIn that case, the item price can be refunded. Return shipping costs are not refunded.\n\nPlease report the problem in the Kleinanzeigen app or website from the purchase. I can’t open the order or issue the refund myself.",
+          "reply_language_asked": "English",
+          "chat_model": "gpt-5.4-mini",
+          "seconds": 1.14,
+          "tokens_in": 473,
+          "tokens_out": 69,
+          "cost_usd": 0.00066525
+        },
+        "rules": {
+          "language": true,
+          "max_words": true,
+          "includes_1": true
+        },
+        "judge": {
+          "score": 5,
+          "reasoning": "The reply accurately states that buyer protection applies when the item differs significantly from the description and correctly mentions the refund policy regarding the item price and return shipping costs. It also provides the necessary next step for the customer to report the issue in the app or website, and it clarifies that the assistant cannot issue the refund. The tone is polite and empathetic, addressing the customer's situation appropriately.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.89,
+          "tokens_in": 1056,
+          "tokens_out": 109,
+          "cost_usd": 0.00022380000000000002
+        }
+      },
+      {
+        "id": "P2",
+        "short": "Item question",
+        "title": "Question about an item the bot cannot see",
+        "chat": {
+          "reply": "I can’t check the listing or see the item details from here.\n\nPlease message the seller directly through the listing to ask whether the “Kinderfahrrad 20 Zoll” is still available and whether it includes lights. If you want to buy it, you can also ask the seller to use “Sicher bezahlen” for buyer protection.",
+          "reply_language_asked": "English",
+          "chat_model": "gpt-5.4-mini",
+          "seconds": 0.97,
+          "tokens_in": 465,
+          "tokens_out": 72,
+          "cost_usd": 0.00067275
+        },
+        "rules": {
+          "language": true,
+          "max_words": true,
+          "includes_1": true,
+          "includes_2": true
+        },
+        "judge": {
+          "score": 4,
+          "reasoning": "The reply correctly states that the assistant cannot check the listing, adhering to the policy. It also provides the correct next step for the buyer to message the seller. However, it mentions asking the seller to use 'Sicher bezahlen' for buyer protection, which is not necessary for the inquiry about availability and lights. The tone is polite and friendly, matching the customer's message.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.72,
+          "tokens_in": 1002,
+          "tokens_out": 106,
+          "cost_usd": 0.00021389999999999997
+        }
+      },
+      {
+        "id": "P3",
+        "short": "Scam complaint",
+        "title": "Angry complaint, scam after bank transfer",
+        "chat": {
+          "reply": "I’m sorry this happened.\n\nPayments made outside **Sicher bezahlen** — for example by **bank transfer** — are **not covered by buyer protection**. I can’t refund the payment or access the order.\n\nFor suspected fraud, please do these next steps:\n1. **Report the user or listing** to Kleinanzeigen.\n2. **Contact your bank** immediately and ask whether anything can be done.\n3. **File a police report**.\n\nIf you want, I can also help you with what to include in the report.",
+          "reply_language_asked": "English",
+          "chat_model": "gpt-5.4-mini",
+          "seconds": 1.26,
+          "tokens_in": 479,
+          "tokens_out": 111,
+          "cost_usd": 0.00085875
+        },
+        "rules": {
+          "language": true,
+          "max_words": true,
+          "includes_1": true,
+          "includes_2": true
+        },
+        "judge": {
+          "score": 5,
+          "reasoning": "The reply accurately states that payments made via bank transfer are not covered by buyer protection, aligning with the policy. It provides the correct next steps for the customer to take without promising a refund, which is consistent with the policy. The tone is calm and empathetic, acknowledging the customer's frustration without placing blame. Overall, all criteria are met.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.62,
+          "tokens_in": 1109,
+          "tokens_out": 100,
+          "cost_usd": 0.00022635
+        }
+      },
+      {
+        "id": "P4",
+        "short": "Not shipped",
+        "title": "Seller has not shipped",
+        "chat": {
+          "reply": "If you paid with **Sicher bezahlen**, buyer protection can apply when the item was **not shipped**.\n\nIn that case, you can report the problem in the **Kleinanzeigen app or website** from the purchase. I can’t open the order or issue a refund myself.\n\nIf the seller does not ship, you get the **full item price back**. If a **Hermes label** was created, the shipping costs are also refunded. With a **DHL label** that was not cancelled, the label cost stays with the carrier.\n\nIf you want, I can also tell you where to find the problem report in the app.",
+          "reply_language_asked": "English",
+          "chat_model": "gpt-5.4-mini",
+          "seconds": 1.25,
+          "tokens_in": 468,
+          "tokens_out": 133,
+          "cost_usd": 0.0009495
+        },
+        "rules": {
+          "language": true,
+          "max_words": true,
+          "includes_1": true,
+          "includes_2": true
+        },
+        "judge": {
+          "score": 4,
+          "reasoning": "The reply accurately states that buyer protection applies when the item was not shipped and explains the refund process correctly, including the conditions for shipping costs. It also instructs the buyer to report the problem as required. The tone is polite and reassuring, matching the customer's situation and language. However, it could be slightly more concise.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.92,
+          "tokens_in": 1095,
+          "tokens_out": 96,
+          "cost_usd": 0.00022185
+        }
+      },
+      {
+        "id": "P5",
+        "short": "Fee (German)",
+        "title": "Fee question in German",
+        "chat": {
+          "reply": "Hallo! Bei „Sicher bezahlen“ zahlt der Käufer den Artikelpreis, die Versandkosten und eine Servicegebühr von **0,50 € + 4,5 % des Kaufpreises**.\n\nBei **100 €** Artikelpreis sind das **0,50 € + 4,50 € = 5,00 €** Gebühr.\n\nDie Gebühr wird also vom **Käufer** bezahlt.",
+          "reply_language_asked": "German",
+          "chat_model": "gpt-5.4-mini",
+          "seconds": 1.06,
+          "tokens_in": 461,
+          "tokens_out": 88,
+          "cost_usd": 0.00074175
+        },
+        "rules": {
+          "language": true,
+          "max_words": true,
+          "includes_1": true
+        },
+        "judge": {
+          "score": 5,
+          "reasoning": "The chatbot's reply accurately states the service fee and confirms that the buyer is responsible for it, aligning with the policy. It provides a clear breakdown of the fee calculation and answers both questions posed by the customer. The tone is polite and the response is in German, matching the customer's language.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 2.22,
+          "tokens_in": 1045,
+          "tokens_out": 90,
+          "cost_usd": 0.00021075
+        }
+      }
+    ],
+    "summary": {
+      "cases": 5,
+      "valid_scores": 5,
+      "avg_score": 4.6,
+      "min_score": 4,
+      "max_score": 5,
+      "passed": 5,
+      "criteria_met": 15,
+      "criteria_possible": 15,
+      "rule_checks_passed": 18,
+      "rule_checks_total": 18,
+      "chat_seconds": 5.68,
+      "judge_seconds": 9.37,
+      "chat_tokens": 2819,
+      "judge_tokens": 5808,
+      "chat_cost_usd": 0.003888,
+      "judge_cost_usd": 0.001097
+    }
+  },
+  "calibration": {
+    "judge_model": "gpt-4o-mini",
+    "items": [
+      {
+        "id": "C01",
+        "case_id": "P1",
+        "known_level": 5,
+        "defect": "none: correct facts, next step, empathetic",
+        "reply": "I'm sorry the phone arrived with a cracked screen that wasn't shown in the listing. Because you paid with \"Sicher bezahlen\", this is covered by buyer protection: the item differs strongly from its description. Please report the problem from your purchase in the Kleinanzeigen app or website. If your case is accepted, you get the item price (180 €) back. Please note that the cost of sending the phone back is not refunded. I can't open orders or issue refunds myself, but reporting it in the app starts the process.",
+        "judge": {
+          "score": 5,
+          "reasoning": "The reply accurately reflects the policy regarding buyer protection and the refund process. It provides the correct next steps for the customer to report the issue in the app and clarifies that the assistant cannot issue refunds. The tone is empathetic and acknowledges the customer's situation appropriately.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.74,
+          "tokens_in": 1095,
+          "tokens_out": 84,
+          "cost_usd": 0.00021465
+        }
+      },
+      {
+        "id": "C02",
+        "case_id": "P1",
+        "known_level": 2,
+        "defect": "wrong fact: says return shipping is refunded and invents a 3-day refund time",
+        "reply": "Sorry to hear that! Since you paid with \"Sicher bezahlen\" you're covered. Report the problem in the app and you'll get a full refund of 180 € plus your return shipping costs within 3 days.",
+        "judge": {
+          "score": 3,
+          "reasoning": "The reply correctly states that the buyer is covered by buyer protection and advises them to report the problem in the app. However, it incorrectly promises a full refund including return shipping costs, which is not in line with the policy. The tone is empathetic and appropriate for the situation.",
+          "criteria_met": {
+            "policy_accuracy": false,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.38,
+          "tokens_in": 1033,
+          "tokens_out": 88,
+          "cost_usd": 0.00020775
+        }
+      },
+      {
+        "id": "C03",
+        "case_id": "P2",
+        "known_level": 4,
+        "defect": "small issue: correct but wordy",
+        "reply": "Thanks for your interest in the bike! Unfortunately I can't see listings, so I can't tell you whether it's still available or whether it comes with lights. The best way to find out is to message the seller directly through the listing; sellers know these details best. If you agree on shipping, you can pay with \"Sicher bezahlen\" so the purchase is covered by buyer protection. I hope you find the right bike, and good luck with your purchase today!",
+        "judge": {
+          "score": 4,
+          "reasoning": "The reply accurately states that the assistant cannot see listings, which aligns with the policy. It correctly advises the customer to message the seller for details, fulfilling the resolution criterion. The tone is friendly and supportive, matching the customer's inquiry. However, the mention of 'Sicher bezahlen' and buyer protection, while informative, is slightly off-topic and could be seen as unnecessary in this context.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.75,
+          "tokens_in": 1025,
+          "tokens_out": 109,
+          "cost_usd": 0.00021915
+        }
+      },
+      {
+        "id": "C04",
+        "case_id": "P2",
+        "known_level": 2,
+        "defect": "invented facts: claims the bike is available and has lights",
+        "reply": "Yes, the \"Kinderfahrrad 20 Zoll\" is still available and it comes with front and rear lights. You can buy it today with \"Sicher bezahlen\".",
+        "judge": {
+          "score": 1,
+          "reasoning": "The chatbot's reply incorrectly states that the bike is available and that it comes with lights, which violates the policy that the assistant cannot see listings. It fails to provide the correct next step of messaging the seller through the listing. The tone is polite, but the inaccuracies in the information provided are significant.",
+          "criteria_met": {
+            "policy_accuracy": false,
+            "resolution": false,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.65,
+          "tokens_in": 969,
+          "tokens_out": 92,
+          "cost_usd": 0.00020055
+        }
+      },
+      {
+        "id": "C05",
+        "case_id": "P3",
+        "known_level": 5,
+        "defect": "none: honest, three next steps, empathetic",
+        "reply": "I'm really sorry this happened; losing 250 € to a scammer is awful. I have to be honest with you: because the payment was a bank transfer and not \"Sicher bezahlen\", buyer protection does not cover it and Kleinanzeigen can't refund it. Here is what you can do right now: 1) Report the user and the listing to Kleinanzeigen. 2) Contact your bank immediately and tell them it was fraud. 3) File a police report. Next time, paying with \"Sicher bezahlen\" protects you if an item is never sent.",
+        "judge": {
+          "score": 5,
+          "reasoning": "The reply accurately states that a bank transfer is not covered by buyer protection and that Kleinanzeigen cannot issue a refund, aligning with the policy. It provides the correct next steps for the customer to take without promising a refund. The tone is empathetic and calm, acknowledging the customer's distress without placing blame. Overall, all criteria are met.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.78,
+          "tokens_in": 1116,
+          "tokens_out": 99,
+          "cost_usd": 0.0002268
+        }
+      },
+      {
+        "id": "C06",
+        "case_id": "P3",
+        "known_level": 1,
+        "defect": "rude, blames the customer, vague refund promise, no next steps",
+        "reply": "You paid by bank transfer, which is your own fault. We are not responsible for that. We will look into a refund if you stop shouting.",
+        "judge": {
+          "score": 1,
+          "reasoning": "The reply contains a wrong fact by blaming the customer for using a bank transfer, which is not appropriate. It also fails to provide the necessary next steps for the customer and includes a promise of a refund contingent on the customer's behavior, which is not allowed by policy. The tone is rude and dismissive, failing to acknowledge the customer's frustration in a calm manner.",
+          "criteria_met": {
+            "policy_accuracy": false,
+            "resolution": false,
+            "tone_language": false
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.62,
+          "tokens_in": 1031,
+          "tokens_out": 104,
+          "cost_usd": 0.00021705000000000002
+        }
+      },
+      {
+        "id": "C07",
+        "case_id": "P4",
+        "known_level": 3,
+        "defect": "one criterion not met: correct facts but no next step",
+        "reply": "I understand it's frustrating to wait. Buyer protection covers purchases where the item was never shipped, and in that case you get the full item price back, plus the shipping costs if a Hermes label was created.",
+        "judge": {
+          "score": 3,
+          "reasoning": "The reply accurately states that buyer protection covers situations where the item was not shipped and confirms that the buyer will receive the full item price back, plus shipping costs if applicable. However, it fails to instruct the buyer to report the problem from the purchase, which is a necessary next step. The tone is polite and acknowledges the buyer's frustration, which aligns with the customer's message.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": false,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 2.2,
+          "tokens_in": 1006,
+          "tokens_out": 107,
+          "cost_usd": 0.00021510000000000002
+        }
+      },
+      {
+        "id": "C08",
+        "case_id": "P4",
+        "known_level": 4,
+        "defect": "small issue: correct, but leaves out the Hermes shipping detail",
+        "reply": "I'm sorry the seller hasn't shipped your jacket yet and isn't answering. Since you paid with \"Sicher bezahlen\", you're covered by buyer protection when an item is not shipped. Please report the problem from your purchase in the Kleinanzeigen app or website. If the case is confirmed, you get the full item price of 60 € back.",
+        "judge": {
+          "score": 5,
+          "reasoning": "The reply accurately states that the buyer is covered by buyer protection since the item was not shipped, and it correctly advises the buyer to report the problem in the Kleinanzeigen app or website. It also mentions that the buyer will receive the full item price back, which aligns with the policy. The tone is polite and reassuring, addressing the customer's concern appropriately.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.69,
+          "tokens_in": 1032,
+          "tokens_out": 102,
+          "cost_usd": 0.00021599999999999996
+        }
+      },
+      {
+        "id": "C09",
+        "case_id": "P5",
+        "known_level": 3,
+        "defect": "one criterion not met: correct fee, but answers in English",
+        "reply": "Hi! The service fee is 0.50 € + 4.5% of the price, so 5.00 € for a 100 € bike. The buyer pays it, in addition to the shipping costs.",
+        "judge": {
+          "score": 4,
+          "reasoning": "The reply accurately states the service fee and who pays it, aligning with the policy. However, the response is in English instead of German, which does not meet the tone and language criterion. Overall, the content is correct and clear.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": false
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.47,
+          "tokens_in": 1006,
+          "tokens_out": 79,
+          "cost_usd": 0.00019830000000000002
+        }
+      },
+      {
+        "id": "C10",
+        "case_id": "P5",
+        "known_level": 1,
+        "defect": "wrong fee and payer, curt tone",
+        "reply": "Die Gebühr beträgt 10 % und wird vom Verkäufer bezahlt. Lies die FAQ.",
+        "judge": {
+          "score": 1,
+          "reasoning": "The chatbot's reply contains incorrect information regarding the fee, stating it is 10% instead of the correct amount of 5.00 EUR. Additionally, it incorrectly states that the seller pays the fee, while the policy specifies that the buyer is responsible for it. The tone is not friendly, and the suggestion to read the FAQ does not directly address the customer's questions.",
+          "criteria_met": {
+            "policy_accuracy": false,
+            "resolution": false,
+            "tone_language": false
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-4o-mini",
+          "seconds": 1.71,
+          "tokens_in": 977,
+          "tokens_out": 106,
+          "cost_usd": 0.00021014999999999999
+        }
+      }
+    ],
+    "metrics": {
+      "judge_model": "gpt-4o-mini",
+      "exact_match": 0.6,
+      "within_one": 1.0,
+      "rank_correlation": 0.94,
+      "precision_bad": 1.0,
+      "recall_bad": 0.83,
+      "f1_bad": 0.91,
+      "seconds_per_item": 1.7,
+      "tokens": 11260,
+      "cost_usd": 0.002126,
+      "cost_per_1000_usd": 0.213
+    }
+  },
+  "judge_comparison": {
+    "judge_model": "gpt-5.4-mini",
+    "items": [
+      {
+        "id": "C01",
+        "case_id": "P1",
+        "known_level": 5,
+        "defect": "none: correct facts, next step, empathetic",
+        "reply": "I'm sorry the phone arrived with a cracked screen that wasn't shown in the listing. Because you paid with \"Sicher bezahlen\", this is covered by buyer protection: the item differs strongly from its description. Please report the problem from your purchase in the Kleinanzeigen app or website. If your case is accepted, you get the item price (180 €) back. Please note that the cost of sending the phone back is not refunded. I can't open orders or issue refunds myself, but reporting it in the app starts the process.",
+        "judge": {
+          "score": 5,
+          "reasoning": "The reply correctly states that a cracked screen not shown in the listing is covered as a strong difference from the description, and it gives the required next step to report the problem from the purchase in the app or website. It also correctly says the item price of 180 € is refunded if accepted, that return shipping is not refunded, and that the assistant cannot issue refunds itself. The tone is polite, empathetic, and in English, matching the customer.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-5.4-mini",
+          "seconds": 1.19,
+          "tokens_in": 1094,
+          "tokens_out": 122,
+          "cost_usd": 0.0013695
+        }
+      },
+      {
+        "id": "C02",
+        "case_id": "P1",
+        "known_level": 2,
+        "defect": "wrong fact: says return shipping is refunded and invents a 3-day refund time",
+        "reply": "Sorry to hear that! Since you paid with \"Sicher bezahlen\" you're covered. Report the problem in the app and you'll get a full refund of 180 € plus your return shipping costs within 3 days.",
+        "judge": {
+          "score": 2,
+          "reasoning": "The reply correctly says the buyer is covered by \"Sicher bezahlen\" and tells them to report the problem in the app. However, it invents a promise of a \"full refund of 180 € plus your return shipping costs within 3 days,\" which is not allowed by the policy: return shipping is not refunded for items that differ significantly from the description, and no 3-day deadline is given. The tone is polite and in English, but it does not mention that the assistant cannot issue the refund itself.",
+          "criteria_met": {
+            "policy_accuracy": false,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-5.4-mini",
+          "seconds": 2.03,
+          "tokens_in": 1032,
+          "tokens_out": 135,
+          "cost_usd": 0.0013815
+        }
+      },
+      {
+        "id": "C03",
+        "case_id": "P2",
+        "known_level": 4,
+        "defect": "small issue: correct but wordy",
+        "reply": "Thanks for your interest in the bike! Unfortunately I can't see listings, so I can't tell you whether it's still available or whether it comes with lights. The best way to find out is to message the seller directly through the listing; sellers know these details best. If you agree on shipping, you can pay with \"Sicher bezahlen\" so the purchase is covered by buyer protection. I hope you find the right bike, and good luck with your purchase today!",
+        "judge": {
+          "score": 4,
+          "reasoning": "The reply correctly says it cannot see listings and therefore cannot confirm availability or lights, and it gives the required next step to message the seller through the listing. However, it adds an extra statement about paying with \"Sicher bezahlen\" and buyer protection that is not needed for this question and goes beyond the answer key, though it is not incorrect. The tone is polite, calm, and in English, matching the customer’s message.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-5.4-mini",
+          "seconds": 1.22,
+          "tokens_in": 1024,
+          "tokens_out": 117,
+          "cost_usd": 0.0012945
+        }
+      },
+      {
+        "id": "C04",
+        "case_id": "P2",
+        "known_level": 2,
+        "defect": "invented facts: claims the bike is available and has lights",
+        "reply": "Yes, the \"Kinderfahrrad 20 Zoll\" is still available and it comes with front and rear lights. You can buy it today with \"Sicher bezahlen\".",
+        "judge": {
+          "score": 2,
+          "reasoning": "The reply makes two unsupported claims: that the bike is still available and that it comes with front and rear lights. The policy and answer key say the assistant cannot see listings and must not answer those questions, and the correct next step is to message the seller through the listing. The tone is friendly and in English, but the resolution is missing and the factual errors violate policy accuracy.",
+          "criteria_met": {
+            "policy_accuracy": false,
+            "resolution": false,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-5.4-mini",
+          "seconds": 1.57,
+          "tokens_in": 968,
+          "tokens_out": 107,
+          "cost_usd": 0.0012075
+        }
+      },
+      {
+        "id": "C05",
+        "case_id": "P3",
+        "known_level": 5,
+        "defect": "none: honest, three next steps, empathetic",
+        "reply": "I'm really sorry this happened; losing 250 € to a scammer is awful. I have to be honest with you: because the payment was a bank transfer and not \"Sicher bezahlen\", buyer protection does not cover it and Kleinanzeigen can't refund it. Here is what you can do right now: 1) Report the user and the listing to Kleinanzeigen. 2) Contact your bank immediately and tell them it was fraud. 3) File a police report. Next time, paying with \"Sicher bezahlen\" protects you if an item is never sent.",
+        "judge": {
+          "score": 5,
+          "reasoning": "The reply correctly states that a bank transfer is not covered by buyer protection and that Kleinanzeigen cannot refund it, which matches the policy and answer key. It also gives the required next steps: report the user/listing, contact the bank immediately, and file a police report. Tone is calm, empathetic, and in English; the final sentence about 'next time' is not needed but does not add an incorrect promise.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-5.4-mini",
+          "seconds": 1.3,
+          "tokens_in": 1115,
+          "tokens_out": 116,
+          "cost_usd": 0.00135825
+        }
+      },
+      {
+        "id": "C06",
+        "case_id": "P3",
+        "known_level": 1,
+        "defect": "rude, blames the customer, vague refund promise, no next steps",
+        "reply": "You paid by bank transfer, which is your own fault. We are not responsible for that. We will look into a refund if you stop shouting.",
+        "judge": {
+          "score": 1,
+          "reasoning": "The reply contains invented and policy-violating claims: it blames the customer, says Kleinanzeigen is responsible, and promises to look into a refund, which the policy explicitly does not allow for bank transfers. It also omits the required next steps to report the user/listing, contact the bank, and file a police report. The tone is rude and blaming, not calm or empathetic, and it is in English but not appropriately phrased for the situation.",
+          "criteria_met": {
+            "policy_accuracy": false,
+            "resolution": false,
+            "tone_language": false
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-5.4-mini",
+          "seconds": 1.4,
+          "tokens_in": 1030,
+          "tokens_out": 125,
+          "cost_usd": 0.001335
+        }
+      },
+      {
+        "id": "C07",
+        "case_id": "P4",
+        "known_level": 3,
+        "defect": "one criterion not met: correct facts but no next step",
+        "reply": "I understand it's frustrating to wait. Buyer protection covers purchases where the item was never shipped, and in that case you get the full item price back, plus the shipping costs if a Hermes label was created.",
+        "judge": {
+          "score": 3,
+          "reasoning": "The reply correctly states that buyer protection covers items that were never shipped and that the buyer gets the full item price back, plus shipping costs if a Hermes label was created. It does not invent a deadline or any other unsupported fact. However, it misses the required next step to report the problem from the purchase, so resolution is incomplete; the tone is polite and reassuring and matches the customer's language.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": false,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-5.4-mini",
+          "seconds": 1.17,
+          "tokens_in": 1005,
+          "tokens_out": 110,
+          "cost_usd": 0.00124875
+        }
+      },
+      {
+        "id": "C08",
+        "case_id": "P4",
+        "known_level": 4,
+        "defect": "small issue: correct, but leaves out the Hermes shipping detail",
+        "reply": "I'm sorry the seller hasn't shipped your jacket yet and isn't answering. Since you paid with \"Sicher bezahlen\", you're covered by buyer protection when an item is not shipped. Please report the problem from your purchase in the Kleinanzeigen app or website. If the case is confirmed, you get the full item price of 60 € back.",
+        "judge": {
+          "score": 5,
+          "reasoning": "The reply correctly states that buyer protection applies because the item was not shipped and tells the buyer to report the problem from the purchase in the app or website. It also correctly says the full item price of 60 € is refunded, and it does not invent any deadline or mention unsupported refund details. The tone is polite, reassuring, and in English, matching the customer’s message.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": true
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-5.4-mini",
+          "seconds": 1.15,
+          "tokens_in": 1031,
+          "tokens_out": 107,
+          "cost_usd": 0.00125475
+        }
+      },
+      {
+        "id": "C09",
+        "case_id": "P5",
+        "known_level": 3,
+        "defect": "one criterion not met: correct fee, but answers in English",
+        "reply": "Hi! The service fee is 0.50 € + 4.5% of the price, so 5.00 € for a 100 € bike. The buyer pays it, in addition to the shipping costs.",
+        "judge": {
+          "score": 3,
+          "reasoning": "The reply correctly states the fee formula, calculates 5.00 € for a 100 € bike, and says the buyer pays it plus shipping costs, which matches the policy and answer key. It also answers both parts of the customer’s question. However, it is written in English rather than German, so the tone/language criterion is not met.",
+          "criteria_met": {
+            "policy_accuracy": true,
+            "resolution": true,
+            "tone_language": false
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-5.4-mini",
+          "seconds": 1.15,
+          "tokens_in": 1005,
+          "tokens_out": 102,
+          "cost_usd": 0.00121275
+        }
+      },
+      {
+        "id": "C10",
+        "case_id": "P5",
+        "known_level": 1,
+        "defect": "wrong fee and payer, curt tone",
+        "reply": "Die Gebühr beträgt 10 % und wird vom Verkäufer bezahlt. Lies die FAQ.",
+        "judge": {
+          "score": 1,
+          "reasoning": "Die Antwort nennt falsche Fakten: Die Gebühr ist nicht 10 %, sondern 0,50 EUR + 4,5 % des Kaufpreises, und sie wird vom Käufer bezahlt, nicht vom Verkäufer. Außerdem beantwortet sie die Frage nicht korrekt und enthält keine konkrete, policy-konforme Lösung; „Lies die FAQ“ ist zu vage. Die Sprache ist zwar Deutsch, aber der Ton ist knapp und nicht hilfreich.",
+          "criteria_met": {
+            "policy_accuracy": false,
+            "resolution": false,
+            "tone_language": false
+          },
+          "parse_ok": true,
+          "judge_model": "gpt-5.4-mini",
+          "seconds": 1.52,
+          "tokens_in": 976,
+          "tokens_out": 118,
+          "cost_usd": 0.001263
+        }
+      }
+    ],
+    "metrics": {
+      "judge_model": "gpt-5.4-mini",
+      "exact_match": 0.9,
+      "within_one": 1.0,
+      "rank_correlation": 0.98,
+      "precision_bad": 1.0,
+      "recall_bad": 1.0,
+      "f1_bad": 1.0,
+      "seconds_per_item": 1.37,
+      "tokens": 11439,
+      "cost_usd": 0.012926,
+      "cost_per_1000_usd": 1.293
+    }
+  }
+}
