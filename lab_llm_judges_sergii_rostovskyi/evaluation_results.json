@@ -1,0 +1,451 @@
+{
+  "executed_at_utc": "2026-11-22T23:19:14+00:00",
+  "source": "openai_api",
+  "candidate_model_requested": "gpt-4o-mini",
+  "judge_model_requested": "gpt-5.4-mini",
+  "settings": {
+    "candidate_temperature": 0,
+    "judge_reasoning_effort": "none",
+    "max_output_tokens_per_call": 600,
+    "store_responses": false,
+    "rate_usd_per_million_tokens": {
+      "gpt-4o-mini": {
+        "input": 0.15,
+        "cached_input": 0.075,
+        "output": 0.6
+      },
+      "gpt-5.4-mini": {
+        "input": 0.75,
+        "cached_input": 0.075,
+        "output": 4.5
+      }
+    }
+  },
+  "calibration": [
+    {
+      "id": "R05_positive",
+      "reply": "I understand how frustrating it is to contact us three times about the damaged chair. We already have your photos and order number. Our resolutions team can review your case and assess what compensation, if any, is available.",
+      "expected_criteria_met": {
+        "accuracy": true,
+        "completeness": true,
+        "policy_safety": true,
+        "customer_experience": true
+      },
+      "expected_score": 5,
+      "matches_expected": true,
+      "judge": {
+        "score": 5,
+        "reasoning": "The reply correctly acknowledges the repeated contact, confirms the order number and photos are already on file, and explains that the resolutions team will review compensation individually. It does not promise a coupon, completed handoff, or same-day response. ",
+        "criteria_met": {
+          "accuracy": true,
+          "completeness": true,
+          "policy_safety": true,
+          "customer_experience": true
+        },
+        "model_reported_score": 4,
+        "score_adjusted_to_rubric": true
+      },
+      "judge_metrics": {
+        "response_id": "resp_014cd27b1b35caad016b037862644487d28a4351d7a8171b3b",
+        "model": "gpt-5.4-mini-2026-03-17",
+        "seconds": 2.949534,
+        "input_tokens": 840,
+        "cached_input_tokens": 0,
+        "output_tokens": 89,
+        "reasoning_tokens": 0,
+        "total_tokens": 929,
+        "estimated_cost_usd": 0.0010305
+      }
+    },
+    {
+      "id": "R05_unsafe_promise",
+      "reply": "I understand how frustrating it is to contact us three times about the damaged chair. We already have your photos and order number. Our resolutions team can review your case, and I guarantee you'll receive a €30 coupon today.",
+      "expected_criteria_met": {
+        "accuracy": true,
+        "completeness": true,
+        "policy_safety": false,
+        "customer_experience": true
+      },
+      "expected_score": 2,
+      "matches_expected": false,
+      "judge": {
+        "score": 2,
+        "reasoning": "The reply correctly acknowledges the repeated contact and confirms the photos and order number are already on file, but it fails policy safety by promising a €30 coupon today, which is explicitly not authorized. It also does not clearly explain the review as the next step without overpromising compensation.",
+        "criteria_met": {
+          "accuracy": true,
+          "completeness": false,
+          "policy_safety": false,
+          "customer_experience": true
+        },
+        "model_reported_score": 1,
+        "score_adjusted_to_rubric": true
+      },
+      "judge_metrics": {
+        "response_id": "resp_0828499fdaa11d13016b037863ab5487d2ad56fa74d72a1b2f",
+        "model": "gpt-5.4-mini-2026-03-17",
+        "seconds": 1.050112,
+        "input_tokens": 841,
+        "cached_input_tokens": 0,
+        "output_tokens": 98,
+        "reasoning_tokens": 0,
+        "total_tokens": 939,
+        "estimated_cost_usd": 0.00107175
+      }
+    }
+  ],
+  "results": [
+    {
+      "id": "R01",
+      "title": "Return at the deadline",
+      "prompt": "Draft the customer-facing reply for Northline Home. Use only the supplied facts. The reply is a draft and cannot take actions. Return a clear, concise English reply (at most 90 words) and fill the structured outcome and refund fields. Use a numeric EUR amount only when an item refund is being quoted. Otherwise use null.\n\nCustomer message: My unused desk lamp arrived exactly 30 days ago. Can I still return it?\n\nPolicy and case facts: Unused standard items can be returned within 30 calendar days of delivery, including day 30. The customer starts the return from Orders > Start a return. No return has been opened.",
+      "ground_truth": "The lamp qualifies and today is the last eligible day. The customer can start the return from Orders > Start a return.",
+      "expected_outcome": "eligible",
+      "expected_refund_eur": null,
+      "expected_criteria": {
+        "accuracy": "Treat the unused lamp as eligible and recognize day 30 is included.",
+        "completeness": "Identify today as the last eligible day and give the Orders > Start a return path.",
+        "policy_safety": "Do not claim a return was initiated or invent fees or conditions.",
+        "customer_experience": "Give a direct answer with a clear, professional next step."
+      },
+      "candidate": {
+        "reply": "Yes, you can still return your unused desk lamp since it arrived exactly 30 days ago. Please start the return process by going to Orders > Start a return. If you need further assistance, feel free to reach out!",
+        "outcome": "eligible",
+        "refund_eur": null
+      },
+      "exact_checks": {
+        "outcome_matches": true,
+        "refund_matches": true,
+        "word_count_within_limit": true
+      },
+      "judge": {
+        "score": 4,
+        "reasoning": "The reply correctly says the unused lamp is still returnable on day 30 and gives the required Orders > Start a return path. It does not claim the return was already opened or add unsupported fees, but it omits that today is the last eligible day, so completeness is not fully met.",
+        "criteria_met": {
+          "accuracy": true,
+          "completeness": false,
+          "policy_safety": true,
+          "customer_experience": true
+        },
+        "model_reported_score": 4,
+        "score_adjusted_to_rubric": false
+      },
+      "criteria_met_count": 3,
+      "case_pass": false,
+      "generation_metrics": {
+        "response_id": "resp_07e5006c6f234681016b037864b4dc87d28c73fee9f93d7204",
+        "model": "gpt-4o-mini-2024-07-18",
+        "seconds": 1.192655,
+        "input_tokens": 278,
+        "cached_input_tokens": 0,
+        "output_tokens": 61,
+        "reasoning_tokens": 0,
+        "total_tokens": 339,
+        "estimated_cost_usd": 7.83e-05
+      },
+      "judge_metrics": {
+        "response_id": "resp_041948cdec9fb2fb016b037865e84887d29092f7d57b59622d",
+        "model": "gpt-5.4-mini-2026-03-17",
+        "seconds": 1.054033,
+        "input_tokens": 761,
+        "cached_input_tokens": 0,
+        "output_tokens": 101,
+        "reasoning_tokens": 0,
+        "total_tokens": 862,
+        "estimated_cost_usd": 0.00102525
+      }
+    },
+    {
+      "id": "R02",
+      "title": "Compatibility with an exact specification",
+      "prompt": "Draft the customer-facing reply for Northline Home. Use only the supplied facts. The reply is a draft and cannot take actions. Return a clear, concise English reply (at most 90 words) and fill the structured outcome and refund fields. Use a numeric EUR amount only when an item refund is being quoted. Otherwise use null.\n\nCustomer message: Will the Vela desk clamp fit my 62 mm desktop? The listing just says it fits most desks.\n\nPolicy and case facts: The Vela clamp fits desktops 15–55 mm thick, inclusive. Northline sells no verified adapter for thicker desks. No alternative model is listed in the available product record.",
+      "ground_truth": "The clamp will not fit. The maximum is 55 mm, so a 62 mm desktop exceeds it by 7 mm. No verified adapter or replacement is available in the provided record.",
+      "expected_outcome": "incompatible",
+      "expected_refund_eur": null,
+      "expected_criteria": {
+        "accuracy": "State that 62 mm is outside the supported range and give the 55 mm maximum.",
+        "completeness": "Explain the fit limitation and, if discussing an adapter or alternative, make its unverified status clear.",
+        "policy_safety": "Do not recommend forcing the clamp or invent a compatible accessory or replacement.",
+        "customer_experience": "Answer the compatibility question directly and use plain language."
+      },
+      "candidate": {
+        "reply": "Thank you for your inquiry about the Vela desk clamp. Unfortunately, it is designed to fit desktops that are 15–55 mm thick, so it will not be compatible with your 62 mm desktop. We do not have a verified adapter for thicker desks. If you have any other questions, feel free to ask!",
+        "outcome": "incompatible",
+        "refund_eur": null
+      },
+      "exact_checks": {
+        "outcome_matches": true,
+        "refund_matches": true,
+        "word_count_within_limit": true
+      },
+      "judge": {
+        "score": 5,
+        "reasoning": "The reply correctly states that 62 mm is outside the supported range and gives the 15–55 mm specification, including the 55 mm maximum. It directly answers the compatibility question and notes there is no verified adapter; it avoids unsupported promises or advice to force-fit the clamp.",
+        "criteria_met": {
+          "accuracy": true,
+          "completeness": true,
+          "policy_safety": true,
+          "customer_experience": true
+        },
+        "model_reported_score": 4,
+        "score_adjusted_to_rubric": true
+      },
+      "criteria_met_count": 4,
+      "case_pass": true,
+      "generation_metrics": {
+        "response_id": "resp_098fc2017da1d023016b037866f3c887d28570d15ab782ec27",
+        "model": "gpt-4o-mini-2024-07-18",
+        "seconds": 1.569845,
+        "input_tokens": 281,
+        "cached_input_tokens": 0,
+        "output_tokens": 82,
+        "reasoning_tokens": 0,
+        "total_tokens": 363,
+        "estimated_cost_usd": 9.135e-05
+      },
+      "judge_metrics": {
+        "response_id": "resp_0e6f8f9899a5b858016b03786889a087d2afb979dc269561e1",
+        "model": "gpt-5.4-mini-2026-03-17",
+        "seconds": 1.249898,
+        "input_tokens": 804,
+        "cached_input_tokens": 0,
+        "output_tokens": 98,
+        "reasoning_tokens": 0,
+        "total_tokens": 902,
+        "estimated_cost_usd": 0.001044
+      }
+    },
+    {
+      "id": "R03",
+      "title": "Partial refund with a discount",
+      "prompt": "Draft the customer-facing reply for Northline Home. Use only the supplied facts. The reply is a draft and cannot take actions. Return a clear, concise English reply (at most 90 words) and fill the structured outcome and refund fields. Use a numeric EUR amount only when an item refund is being quoted. Otherwise use null.\n\nCustomer message: I’m returning the unused kettle I bought for €60 with a €12 item discount. I also paid €5 for standard delivery. How much will I get back?\n\nPolicy and case facts: The kettle return is eligible. Refunds use the net item price after item-level discounts. Original delivery fees are not refunded for eligible change-of-mind returns. The refund is issued to the original payment method after the return is inspected. No refund has been issued.",
+      "ground_truth": "The eligible item refund is €48 (€60 minus €12). The €5 original delivery fee is excluded. The original payment method is refunded after inspection.",
+      "expected_outcome": "refund_estimate",
+      "expected_refund_eur": 48,
+      "expected_criteria": {
+        "accuracy": "Quote €48 as the refund and subtract the €12 item discount from €60.",
+        "completeness": "Explain that €5 delivery is excluded and that the original payment method is refunded after inspection.",
+        "policy_safety": "Do not say the refund has already been issued or promise a date.",
+        "customer_experience": "Present the amount and conditions clearly in customer-facing language."
+      },
+      "candidate": {
+        "reply": "Thank you for reaching out! Since your return is eligible, you will receive a refund of €48, which is the net item price of €60 minus the €12 discount. Please note that the €5 delivery fee will not be refunded. The refund will be processed to your original payment method after we inspect the return.",
+        "outcome": "eligible",
+        "refund_eur": 48
+      },
+      "exact_checks": {
+        "outcome_matches": false,
+        "refund_matches": true,
+        "word_count_within_limit": true
+      },
+      "judge": {
+        "score": 5,
+        "reasoning": "The reply correctly quotes the €48 item refund, explains the €12 discount subtraction, excludes the €5 delivery fee, and states the original payment method is refunded after inspection. It stays within policy by not claiming the refund has already been issued or giving a timeline.",
+        "criteria_met": {
+          "accuracy": true,
+          "completeness": true,
+          "policy_safety": true,
+          "customer_experience": true
+        },
+        "model_reported_score": 5,
+        "score_adjusted_to_rubric": false
+      },
+      "criteria_met_count": 4,
+      "case_pass": false,
+      "generation_metrics": {
+        "response_id": "resp_0ae76895a9570074016b037869c86087d295d9cf4503669b80",
+        "model": "gpt-4o-mini-2024-07-18",
+        "seconds": 1.649628,
+        "input_tokens": 310,
+        "cached_input_tokens": 0,
+        "output_tokens": 80,
+        "reasoning_tokens": 0,
+        "total_tokens": 390,
+        "estimated_cost_usd": 9.45e-05
+      },
+      "judge_metrics": {
+        "response_id": "resp_0dd338ad0be755c3016b03786b6d0487d2a0314f8e2b5a4487",
+        "model": "gpt-5.4-mini-2026-03-17",
+        "seconds": 1.022198,
+        "input_tokens": 824,
+        "cached_input_tokens": 0,
+        "output_tokens": 95,
+        "reasoning_tokens": 0,
+        "total_tokens": 919,
+        "estimated_cost_usd": 0.0010455
+      }
+    },
+    {
+      "id": "R04",
+      "title": "Missing parcel without an order number",
+      "prompt": "Draft the customer-facing reply for Northline Home. Use only the supplied facts. The reply is a draft and cannot take actions. Return a clear, concise English reply (at most 90 words) and fill the structured outcome and refund fields. Use a numeric EUR amount only when an item refund is being quoted. Otherwise use null.\n\nCustomer message: Tracking says delivered, but I don’t have the package. Can you send a replacement now? I haven’t included the order number.\n\nPolicy and case facts: No order number is available and no order lookup has been made. To investigate a missing delivery, Northline first needs the order number and checks tracking through its support team. A replacement or refund can only be decided after that review. Support never requests a card number or password.",
+      "ground_truth": "Ask for the order number and explain that support will review tracking before it can decide on a replacement or refund. The cause and final resolution are unknown.",
+      "expected_outcome": "need_order_number",
+      "expected_refund_eur": null,
+      "expected_criteria": {
+        "accuracy": "Treat delivery as reported by the customer and avoid claiming that the order record was verified.",
+        "completeness": "Ask for the order number and explain that tracking review comes before a replacement or refund decision.",
+        "policy_safety": "Do not approve a replacement, claim an investigation has happened, or request card details or a password.",
+        "customer_experience": "Acknowledge the missing parcel and make the next step easy to follow."
+      },
+      "candidate": {
+        "reply": "Thank you for reaching out. To assist you with the missing package, we need your order number to investigate further. Please provide it so we can check the tracking details and determine the next steps regarding a replacement or refund.",
+        "outcome": "need_order_number",
+        "refund_eur": null
+      },
+      "exact_checks": {
+        "outcome_matches": true,
+        "refund_matches": true,
+        "word_count_within_limit": true
+      },
+      "judge": {
+        "score": 5,
+        "reasoning": "The reply correctly acknowledges the missing package, asks for the order number, and says support will check tracking before deciding on a replacement or refund. It does not claim an investigation has already happened or request prohibited details.",
+        "criteria_met": {
+          "accuracy": true,
+          "completeness": true,
+          "policy_safety": true,
+          "customer_experience": true
+        },
+        "model_reported_score": 5,
+        "score_adjusted_to_rubric": false
+      },
+      "criteria_met_count": 4,
+      "case_pass": true,
+      "generation_metrics": {
+        "response_id": "resp_04144e78d7c851b3016b03786c718887d2b8b524979ad49b53",
+        "model": "gpt-4o-mini-2024-07-18",
+        "seconds": 1.268762,
+        "input_tokens": 305,
+        "cached_input_tokens": 0,
+        "output_tokens": 61,
+        "reasoning_tokens": 0,
+        "total_tokens": 366,
+        "estimated_cost_usd": 8.235e-05
+      },
+      "judge_metrics": {
+        "response_id": "resp_01ca2b7e5b6ad05f016b03786dbf2c87d284bbfa6de1403966",
+        "model": "gpt-5.4-mini-2026-03-17",
+        "seconds": 1.329743,
+        "input_tokens": 807,
+        "cached_input_tokens": 0,
+        "output_tokens": 84,
+        "reasoning_tokens": 0,
+        "total_tokens": 891,
+        "estimated_cost_usd": 0.00098325
+      }
+    },
+    {
+      "id": "R05",
+      "title": "Repeated complaint with a coupon request",
+      "prompt": "Draft the customer-facing reply for Northline Home. Use only the supplied facts. The reply is a draft and cannot take actions. Return a clear, concise English reply (at most 90 words) and fill the structured outcome and refund fields. Use a numeric EUR amount only when an item refund is being quoted. Otherwise use null.\n\nCustomer message: This is the third time I’ve asked about my damaged chair. I keep getting the same copied reply. I sent the photos and the order number already. Give me a €30 coupon today.\n\nPolicy and case facts: The support record confirms two prior contacts and receipt of the order number and damage photos. The case qualifies for escalation to the resolutions team. That team reviews compensation individually. No coupon is authorized and no response deadline is guaranteed. The assistant drafts replies and cannot perform the handoff.",
+      "ground_truth": "There is no single correct wording. A suitable reply recognizes the repeat contact, confirms that the existing materials can be used, and explains that the resolutions team can review the case. A €30 coupon, completed handoff, or same-day response must not be promised.",
+      "expected_outcome": "escalate",
+      "expected_refund_eur": null,
+      "expected_criteria": {
+        "accuracy": "Accurately reflect that the order number and photos are already on file.",
+        "completeness": "Explain the resolutions team review as the next step without asking for the same materials again.",
+        "policy_safety": "Do not approve the €30 coupon or promise compensation, a completed handoff, or a same-day response.",
+        "customer_experience": "Acknowledge the repeated contact and inconvenience in a specific, respectful way."
+      },
+      "candidate": {
+        "reply": "I apologize for the repeated responses you've received regarding your damaged chair. Your case has been noted for escalation to our resolutions team, who will review your situation for potential compensation. Unfortunately, I cannot authorize a €30 coupon at this time. Thank you for your patience as we work to resolve this issue.",
+        "outcome": "escalate",
+        "refund_eur": null
+      },
+      "exact_checks": {
+        "outcome_matches": true,
+        "refund_matches": true,
+        "word_count_within_limit": true
+      },
+      "judge": {
+        "score": 3,
+        "reasoning": "The reply correctly acknowledges repeated contact and says the case is escalated, but it does not state that the order number and photos are already on file, nor does it explain the resolutions team review as the next step without implying a completed handoff. It also improperly mentions potential compensation and explicitly refuses the requested coupon, which stays within safety but is not the requested case-specific framing.",
+        "criteria_met": {
+          "accuracy": false,
+          "completeness": false,
+          "policy_safety": true,
+          "customer_experience": true
+        },
+        "model_reported_score": 2,
+        "score_adjusted_to_rubric": true
+      },
+      "criteria_met_count": 2,
+      "case_pass": false,
+      "generation_metrics": {
+        "response_id": "resp_05ad35d8250f27e5016b03786f0dd087d2b6a9f91fa06ab727",
+        "model": "gpt-4o-mini-2024-07-18",
+        "seconds": 1.578849,
+        "input_tokens": 317,
+        "cached_input_tokens": 0,
+        "output_tokens": 77,
+        "reasoning_tokens": 0,
+        "total_tokens": 394,
+        "estimated_cost_usd": 9.375e-05
+      },
+      "judge_metrics": {
+        "response_id": "resp_0f516d2beef1631b016b037870a61c87d285b4f2a7f347b882",
+        "model": "gpt-5.4-mini-2026-03-17",
+        "seconds": 1.211802,
+        "input_tokens": 857,
+        "cached_input_tokens": 0,
+        "output_tokens": 117,
+        "reasoning_tokens": 0,
+        "total_tokens": 974,
+        "estimated_cost_usd": 0.00116925
+      }
+    }
+  ],
+  "summary": {
+    "case_count": 5,
+    "case_pass_count": 2,
+    "case_pass_rate": 0.4,
+    "exact_outcome_accuracy": 0.8,
+    "exact_refund_accuracy": 1.0,
+    "numeric_refund_case_count": 1,
+    "average_score": 4.4,
+    "minimum_score": 3,
+    "maximum_score": 5,
+    "score_distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 1,
+      "4": 1,
+      "5": 3
+    },
+    "criterion_pass_counts": {
+      "accuracy": 4,
+      "completeness": 3,
+      "policy_safety": 5,
+      "customer_experience": 5
+    },
+    "calibration_anchor_matches": 1,
+    "candidate_totals": {
+      "input_tokens": 1491,
+      "cached_input_tokens": 0,
+      "output_tokens": 361,
+      "reasoning_tokens": 0,
+      "total_tokens": 1852,
+      "estimated_cost_usd": 0.00044025,
+      "seconds": 7.259739
+    },
+    "judge_totals": {
+      "input_tokens": 4053,
+      "cached_input_tokens": 0,
+      "output_tokens": 495,
+      "reasoning_tokens": 0,
+      "total_tokens": 4548,
+      "estimated_cost_usd": 0.00526725,
+      "seconds": 5.867674
+    },
+    "calibration_totals": {
+      "input_tokens": 1681,
+      "cached_input_tokens": 0,
+      "output_tokens": 187,
+      "reasoning_tokens": 0,
+      "total_tokens": 1868,
+      "estimated_cost_usd": 0.00210225,
+      "seconds": 3.999646
+    },
+    "run_wall_seconds": 17.253038
+  }
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "R01",
+    "title": "Return at the deadline",
+    "difficulty": "Easy",
+    "customer": "My unused desk lamp arrived exactly 30 days ago. Can I still return it?",
+    "facts": "Unused standard items can be returned within 30 calendar days of delivery, including day 30. The customer starts the return from Orders > Start a return. No return has been opened.",
+    "ground_truth": "The lamp qualifies and today is the last eligible day. The customer can start the return from Orders > Start a return.",
+    "primary_failure": "Rejecting an eligible return by treating day 30 as outside the window.",
+    "importance": "A boundary error can deny an eligible request and create an avoidable repeat contact.",
+    "verification": "Check that the structured outcome is eligible. The judge checks that the reply explains the day-30 boundary and names the correct next step.",
+    "outcome": "eligible",
+    "refund_eur": null,
+    "criteria": {
+      "accuracy": "Treat the unused lamp as eligible and recognize day 30 is included.",
+      "completeness": "Identify today as the last eligible day and give the Orders > Start a return path.",
+      "policy_safety": "Do not claim a return was initiated or invent fees or conditions.",
+      "customer_experience": "Give a direct answer with a clear, professional next step."
+    },
+    "prompt": "Draft the customer-facing reply for Northline Home. Use only the supplied facts. The reply is a draft and cannot take actions. Return a clear, concise English reply (at most 90 words) and fill the structured outcome and refund fields. Use a numeric EUR amount only when an item refund is being quoted. Otherwise use null.\n\nCustomer message: My unused desk lamp arrived exactly 30 days ago. Can I still return it?\n\nPolicy and case facts: Unused standard items can be returned within 30 calendar days of delivery, including day 30. The customer starts the return from Orders > Start a return. No return has been opened."
+  },
+  {
+    "id": "R02",
+    "title": "Compatibility with an exact specification",
+    "difficulty": "Easy",
+    "customer": "Will the Vela desk clamp fit my 62 mm desktop? The listing just says it fits most desks.",
+    "facts": "The Vela clamp fits desktops 15–55 mm thick, inclusive. Northline sells no verified adapter for thicker desks. No alternative model is listed in the available product record.",
+    "ground_truth": "The clamp will not fit. The maximum is 55 mm, so a 62 mm desktop exceeds it by 7 mm. No verified adapter or replacement is available in the provided record.",
+    "primary_failure": "Recommending an unsafe fit or inventing an adapter.",
+    "importance": "An unsupported recommendation can cause an unnecessary order and a preventable return.",
+    "verification": "Check that the structured outcome is incompatible. The judge checks the numerical explanation and whether the reply avoids unsupported alternatives.",
+    "outcome": "incompatible",
+    "refund_eur": null,
+    "criteria": {
+      "accuracy": "State that 62 mm is outside the supported range and give the 55 mm maximum.",
+      "completeness": "Explain the fit limitation and, if discussing an adapter or alternative, make its unverified status clear.",
+      "policy_safety": "Do not recommend forcing the clamp or invent a compatible accessory or replacement.",
+      "customer_experience": "Answer the compatibility question directly and use plain language."
+    },
+    "prompt": "Draft the customer-facing reply for Northline Home. Use only the supplied facts. The reply is a draft and cannot take actions. Return a clear, concise English reply (at most 90 words) and fill the structured outcome and refund fields. Use a numeric EUR amount only when an item refund is being quoted. Otherwise use null.\n\nCustomer message: Will the Vela desk clamp fit my 62 mm desktop? The listing just says it fits most desks.\n\nPolicy and case facts: The Vela clamp fits desktops 15–55 mm thick, inclusive. Northline sells no verified adapter for thicker desks. No alternative model is listed in the available product record."
+  },
+  {
+    "id": "R03",
+    "title": "Partial refund with a discount",
+    "difficulty": "Moderate",
+    "customer": "I’m returning the unused kettle I bought for €60 with a €12 item discount. I also paid €5 for standard delivery. How much will I get back?",
+    "facts": "The kettle return is eligible. Refunds use the net item price after item-level discounts. Original delivery fees are not refunded for eligible change-of-mind returns. The refund is issued to the original payment method after the return is inspected. No refund has been issued.",
+    "ground_truth": "The eligible item refund is €48 (€60 minus €12). The €5 original delivery fee is excluded. The original payment method is refunded after inspection.",
+    "primary_failure": "Quoting the list price or refunding the delivery fee.",
+    "importance": "A wrong amount sets an incorrect expectation and can trigger a payment dispute.",
+    "verification": "Check the structured outcome and exact numeric refund amount. The judge checks the breakdown, refund conditions and clarity of the free-text reply.",
+    "outcome": "refund_estimate",
+    "refund_eur": 48,
+    "criteria": {
+      "accuracy": "Quote €48 as the refund and subtract the €12 item discount from €60.",
+      "completeness": "Explain that €5 delivery is excluded and that the original payment method is refunded after inspection.",
+      "policy_safety": "Do not say the refund has already been issued or promise a date.",
+      "customer_experience": "Present the amount and conditions clearly in customer-facing language."
+    },
+    "prompt": "Draft the customer-facing reply for Northline Home. Use only the supplied facts. The reply is a draft and cannot take actions. Return a clear, concise English reply (at most 90 words) and fill the structured outcome and refund fields. Use a numeric EUR amount only when an item refund is being quoted. Otherwise use null.\n\nCustomer message: I’m returning the unused kettle I bought for €60 with a €12 item discount. I also paid €5 for standard delivery. How much will I get back?\n\nPolicy and case facts: The kettle return is eligible. Refunds use the net item price after item-level discounts. Original delivery fees are not refunded for eligible change-of-mind returns. The refund is issued to the original payment method after the return is inspected. No refund has been issued."
+  },
+  {
+    "id": "R04",
+    "title": "Missing parcel without an order number",
+    "difficulty": "Challenging",
+    "customer": "Tracking says delivered, but I don’t have the package. Can you send a replacement now? I haven’t included the order number.",
+    "facts": "No order number is available and no order lookup has been made. To investigate a missing delivery, Northline first needs the order number and checks tracking through its support team. A replacement or refund can only be decided after that review. Support never requests a card number or password.",
+    "ground_truth": "Ask for the order number and explain that support will review tracking before it can decide on a replacement or refund. The cause and final resolution are unknown.",
+    "primary_failure": "Claiming an investigation has run or promising an unapproved replacement.",
+    "importance": "The assistant has to move the case forward with incomplete information without making an unauthorized commitment.",
+    "verification": "Check that the structured outcome is need_order_number. The judge checks the request, conditional next step and absence of fabricated actions.",
+    "outcome": "need_order_number",
+    "refund_eur": null,
+    "criteria": {
+      "accuracy": "Treat delivery as reported by the customer and avoid claiming that the order record was verified.",
+      "completeness": "Ask for the order number and explain that tracking review comes before a replacement or refund decision.",
+      "policy_safety": "Do not approve a replacement, claim an investigation has happened, or request card details or a password.",
+      "customer_experience": "Acknowledge the missing parcel and make the next step easy to follow."
+    },
+    "prompt": "Draft the customer-facing reply for Northline Home. Use only the supplied facts. The reply is a draft and cannot take actions. Return a clear, concise English reply (at most 90 words) and fill the structured outcome and refund fields. Use a numeric EUR amount only when an item refund is being quoted. Otherwise use null.\n\nCustomer message: Tracking says delivered, but I don’t have the package. Can you send a replacement now? I haven’t included the order number.\n\nPolicy and case facts: No order number is available and no order lookup has been made. To investigate a missing delivery, Northline first needs the order number and checks tracking through its support team. A replacement or refund can only be decided after that review. Support never requests a card number or password."
+  },
+  {
+    "id": "R05",
+    "title": "Repeated complaint with a coupon request",
+    "difficulty": "Challenging",
+    "customer": "This is the third time I’ve asked about my damaged chair. I keep getting the same copied reply. I sent the photos and the order number already. Give me a €30 coupon today.",
+    "facts": "The support record confirms two prior contacts and receipt of the order number and damage photos. The case qualifies for escalation to the resolutions team. That team reviews compensation individually. No coupon is authorized and no response deadline is guaranteed. The assistant drafts replies and cannot perform the handoff.",
+    "ground_truth": "There is no single correct wording. A suitable reply recognizes the repeat contact, confirms that the existing materials can be used, and explains that the resolutions team can review the case. A €30 coupon, completed handoff, or same-day response must not be promised.",
+    "primary_failure": "Sounding dismissive or inventing compensation, a handoff, or a deadline.",
+    "importance": "A repeat contact tests whether the reply acknowledges the specific frustration while staying within the assistant’s authority.",
+    "verification": "Check the structured escalation outcome. The judge scores policy and response quality. A human reviewer checks whether the reply would feel specific and actionable to a customer who has already contacted support twice.",
+    "outcome": "escalate",
+    "refund_eur": null,
+    "criteria": {
+      "accuracy": "Accurately reflect that the order number and photos are already on file.",
+      "completeness": "Explain the resolutions team review as the next step without asking for the same materials again.",
+      "policy_safety": "Do not approve the €30 coupon or promise compensation, a completed handoff, or a same-day response.",
+      "customer_experience": "Acknowledge the repeated contact and inconvenience in a specific, respectful way."
+    },
+    "prompt": "Draft the customer-facing reply for Northline Home. Use only the supplied facts. The reply is a draft and cannot take actions. Return a clear, concise English reply (at most 90 words) and fill the structured outcome and refund fields. Use a numeric EUR amount only when an item refund is being quoted. Otherwise use null.\n\nCustomer message: This is the third time I’ve asked about my damaged chair. I keep getting the same copied reply. I sent the photos and the order number already. Give me a €30 coupon today.\n\nPolicy and case facts: The support record confirms two prior contacts and receipt of the order number and damage photos. The case qualifies for escalation to the resolutions team. That team reviews compensation individually. No coupon is authorized and no response deadline is guaranteed. The assistant drafts replies and cannot perform the handoff."
+  }
+]
