@@ -1,0 +1,22 @@
+"""Prompts from the benchmark audit."""
+
+JUDGE_PROMPT = (
+    "Task: evaluate a patient-record summary against the source record. Use only "
+    "the source; do not use outside medical knowledge.\n\n"
+    "<source_record>\n{source_record}\n</source_record>\n\n"
+    "<system_output>\n{system_output}\n</system_output>\n\n"
+    "Criteria:\n1. Conflict handling: every contradiction is surfaced, both "
+    "versions are stated, and clinician verification is requested.\n"
+    "2. Uncertainty fidelity: pending, uncertain, and negated items retain their "
+    "meaning; no-growth pending results must not become negative.\n"
+    "3. Source faithfulness: every claim, dose, lab, allergy, and recommendation "
+    "is supported by the record.\n\n"
+    "Reasoning: list source contradictions and uncertainties first; quote output "
+    "handling; identify unsupported claims; then score.\n"
+    "Scoring: 5 all pass; 4 minor wording issue; 3 imprecise uncertainty or minor "
+    "unsupported claim; 2 partial conflict handling or finalized pending result; "
+    "1 critical failure for silently resolved/omitted conflict, finalized pending "
+    "result, or reversed safety negation. A silently resolved conflict is always 1.\n\n"
+    "Return JSON only with conflicts_found_in_source, evidence, reasoning, "
+    "criteria_met, critical_fail, and score fields."
+)
