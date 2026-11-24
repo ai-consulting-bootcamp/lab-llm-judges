@@ -1,0 +1,72 @@
+[
+  {
+    "id": "SHOP-01",
+    "reply": "Thank you for reaching out regarding your order SC-101.\n\nSince your order arrived on 2026-11-21 and you mentioned that the product is unused and in its original packaging, you are eligible to return it for a refund, as it falls within the 30-day return window.\n\nTo proceed with the return, please follow the return instructions provided with your order or contact our customer support for further assistance. They will guide you through the return process.\n\nIf you have any more questions or need further assistance, feel free to ask!",
+    "human_criteria": {
+      "accuracy": false,
+      "completeness": true,
+      "tone": true
+    },
+    "human_score": 0,
+    "human_verdict": "FAIL",
+    "reviewed_by": "Sandra",
+    "review_method": "AI-assisted review confirmed by Sandra",
+    "note": "The reply assumes return instructions were included with the order, but this information was not provided."
+  },
+  {
+    "id": "SHOP-02",
+    "reply": "Thank you for reaching out regarding your order SC-102.\n\nSince your order arrived on 2026-11-21 and you mentioned that the product is unused and in its original packaging, you are eligible to request a return. However, because the cost of the product is EUR 150, human approval is required for the refund process.\n\nTo proceed, I recommend contacting our customer support team directly to discuss your return and refund request. They will be able to assist you further and provide the necessary guidance.\n\nIf you have any other questions or need further assistance, feel free to ask!",
+    "human_criteria": {
+      "accuracy": true,
+      "completeness": true,
+      "tone": true
+    },
+    "human_score": 1,
+    "human_verdict": "PASS",
+    "reviewed_by": "Sandra",
+    "review_method": "AI-assisted review confirmed by Sandra",
+    "note": "Accepted against the agreed criteria."
+  },
+  {
+    "id": "SHOP-03",
+    "reply": "Thank you for reaching out regarding your order SC-103.\n\nSince your order arrived on 2026-11-01, you are still within the return window, as returns are accepted within 30 calendar days after delivery, including day 30. Therefore, you can proceed with your return.\n\nRegarding your refund, since the amount is exactly EUR 100, you are eligible for a refund if all return conditions are met, and it does not require human approval.\n\nPlease ensure that the product is unused and in its original packaging when you initiate the return. If you need further assistance with the return process, I recommend contacting customer support for detailed instructions.\n\nIf you have any more questions, feel free to ask!",
+    "human_criteria": {
+      "accuracy": true,
+      "completeness": true,
+      "tone": true
+    },
+    "human_score": 1,
+    "human_verdict": "PASS",
+    "reviewed_by": "Sandra",
+    "review_method": "AI-assisted review confirmed by Sandra",
+    "note": "Accepted against the agreed criteria."
+  },
+  {
+    "id": "SHOP-04",
+    "reply": "Thank you for reaching out regarding your return request for order SC-104.\n\nSince the order cost EUR 60, you may be eligible for a refund if all return conditions are met. To confirm your eligibility, I need a bit more information:\n\n1. What was the delivery date of your order?\n2. Is the product unused and in its original packaging?\n\nOnce I have this information, I can help you determine your eligibility for a refund. Thank you!",
+    "human_criteria": {
+      "accuracy": true,
+      "completeness": true,
+      "tone": true
+    },
+    "human_score": 1,
+    "human_verdict": "PASS",
+    "reviewed_by": "Sandra",
+    "review_method": "AI-assisted review confirmed by Sandra",
+    "note": "Accepted against the agreed criteria."
+  },
+  {
+    "id": "SHOP-05",
+    "reply": "Dear Customer,\n\nI understand your frustration regarding the lack of clear information about the TravelPack 20, and I apologize for any inconvenience this has caused you. Unfortunately, I do not have any information regarding the waterproof capabilities of the TravelPack 20. I recommend reaching out to our customer support team directly for a definitive answer.\n\nRegarding your request for a discount, I must inform you that I am unable to issue discounts or compensation as per our store policy. I appreciate your understanding in this matter.\n\nIf you have any further questions or need assistance, please feel free to ask.\n\nBest regards,  \nShopCo Customer Support Assistant",
+    "human_criteria": {
+      "accuracy": true,
+      "completeness": true,
+      "tone": true
+    },
+    "human_score": 1,
+    "human_verdict": "PASS",
+    "reviewed_by": "Sandra",
+    "review_method": "AI-assisted review confirmed by Sandra",
+    "note": "Accepted against the agreed criteria."
+  }
+]

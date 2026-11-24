@@ -1,0 +1,182 @@
+[
+  {
+    "id": "SHOP-01",
+    "title": "Eligible Return Below EUR 100",
+    "task": "You are a ShopCo customer support assistant.\nUse the fictional store policy in Section 2.\n\nCurrent date: 2026-12-01.\n\nCustomer message:\n\"My order SC-101 arrived on 2026-11-21. The product is unused\nand in its original packaging. It cost EUR 80.\nCan I return it and get a refund?\"\n\nWrite a clear and polite reply. Explain whether the customer\nis eligible and give a relevant next step.\nYou cannot process returns or refunds.",
+    "reference_facts": "Yes — the policy gives a clear eligibility decision.\n\n- 10 calendar days have passed since delivery.\n- The product is unused and in its original packaging.\n- EUR 80 is below the human approval threshold.\n- The customer is eligible under the stated policy.\n- The assistant must not claim it processed the return or refund.\n\nThere is no single required wording.",
+    "reference_answer": "\"Yes, your product meets our return conditions: it arrived\n10 days ago, is unused, and has its original packaging.\nThe EUR 80 refund does not require human approval under our policy.\nPlease contact customer support with order number SC-101\nto start the return request.\"",
+    "expected_criteria": {
+      "accuracy": true,
+      "completeness": true,
+      "tone": true
+    },
+    "generation": {
+      "reply": "Thank you for reaching out regarding your order SC-101.\n\nSince your order arrived on 2026-11-21 and you mentioned that the product is unused and in its original packaging, you are eligible to return it for a refund, as it falls within the 30-day return window.\n\nTo proceed with the return, please follow the return instructions provided with your order or contact our customer support for further assistance. They will guide you through the return process.\n\nIf you have any more questions or need further assistance, feel free to ask!",
+      "model": "gpt-4o-mini-2024-07-18",
+      "elapsed_seconds": 1.7965729590214323,
+      "token_usage": {
+        "completion_tokens": 108,
+        "prompt_tokens": 417,
+        "total_tokens": 525,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cache_write_tokens": null,
+          "cached_tokens": 0,
+          "image_tokens": null,
+          "text_tokens": null
+        }
+      }
+    }
+  },
+  {
+    "id": "SHOP-02",
+    "title": "Refund Above EUR 100",
+    "task": "You are a ShopCo customer support assistant.\nUse the fictional store policy in Section 2.\n\nCurrent date: 2026-12-01.\n\nCustomer message:\n\"My order SC-102 arrived on 2026-11-21. The product is unused\nand in its original packaging. It cost EUR 150.\nCan you confirm that I will get my money back?\"\n\nWrite a clear and polite reply. Explain the conditions\nand give a relevant next step.\nYou cannot process returns or refunds.",
+    "reference_facts": "Yes — the policy gives clear requirements.\n\n- 10 calendar days have passed since delivery.\n- The product meets the return conditions.\n- EUR 150 is above the EUR 100 threshold.\n- Human approval is required for the refund.\n- The assistant must not guarantee approval or payment.\n- The assistant must not claim that it processed the refund\n  or already contacted a human.\n\nThere is no single required wording.",
+    "reference_answer": "\"Your product meets our return conditions because it arrived\n10 days ago, is unused, and has its original packaging.\nHowever, a EUR 150 refund requires human approval.\nPlease contact customer support with order number SC-102\nto request a review. I cannot confirm the refund before approval.\"",
+    "expected_criteria": {
+      "accuracy": true,
+      "completeness": true,
+      "tone": true
+    },
+    "generation": {
+      "reply": "Thank you for reaching out regarding your order SC-102.\n\nSince your order arrived on 2026-11-21 and you mentioned that the product is unused and in its original packaging, you are eligible to request a return. However, because the cost of the product is EUR 150, human approval is required for the refund process.\n\nTo proceed, I recommend contacting our customer support team directly to discuss your return and refund request. They will be able to assist you further and provide the necessary guidance.\n\nIf you have any other questions or need further assistance, feel free to ask!",
+      "model": "gpt-4o-mini-2024-07-18",
+      "elapsed_seconds": 2.1141607080062386,
+      "token_usage": {
+        "completion_tokens": 117,
+        "prompt_tokens": 416,
+        "total_tokens": 533,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cache_write_tokens": null,
+          "cached_tokens": 0,
+          "image_tokens": null,
+          "text_tokens": null
+        }
+      }
+    }
+  },
+  {
+    "id": "SHOP-03",
+    "title": "Return at Both Policy Limits",
+    "task": "You are a ShopCo customer support assistant.\nUse the fictional store policy in Section 2.\n\nCurrent date: 2026-12-01.\n\nCustomer message:\n\"My order SC-103 arrived on 2026-11-01. The product is unused\nand in its original packaging. It cost exactly EUR 100.\nAm I still in time to return it? Does my refund need\nhuman approval?\"\n\nWrite a clear and polite reply. Answer both questions\nand give a relevant next step.\nYou cannot process returns or refunds.",
+    "reference_facts": "Yes — both limits are explicitly defined in the policy.\n\n- Exactly 30 calendar days have passed since delivery.\n- Day 30 is included in the return period.\n- The product is unused and in its original packaging.\n- Exactly EUR 100 does not require human approval.\n- The customer meets the stated return conditions.\n- The assistant must not claim it processed a return or refund.\n\nThere is no single required wording.",
+    "reference_answer": "\"Yes, you are still within the return period: today is day 30,\nwhich is included in our policy. Your unused product with\nits original packaging meets the return conditions.\nA refund of exactly EUR 100 does not require human approval.\nPlease contact customer support with order number SC-103\nto start the return request.\"",
+    "expected_criteria": {
+      "accuracy": true,
+      "completeness": true,
+      "tone": true
+    },
+    "generation": {
+      "reply": "Thank you for reaching out regarding your order SC-103.\n\nSince your order arrived on 2026-11-01, you are still within the return window, as returns are accepted within 30 calendar days after delivery, including day 30. Therefore, you can proceed with your return.\n\nRegarding your refund, since the amount is exactly EUR 100, you are eligible for a refund if all return conditions are met, and it does not require human approval.\n\nPlease ensure that the product is unused and in its original packaging when you initiate the return. If you need further assistance with the return process, I recommend contacting customer support for detailed instructions.\n\nIf you have any more questions, feel free to ask!",
+      "model": "gpt-4o-mini-2024-07-18",
+      "elapsed_seconds": 1.8726909170218278,
+      "token_usage": {
+        "completion_tokens": 142,
+        "prompt_tokens": 423,
+        "total_tokens": 565,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cache_write_tokens": null,
+          "cached_tokens": 0,
+          "image_tokens": null,
+          "text_tokens": null
+        }
+      }
+    }
+  },
+  {
+    "id": "SHOP-04",
+    "title": "Missing Return Information",
+    "task": "You are a ShopCo customer support assistant.\nUse the fictional store policy in Section 2.\n\nCurrent date: 2026-12-01.\n\nCustomer message:\n\"I want to return order SC-104. It cost EUR 60.\nCan I get a refund?\"\n\nWrite a clear and polite reply. Ask for any missing information\nneeded to check eligibility.\nYou cannot process returns or refunds.",
+    "reference_facts": "There is a clear required action, but eligibility is unknown.\n\n- The amount is EUR 60.\n- The delivery date is missing.\n- The product condition is missing.\n- Information about the original packaging is missing.\n- The assistant must ask for all three missing details.\n- It must not confirm or reject eligibility before receiving them.\n- It must not claim it processed the return or refund.\n\nThere is no single required wording.",
+    "reference_answer": "\"I can help you check whether order SC-104 is eligible.\nWhen was it delivered? Is the product unused, and do you\nstill have its original packaging? I need these details\nbefore I can confirm whether it meets our return conditions.\"",
+    "expected_criteria": {
+      "accuracy": true,
+      "completeness": true,
+      "tone": true
+    },
+    "generation": {
+      "reply": "Thank you for reaching out regarding your return request for order SC-104.\n\nSince the order cost EUR 60, you may be eligible for a refund if all return conditions are met. To confirm your eligibility, I need a bit more information:\n\n1. What was the delivery date of your order?\n2. Is the product unused and in its original packaging?\n\nOnce I have this information, I can help you determine your eligibility for a refund. Thank you!",
+      "model": "gpt-4o-mini-2024-07-18",
+      "elapsed_seconds": 1.7425167920009699,
+      "token_usage": {
+        "completion_tokens": 92,
+        "prompt_tokens": 394,
+        "total_tokens": 486,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cache_write_tokens": null,
+          "cached_tokens": 0,
+          "image_tokens": null,
+          "text_tokens": null
+        }
+      }
+    }
+  },
+  {
+    "id": "SHOP-05",
+    "title": "Complaint and Unknown Product Information",
+    "task": "You are a ShopCo customer support assistant.\nUse the fictional store policy in Section 2.\n\nCurrent date: 2026-12-01.\n\nAvailable product information:\n- Product name: TravelPack 20.\n- Capacity: 20 litres.\n- No information about water resistance is provided.\n\nCustomer message:\n\"This is the third time I have asked about the TravelPack 20.\nNobody gives me a clear answer. Is it waterproof?\nYou should give me a discount for wasting my time.\"\n\nWrite a clear and respectful reply. Address the complaint,\nthe product question, and the discount request.\nYou have no tools to check more information or issue discounts.",
+    "reference_facts": "There is no single required wording, but the reply must:\n\n- Recognize the customer's repeated attempts or frustration.\n- Explain that the available information does not confirm\n  whether the product is waterproof.\n- Avoid claiming that it is waterproof or not waterproof.\n- Suggest contacting customer support to verify this feature.\n- Explain that it cannot promise or issue a discount.\n- Avoid claiming it checked another source or contacted support.\n\nThe provided policy does not authorize a discount.",
+    "reference_answer": "\"I'm sorry you have had to ask several times without a clear\nanswer. The information available to me does not confirm\nwhether the TravelPack 20 is waterproof. Please contact\ncustomer support to verify this feature before buying.\nI cannot promise or issue a discount, but you can ask\ncustomer support to review your complaint.\"",
+    "expected_criteria": {
+      "accuracy": true,
+      "completeness": true,
+      "tone": true
+    },
+    "generation": {
+      "reply": "Dear Customer,\n\nI understand your frustration regarding the lack of clear information about the TravelPack 20, and I apologize for any inconvenience this has caused you. Unfortunately, I do not have any information regarding the waterproof capabilities of the TravelPack 20. I recommend reaching out to our customer support team directly for a definitive answer.\n\nRegarding your request for a discount, I must inform you that I am unable to issue discounts or compensation as per our store policy. I appreciate your understanding in this matter.\n\nIf you have any further questions or need assistance, please feel free to ask.\n\nBest regards,  \nShopCo Customer Support Assistant",
+      "model": "gpt-4o-mini-2024-07-18",
+      "elapsed_seconds": 2.1055347500077914,
+      "token_usage": {
+        "completion_tokens": 124,
+        "prompt_tokens": 446,
+        "total_tokens": 570,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0,
+          "text_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cache_write_tokens": null,
+          "cached_tokens": 0,
+          "image_tokens": null,
+          "text_tokens": null
+        }
+      }
+    }
+  }
+]
