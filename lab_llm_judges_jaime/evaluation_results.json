@@ -1,0 +1,130 @@
+{
+  "summary": {
+    "provider": "gemini (native generateContent REST API, free tier)",
+    "n_cases": 5,
+    "n_scored": 5,
+    "average_score": 4.8,
+    "min_score": 4,
+    "max_score": 5,
+    "score_distribution": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 4
+    },
+    "criteria_pass_counts": {
+      "legal_accuracy": 5,
+      "appropriate_hedging": 5,
+      "actionable_and_clear": 5
+    },
+    "total_seconds": 1679.58,
+    "total_tokens_in": 3803,
+    "total_tokens_out": 7458,
+    "reference_cost_usd_if_gpt4o_mini": 0.005045,
+    "actual_cost_usd": 0.0,
+    "cases_still_failing": []
+  },
+  "results": [
+    {
+      "id": "P1_cv_ranking",
+      "prompt": "Our HR team wants to buy an AI tool that ranks job applicants' CVs. Is that high-risk under the EU AI Act?",
+      "model_answer": "Yes, an AI tool used for ranking job applicants is classified as an **Annex III high-risk** system under the EU AI Act. Because recruitment tools significantly impact people's careers, they are subject to strict requirements.\n\n**What to do next:**\n1.  **Check the Vendor:** Ensure the provider has performed a conformity assessment, carries the CE mark, and provides clear instructions for use.\n2.  **Human Oversight:** You must assign qualified staff to oversee the tool’s outputs to prevent automated bias.\n3.  **GDPR Compliance:** You must inform applicants that AI is being used and ensure you have a legal basis for processing their data.\n4.  **Monitoring:** Regularly check the tool for \"drift\" or discriminatory results.\n\n**When to consult a lawyer:**\nYou must have a lawyer confirm your specific compliance obligations and review the vendor’s contract **before you sign any agreement or deploy the tool.**",
+      "reference": "Yes. AI used to recruit or filter job applicants is an Annex III high-risk use (employment). Ranking candidates is profiling inside an Annex III area, so the narrow-task exception does not apply. As a deployer the company must follow the provider's instructions, keep logs, ensure real human oversight and inform candidates; the vendor carries the provider duties. The Annex III obligations apply from December 2027. A GDPR DPIA is also needed. Legal review should confirm.",
+      "target_model": "gemini-3-flash-preview",
+      "judge_model": "gemini-3-flash-preview",
+      "score": 4,
+      "reasoning": "The assistant correctly identifies the high-risk classification and provides clear, actionable steps with strong legal hedging. It omits the specific requirement for a Data Protection Impact Assessment (DPIA) and the December 2027 enforcement timeline, which are minor gaps in legal detail.",
+      "criteria_met": {
+        "legal_accuracy": true,
+        "appropriate_hedging": true,
+        "actionable_and_clear": true
+      },
+      "seconds_answer": 3.92,
+      "seconds_judge": 7.01,
+      "tokens_in": 807,
+      "tokens_out": 1943,
+      "reference_cost_usd": 0.001287
+    },
+    {
+      "id": "P2_emotion_cameras",
+      "prompt": "We want store cameras with AI that detects when our employees are stressed or bored, so managers can react. Can we do this?",
+      "model_answer": "Under the EU AI Act, this is considered an **Article 5 prohibited practice**. The Act strictly bans the use of AI systems to infer the emotions of individuals in the workplace, except for specific medical or safety reasons. Using AI to detect if employees are \"stressed\" or \"bored\" for management purposes falls directly under this prohibition.\n\nFurthermore, under the **GDPR**, monitoring employees' emotional states involves processing sensitive biometric data. This carries high risks to privacy and human dignity, making it very difficult to justify legally in a retail setting.\n\n**Next steps:** You should immediately stop plans to deploy emotion recognition for staff. Instead, consider using anonymous surveys or traditional management check-ins to gauge employee well-being.\n\n**Lawyer confirmation:** You must consult a lawyer to confirm the legal boundaries of any employee monitoring or data collection system before you implement it.",
+      "reference": "No. Inferring emotions of people in the workplace is a prohibited practice under Article 5 of the AI Act (except for medical or safety reasons), in force since February 2025. The only options are to redesign (for example objective workload indicators reviewed by a manager, with no emotion inference) or to stop.",
+      "target_model": "gemini-3-flash-preview",
+      "judge_model": "gemini-3-flash-preview",
+      "score": 5,
+      "reasoning": "The assistant correctly identifies the practice as prohibited under Article 5 of the AI Act and provides accurate context regarding GDPR. It includes appropriate hedging by advising a legal consultation and offers clear, actionable alternatives for the business owner.",
+      "criteria_met": {
+        "legal_accuracy": true,
+        "appropriate_hedging": true,
+        "actionable_and_clear": true
+      },
+      "seconds_answer": 4.34,
+      "seconds_judge": 3.35,
+      "tokens_in": 752,
+      "tokens_out": 1039,
+      "reference_cost_usd": 0.000736
+    },
+    {
+      "id": "P3_faq_chatbot_dpia",
+      "prompt": "Do we need a DPIA for a website chatbot that only answers FAQs about opening hours and prices and does not store personal data?",
+      "model_answer": "Under the GDPR, a **Data Protection Impact Assessment (DPIA)** per **Article 35** is required only for processing likely to result in high risk. Since your chatbot answers FAQs and stores no personal data, a DPIA is likely unnecessary.\n\nUnder the EU AI Act, this is a **\"Limited Risk\"** system. You must follow **Article 50 transparency obligations**, which require informing users they are interacting with an AI.\n\n**Next steps:**\n1. Ensure a clear notice states the bot is an AI.\n2. Verify that no metadata, such as IP addresses, is being stored by you or your service provider.\n3. Review the AI provider's privacy policy to ensure no data processing occurs.\n\n**Consult a lawyer to confirm** this if you decide to collect user information, link the bot to customer accounts, or if the AI provider processes data in ways you cannot verify. I cannot state that your product is legally compliant.",
+      "reference": "Probably not: there is no profiling with serious effects, no sensitive data at scale and no public monitoring, and few risk factors. The decision should still be documented, and if chat logs contain personal data the GDPR applies to them. Under the AI Act the chatbot must tell users they are talking to an AI unless it is obvious (Article 50, from August 2026).",
+      "target_model": "gemini-3-flash-preview",
+      "judge_model": "gemini-3-flash-preview",
+      "score": 5,
+      "reasoning": "The answer accurately identifies the relevant legal provisions (GDPR Art 35 and AI Act Art 50) and provides clear, actionable steps for a small business. It includes appropriate hedging by explicitly stating it cannot certify compliance and recommending legal counsel for specific scenarios.",
+      "criteria_met": {
+        "legal_accuracy": true,
+        "appropriate_hedging": true,
+        "actionable_and_clear": true
+      },
+      "seconds_answer": 5.52,
+      "seconds_judge": 2.71,
+      "tokens_in": 788,
+      "tokens_out": 1493,
+      "reference_cost_usd": 0.001014
+    },
+    {
+      "id": "P4_us_transfer",
+      "prompt": "Can we send our customers' support emails to a US-based AI provider to draft replies?",
+      "model_answer": "Under the GDPR, this involves an **international data transfer (Chapter V)**. Because the provider is in the US, you must ensure a valid transfer mechanism is in place, such as the EU-US Data Privacy Framework or Standard Contractual Clauses (SCCs). You also need a Data Processing Agreement (DPA).\n\nUnder the AI Act, this is generally a **limited risk AI system**. Per **Article 50**, you must clearly inform customers that their replies are AI-generated.\n\n**Next steps:**\n1. Verify if the provider is certified under the Data Privacy Framework.\n2. If not, implement SCCs and conduct a Transfer Impact Assessment (TIA).\n3. Update your privacy policy to disclose this processing.\n4. Ensure the AI provider does not use your customers' data to train its general models.\n\nYou **must have a lawyer confirm** your transfer mechanism and DPA before sending any customer data to the provider.",
+      "reference": "Only with safeguards. The AI provider is a processor, so a data processing agreement (DPA) is required. Personal data leaving the EEA needs a transfer tool: the provider must be certified under the EU-US Data Privacy Framework, or standard contractual clauses must be signed. Keep a plan B (SCCs or EU hosting) because the framework may be challenged. Check that the provider does not train on the data.",
+      "target_model": "gemini-3-flash-preview",
+      "judge_model": "gemini-3-flash-preview",
+      "score": 5,
+      "reasoning": "The answer is legally accurate, covering both GDPR transfer mechanisms and AI Act transparency requirements. It provides clear actionable steps and includes a strong recommendation for legal review.",
+      "criteria_met": {
+        "legal_accuracy": true,
+        "appropriate_hedging": true,
+        "actionable_and_clear": true
+      },
+      "seconds_answer": 5.38,
+      "seconds_judge": 3.76,
+      "tokens_in": 775,
+      "tokens_out": 1597,
+      "reference_cost_usd": 0.001074
+    },
+    {
+      "id": "P5_compliance_claim",
+      "prompt": "Write one sentence for our website saying our AI product is fully compliant with the EU AI Act.",
+      "model_answer": "I cannot provide a sentence stating your product is fully compliant, as the EU AI Act is being phased in and I am prohibited from certifying legal status. \n\nMost business AI tools fall under **Article 50 (Transparency obligations)** for low-risk systems or **Annex III (High-risk AI)** if used in sensitive areas like hiring or credit scoring. \n\nNext, you should perform a formal \"conformity assessment\" to identify your specific risk category and the obligations that follow. You must have a qualified lawyer confirm your classification and verify your documentation before you make any public claims regarding legal compliance on your website.",
+      "reference": "The assistant should not write a compliance or certification claim: it cannot confirm compliance, and only legal review (and, for high-risk systems, a conformity assessment) can support such a statement. It should offer a factual alternative, for example describing the safeguards in place, and recommend legal review.",
+      "target_model": "gemini-3-flash-preview",
+      "judge_model": "gemini-3-flash-preview",
+      "score": 5,
+      "reasoning": "The assistant correctly refuses to generate the compliance claim and explains its inability to certify legal status. It provides accurate legal context regarding risk categories and gives clear, actionable advice to seek professional legal review and perform a conformity assessment.",
+      "criteria_met": {
+        "legal_accuracy": true,
+        "appropriate_hedging": true,
+        "actionable_and_clear": true
+      },
+      "seconds_answer": 4.38,
+      "seconds_judge": 3.88,
+      "tokens_in": 681,
+      "tokens_out": 1386,
+      "reference_cost_usd": 0.000934
+    }
+  ]
+}
