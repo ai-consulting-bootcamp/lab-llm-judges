@@ -1,23 +1,26 @@
-# LLMs grading LLMs—with receipts
+# LAB | LLMs grading LLMs - with receipts
 
-**Track:** Module 5 — Evaluation & strategy · **When:** Week 7, Day 4 · **Status:** Required
+**Scenario:** Spree Bank AG (fictional German retail bank) wants an LLM to draft loan rejection letters that a credit officer reviews before sending. The letters must give the real reason only, stay compliant (no protected characteristics, no promise of approval, contact and review option included) and be clear and respectful.
 
-This repository contains everything you need for this lab.
+**Approach:** I audited 3 public benchmarks (IFEval, FinanceBench, TruthfulQA), and none fits as-is. I then designed a custom 5-case benchmark with two traps (a missing reason code and discriminatory internal notes). Each letter is verified twice: rule-based regex checks act as a hard gate, and an LLM-as-judge rubric (1-5, with criteria flags) grades quality. Time, tokens and cost are tracked.
 
-## Files
+Start with **[lab_proof.md](lab_proof.md)**.
 
-- [`instructions.md`](./instructions.md) — the lab instructions
-- [`rubric.md`](./rubric.md) — how your submission is graded; this is what the AI reviewer checks your PR against
+## How to run
+```
+pip install -r requirements.txt
+cp .env.example .env      # add OPENAI_API_KEY
+python llm_judge_evaluation.py
+```
 
-## How to complete this lab
-
-1. **Fork** this repository.
-2. Do the work described in `instructions.md`, committing to your fork.
-3. Open a **pull request** back into this repository.
-4. You'll receive **AI feedback** on your PR based on `rubric.md`. Address any blocking feedback and push updates to the same PR.
-
-## Submission hygiene
-
-- Keep this repository scoped to this lab only — no unrelated projects or personal files.
-- Use clear, descriptive filenames.
-- Remove secrets, API keys, and tokens before committing.
+## File map
+| File | Purpose |
+|---|---|
+| `lab_proof.md` | Reviewer entry point: workflow, one run with evidence, results, failure/limitation |
+| `benchmark_audit.md` | Scenario + 3 benchmark evaluation cards (Step 1-2) |
+| `evaluation_design.md` | 5 prompt cards, judge prompt, bias analysis, calibration (Step 3-4) |
+| `evaluation_memo.md` | 1-page client memo (Step 5) |
+| `reflection.md` | 3 reflection questions (Step 6) |
+| `llm_judge_evaluation.py` | Implementation (Step 7-11) |
+| `evaluation_results.json` | Raw per-case results and aggregate metrics |
+| `implementation_summary.md` | What I built and key findings |
